@@ -103,6 +103,8 @@ def parse_releases(data) -> list:
     for r in data if isinstance(data, list) else []:
         if not isinstance(r, dict) or r.get("draft") or not r.get("tag_name"):
             continue
+        if not re.match(r"^[vV]?\d", str(r["tag_name"])):     # например launcher-v0.2: не версия Portabilizer
+            continue
         assets = r.get("assets") or []
         a = pick_asset(assets, r["tag_name"])
         sha, sha_url = _sha_from(a, assets, r.get("body") or "") if a else ("", "")
@@ -331,3 +333,34 @@ def launch(exe: Path, radical: bool = False):
     if os.name == "nt":
         kw["creationflags"] = 0x00000008 | 0x00000200   # DETACHED_PROCESS | NEW_PROCESS_GROUP
     return subprocess.Popen(build_command(exe, radical), cwd=str(exe.parent), close_fds=True, **kw)
+
+
+# ------------------------------------------------------------------ ярлык на рабочем столе
+
+def shortcut_ps(target, name, args="", workdir="", icon="") -> str:
+    """Команда PowerShell, которая создаёт ярлык на рабочем столе (путь стола берёт у Windows,
+    поэтому подходит и для русского «Рабочий стол», и для папки в OneDrive)."""
+    esc = lambda v: str(v).replace("'", "''")                           # noqa: E731
+    name = re.sub(r'[\\/:*?"<>|]+', "_", name).strip() or "Portabilizer Launcher"
+    return ("$d=[Environment]::GetFolderPath('Desktop');"
+            f"$p=Join-Path $d '{esc(name)}.lnk';"
+            "$s=(New-Object -ComObject WScript.Shell).CreateShortcut($p);"
+            f"$s.TargetPath='{esc(target)}';$s.Arguments='{esc(args)}';"
+            f"$s.WorkingDirectory='{esc(workdir)}';"
+            + (f"$s.IconLocation='{esc(icon)}';" if icon else "")
+            + "$s.Save();Write-Output $p")
+
+
+def create_desktop_shortcut(target, name="Portabilizer Launcher", args="", workdir=None, icon=None) -> str:
+    """Создаёт ярлык на рабочем столе (только Windows). Возвращает путь к ярлыку."""
+    if os.name != "nt":
+        raise OSError("ярлыки на рабочем столе поддерживаются только в Windows")
+    target = Path(target)
+    ps = shortcut_ps(target, name, args, workdir or target.parent, icon or "")
+    r = subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", ps],
+                       capture_output=True, text=True, timeout=30, stdin=subprocess.DEVNULL,
+                       creationflags=0x08000000)
+    out = (r.stdout or "").strip().splitlines()
+    if r.returncode != 0 or not out:
+        raise OSError((r.stderr or r.stdout or "не удалось создать ярлык").strip()[:300])
+    return out[-1]

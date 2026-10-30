@@ -15,7 +15,7 @@ from pathlib import Path
 import pz_core as C
 import pz_theme as T
 
-VERSION = "0.1"
+VERSION = "0.2"
 REPO_URL = f"https://github.com/{C.OWNER}/{C.REPO}"
 DEFAULTS = {"show_beta": True, "close_after_launch": False, "mode": "normal", "last_tag": "",
             "versions_dir": ""}
@@ -75,12 +75,28 @@ class Model:
             if inst:
                 state, kind = ("установлена (своя)" if r.local else "установлена"), "inst"
             elif r.available:
-                state, kind = f"можно установить ({C.fmt_size(r.asset_size)})", "avail"
+                newer = bool(self.installed) and C.parse_version(r.tag) > self.newest_installed()
+                state = ("новая, можно установить" if newer else "можно установить") + \
+                        f" ({C.fmt_size(r.asset_size)})"
+                kind = "new" if newer else "avail"
             else:
                 state, kind = "нет файла в релизе", "local"
             out.append({"tag": r.tag, "title": r.tag + (" [Beta]" if r.prerelease else ""),
                         "state": state, "kind": kind})
         return out
+
+    def newest_installed(self) -> tuple:
+        return max((C.parse_version(t) for t in self.installed), default=())
+
+    def new_version(self):
+        """Самый новый релиз, который новее всех установленных (или None). Beta - по настройке."""
+        if not self.installed:
+            return None
+        top = self.newest_installed()
+        for r in self.items():                           # items() отсортирован: новые первыми
+            if r.available and r.tag not in self.installed and C.parse_version(r.tag) > top:
+                return r
+        return None
 
     def get(self, tag):
         for r in self.items():
@@ -221,6 +237,8 @@ def gui(_hook=None):
     r_hint = ttk.Label(left, style="Danger.TLabel", wraplength=300,
                        text="R: после успешной сборки исходный файл удаляется. Программа "
                             "попросит подтверждение.")
+    banner_var = tk.StringVar()
+    banner = ttk.Label(left, textvariable=banner_var, style="Accent.TLabel", wraplength=300)
     btn_main = ttk.Button(left, text="Запустить", style="Big.Accent.TButton")
     btn_main.pack(fill="x", pady=(10, 6))
     pb = ttk.Progressbar(left, mode="determinate", maximum=100)
@@ -239,10 +257,19 @@ def gui(_hook=None):
     # ------------------------------------------------------------ правая панель
     nb = ttk.Notebook(root)
     nb.pack(side="right", fill="both", expand=True, padx=(0, 10), pady=10)
-    tab_set, tab_vers, tab_look, tab_log, tab_about = (ttk.Frame(nb) for _ in range(5))
-    for tab, title in ((tab_set, "Лаунчер"), (tab_vers, "Менеджер версий"),
+    tab_news, tab_set, tab_vers, tab_look, tab_log, tab_about = (ttk.Frame(nb) for _ in range(6))
+    for tab, title in ((tab_news, "Что нового"), (tab_set, "Лаунчер"), (tab_vers, "Менеджер версий"),
                        (tab_look, "Оформление"), (tab_log, "Журнал"), (tab_about, "О программе")):
         nb.add(tab, text=title)
+
+    # --- Что нового: описание выбранной версии
+    tab_news.grid_columnconfigure(0, weight=1)
+    tab_news.grid_rowconfigure(0, weight=1)
+    news = tk.Text(tab_news, state="disabled", wrap="word", relief="flat")
+    news.grid(row=0, column=0, sticky="nsew", padx=(10, 0), pady=10)
+    nsb = ttk.Scrollbar(tab_news, command=news.yview)
+    nsb.grid(row=0, column=1, sticky="ns", pady=10, padx=(0, 10))
+    news.config(yscrollcommand=nsb.set)
 
     # --- Лаунчер: настройки
     tab_set.grid_columnconfigure(1, weight=1)
@@ -313,6 +340,7 @@ def gui(_hook=None):
                             ("Danger.TLabel", "danger")):
                 style.configure(nm, foreground=c[key])
             style.configure("Big.Accent.TButton", font=("Segoe UI", 12, "bold"), padding=(12, 8))
+            style.configure("Accent.TLabel", foreground="#0b5cd5", font=("Segoe UI", 9, "bold"))
             root.configure(bg=default_bg)
             try:
                 menu.configure(**menu_defaults)
@@ -326,6 +354,8 @@ def gui(_hook=None):
                 if mp:
                     style.map(nm, **mp)
             style.configure("Big.Accent.TButton", font=("Segoe UI", 12, "bold"), padding=(12, 9))
+            style.configure("Accent.TLabel", foreground=t["accent"] if T.contrast(t["accent"], t["bg"]) >= 4.5
+                            else t["fg"], font=("Segoe UI", 9, "bold"))
             c = t
             root.configure(bg=t["bg"])
             tcfg = dict(bg=t["surface"], fg=t["fg"], insertbackground=t["fg"],
@@ -343,7 +373,8 @@ def gui(_hook=None):
             except tk.TclError:
                 pass
         logbox.configure(**tcfg)
-        for tag, key in (("inst", "ok"), ("avail", "fg"), ("local", "muted")):
+        news.configure(**tcfg)
+        for tag, key in (("inst", "ok"), ("avail", "fg"), ("new", "warn"), ("local", "muted")):
             tv.tag_configure(tag, foreground=c[key])
         T.set_dark_titlebar(root, bool(t) and t["kind"] == "dark")
         draw_swatches(t)
@@ -484,6 +515,10 @@ def gui(_hook=None):
         for b in (btn_info,):
             b.state(["!disabled"] if tag else ["disabled"])
         btn_dir.state(["!disabled"])
+        news.config(state="normal")
+        news.delete("1.0", "end")
+        news.insert("end", model.info(tag) if tag else "Выберите версию в списке слева.")
+        news.config(state="disabled")
         if tag:
             settings["last_tag"] = tag
 
@@ -499,12 +534,34 @@ def gui(_hook=None):
             pb["value"] = 0
         tv.state(["disabled"] if on else ["!disabled"])
 
-    def do_refresh(_e=None):
+    def check_new(startup=False):
+        r = model.new_version()
+        if r is None:
+            banner.pack_forget()
+            return
+        banner_var.set(f"Доступна новая версия: {r.tag}. Выберите её и нажмите «Установить».")
+        banner.pack(anchor="w", before=btn_main, pady=(8, 0))
+        if startup and settings.get("notified_tag") != r.tag:
+            settings["notified_tag"] = r.tag
+            save()
+            first = (r.notes or "").strip().splitlines()[:6]
+            if messagebox.askyesno("Новая версия Portabilizer",
+                                   f"Вышла новая версия: {r.tag}.\n\n" + "\n".join(first) +
+                                   "\n\nУстановить сейчас?", parent=root):
+                fill_list(r.tag)
+                do_install(r.tag)
+
+    def after_refresh(res, err, startup=False):
+        status_var.set(res if res else f"Ошибка: {err}")
+        log(res or str(err))
+        fill_list()
+        check_new(startup)
+
+    def do_refresh(_e=None, startup=False):
         if ui["busy"]:
             return
         status_var.set("Проверяю версии в GitHub...")
-        bg(model.refresh, lambda res, err: (
-            status_var.set(res if res else f"Ошибка: {err}"), log(res or str(err)), fill_list()))
+        bg(model.refresh, lambda res, err: after_refresh(res, err, startup))
 
     def do_install(tag):
         ui["cancel"] = False
@@ -519,6 +576,7 @@ def gui(_hook=None):
             if err is None:
                 status_var.set(f"Версия {tag} установлена.")
                 fill_list(tag)
+                check_new()
             elif isinstance(err, C.Cancelled):
                 status_var.set("Установка отменена.")
                 update_buttons()
@@ -618,8 +676,33 @@ def gui(_hook=None):
     menu.add_command(label="Добавить свою версию...", command=do_add_file)
     menu.add_command(label="Удалить выбранную версию", command=do_remove)
     menu.add_separator()
+    menu.add_command(label="Создать ярлык на рабочем столе", command=lambda: make_shortcut(True))
     menu.add_command(label="Открыть папку версий", command=lambda: open_folder(model.versions_dir))
     menu.add_command(label="О программе", command=lambda: nb.select(tab_about))
+
+    def make_shortcut(verbose=False):
+        if not getattr(sys, "frozen", False):
+            if verbose:
+                messagebox.showinfo("Ярлык", "Ярлык создаётся для собранного Portabilizer Launcher.exe "
+                                    "(build_launcher.bat). Из исходников он не нужен.", parent=root)
+            return
+        try:
+            path = C.create_desktop_shortcut(sys.executable, "Portabilizer Launcher")
+            log(f"Создан ярлык: {path}")
+            if verbose:
+                messagebox.showinfo("Ярлык", f"Ярлык создан:\n{path}", parent=root)
+        except OSError as e:
+            log(f"Ярлык не создан: {e}")
+            if verbose:
+                messagebox.showwarning("Ярлык", f"Не удалось создать ярлык: {e}", parent=root)
+
+    def first_run_shortcut():
+        if getattr(sys, "frozen", False) and not settings.get("shortcut_asked"):
+            settings["shortcut_asked"] = True
+            save()
+            if messagebox.askyesno("Ярлык", "Создать ярлык Portabilizer Launcher на рабочем столе?",
+                                   parent=root):
+                make_shortcut(True)
 
     menu_defaults = {k: menu.cget(k) for k in ("bg", "fg", "activebackground", "activeforeground",
                                               "relief")}
@@ -701,14 +784,17 @@ def gui(_hook=None):
     apply_theme()
     fill_list()
     pump_job = root.after(120, pump)
-    root.after(200, do_refresh)
+    root.after(200, lambda: do_refresh(startup=True))
+    root.after(1500, first_run_shortcut)
 
     if _hook:
         _hook({"root": root, "model": model, "settings": settings, "mode_var": mode_var,
                "tv": tv, "mv": mv, "fill_list": fill_list, "update_buttons": update_buttons,
                "do_main": do_main, "do_refresh": do_refresh, "apply_theme": apply_theme,
                "theme_cur": cur, "pump": pump, "q": q, "btn_main": btn_main, "status_var": status_var,
-               "do_remove": do_remove, "style": style, "themes": themes, "ui": ui})
+               "do_remove": do_remove, "style": style, "themes": themes, "ui": ui,
+               "check_new": check_new, "banner_var": banner_var, "news": news,
+               "make_shortcut": make_shortcut})
         return
     root.mainloop()
 
