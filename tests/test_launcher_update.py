@@ -45,3 +45,10 @@ for k in ("smooth64", "smooth32", "pixel64", "pixel32"):
     im = Image.open(io.BytesIO(base64.b64decode(pz_icons.ICONS[k]))).convert("RGBA")
     check(im.size == (int(k[-2:]),) * 2 and im.getpixel((0, 0))[3] == 0, f"{k}: размер и прозрачный угол")
 print(f"самообновление и иконки: {n} проверок пройдено")
+cl = open(Path(__file__).resolve().parent.parent / "CHANGELOG.md", encoding="utf-8").read()
+d = C.parse_changelog(cl)
+check(set(d) == {"8.9", "8.8", "8.7"} and "переносится" in d["8.9"] and "UAC" in d["8.7"], "разбор CHANGELOG")
+rs = [C.Release("V8.9"), C.Release("V8.7", notes="своё")]
+C.fill_notes_from_changelog(rs, cl)
+check("переносится" in rs[0].notes and rs[1].notes == "своё", "пустое заполняется, своё не трогается")
+print(f"changelog: всего {n} проверок")

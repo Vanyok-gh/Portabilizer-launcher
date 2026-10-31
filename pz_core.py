@@ -120,6 +120,43 @@ def parse_releases(data) -> list:
     return out
 
 
+def parse_changelog(text: str) -> dict:
+    """CHANGELOG.md -> {'8.9': 'текст', ...}. Раздел начинается с '## v8.9' (v необязательна)."""
+    out, key, buf = {}, None, []
+    for line in str(text or "").splitlines():
+        m = re.match(r"^##\s+[vV]?(\d+(?:\.\d+)*)\b", line)
+        if m:
+            if key:
+                out[key] = "\n".join(buf).strip()
+            key, buf = m.group(1), []
+        elif key:
+            buf.append(line)
+    if key:
+        out[key] = "\n".join(buf).strip()
+    return out
+
+
+def fill_notes_from_changelog(releases, text: str):
+    """Подставляет описание из CHANGELOG тем релизам, у которых оно пустое."""
+    log = parse_changelog(text)
+    for r in releases:
+        if not (r.notes or "").strip():
+            body = log.get(".".join(map(str, parse_version(r.tag))))
+            if body:
+                r.notes = f"Portabilizer {r.tag}\n\n{body}"
+
+
+def fetch_changelog(owner, repo, timeout=15, opener=None) -> str:
+    """Читает CHANGELOG.md из репозитория (ветка main). Любая ошибка -> пустая строка."""
+    try:
+        url = f"https://raw.githubusercontent.com/{owner}/{repo}/main/CHANGELOG.md"
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        with (opener or urllib.request.urlopen)(req, timeout=timeout) as r:
+            return r.read().decode("utf-8")
+    except Exception:                                       # noqa: BLE001
+        return ""
+
+
 def versions_api_url(settings=None) -> str:
     """Адрес API релизов с версиями Portabilizer: из настройки versions_repo ('владелец/репозиторий')."""
     spec = str((settings or {}).get("versions_repo") or "").strip().strip("/")
@@ -307,7 +344,9 @@ def install_release(rel: Release, versions_dir: Path, progress=None, cancel=None
         stage.mkdir()
         safe_extract(zpath, stage)
         if not find_exe(stage):
-            raise ValueError(f"в архиве нет {EXE_NAME}")
+            raise ValueError(f"в архиве нет {EXE_NAME}. Похоже, к релизу приложены исходники, а не "
+                             f"собранная программа: соберите её через build.bat и приложите "
+                             f"zip с {EXE_NAME} (как у v8.7)")
         if final.exists():
             shutil.rmtree(final)
         shutil.move(str(stage), str(final))
@@ -336,7 +375,8 @@ def import_local(path, versions_dir: Path, name: str = "") -> Path:
         if p.suffix.lower() == ".zip":
             safe_extract(p, final)
             if not find_exe(final):
-                raise ValueError(f"в архиве нет {EXE_NAME}")
+                raise ValueError(f"в архиве нет {EXE_NAME}. Похоже, к релизу приложены исходники, "
+                                 f"а не собранная программа: соберите её через build.bat")
         elif p.suffix.lower() == ".exe":
             shutil.copy2(p, final / EXE_NAME)
         else:

@@ -51,6 +51,13 @@ class Model:
             url = self.api_url or C.versions_api_url(self.settings)
             self.releases = C.fetch_releases(url, opener=self.opener, cache=self.cache)
             self.online = True
+            if any(not (r.notes or "").strip() for r in self.releases):
+                try:
+                    owner, repo = url.split("/repos/")[1].split("/")[:2]
+                    C.fill_notes_from_changelog(self.releases,
+                                                C.fetch_changelog(owner, repo, opener=self.opener))
+                except (IndexError, ValueError):
+                    pass                                   # нестандартный адрес (тесты): описание не подставляем
             self.status = f"Версий в GitHub: {len(self.releases)}."
         except C.OfflineCache as e:
             self.releases, self.online = e.releases, False
