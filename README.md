@@ -73,3 +73,23 @@ python tests/test_updates.py  # уведомление о новой верси�
 - Контрольная сумма проверяется до распаковки.
 - Лаунчер только скачивает и запускает `Portabilizer.exe` из ваших релизов. Свой код из
   интернета он не исполняет.
+
+
+## Два репозитория (рекомендуется)
+
+* `Portabilizer-launcher` (этот): код лаунчера и его релизы с тегами `launcher-v0.3`, `launcher-v0.4` ...
+* `Portabilizer`: релизы самой программы (`v8.9`, `v9.0` ...). Откуда лаунчер берёт версии, задаётся константами
+  `VERSIONS_OWNER` / `VERSIONS_REPO` в `pz_core.py` или настройкой `versions_repo` (`владелец/репозиторий`) в
+  `launcher_settings.json`. Пока второго репозитория нет, версии берутся из этого.
+
+Лаунчер сам проверяет, вышел ли релиз `launcher-vX.Y` новее установленного, и предлагает открыть страницу загрузки.
+
+## Сборка exe на GitHub
+
+Создайте тег `launcher-v0.3` (Releases -> Draft a new release -> новый тег). Workflow
+`.github/workflows/release-launcher.yml` соберёт `Portabilizer Launcher.exe` на Windows и приложит zip к релизу.
+Локально: `build_launcher.bat`.
+
+## Иконки
+
+`launcher.ico` (exe), `pz_icons.py` (окно): гладкая для обычных тем, пиксельная при теме «Классическая (системная)».

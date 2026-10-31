@@ -1,0 +1,29 @@
+# Сборка Portabilizer Launcher.exe на сервере GitHub. Запускается, когда вы создаёте тег launcher-vX.Y
+# (например launcher-v0.3): exe собирается и сам прикладывается к релизу.
+name: Release launcher
+on:
+  push:
+    tags: ["launcher-v*"]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pyinstaller
+      - run: python -m PyInstaller --noconfirm --clean --onefile --windowed --name "Portabilizer Launcher" --icon launcher.ico launcher.py
+      - name: Pack
+        shell: pwsh
+        run: |
+          $v = "${{ github.ref_name }}" -replace '^launcher-',''
+          Compress-Archive -Path "dist\Portabilizer Launcher.exe" -DestinationPath "Portabilizer-Launcher-$v.zip"
+      - name: Publish release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ github.ref_name }}" (Get-ChildItem Portabilizer-Launcher-*.zip).FullName --title "Portabilizer Launcher ${{ github.ref_name }}" --generate-notes

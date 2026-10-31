@@ -17,7 +17,10 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-OWNER, REPO = "Vanyok-gh", "portabilizer-launcher"
+OWNER, REPO = "Vanyok-gh", "portabilizer-launcher"          # репозиторий самого лаунчера
+# откуда брать версии Portabilizer: пока тот же репозиторий; когда появится отдельный
+# (например Vanyok-gh/Portabilizer), достаточно поменять эту строку или параметр versions_repo в настройках
+VERSIONS_OWNER, VERSIONS_REPO = "Vanyok-gh", "portabilizer-launcher"
 API_URL = "https://api.github.com/repos/{owner}/{repo}/releases"
 EXE_NAME = "Portabilizer.exe"
 USER_AGENT = "Portabilizer-Launcher"
@@ -115,6 +118,40 @@ def parse_releases(data) -> list:
             asset_size=int(a.get("size") or 0) if a else 0, sha256=sha, sha_url=sha_url))
     out.sort(key=lambda x: parse_version(x.tag), reverse=True)
     return out
+
+
+def versions_api_url(settings=None) -> str:
+    """Адрес API релизов с версиями Portabilizer: из настройки versions_repo ('владелец/репозиторий')."""
+    spec = str((settings or {}).get("versions_repo") or "").strip().strip("/")
+    owner, _, repo = spec.partition("/")
+    if not (owner and repo and re.match(r"^[\w.-]+$", owner) and re.match(r"^[\w.-]+$", repo)):
+        owner, repo = VERSIONS_OWNER, VERSIONS_REPO
+    return API_URL.format(owner=owner, repo=repo)
+
+
+def parse_launcher_release(data, current: str):
+    """Самый новый релиз с тегом launcher-vX.Y, если он новее current. Иначе None."""
+    best = None
+    for r in data if isinstance(data, list) else []:
+        if not isinstance(r, dict) or r.get("draft") or r.get("prerelease"):
+            continue
+        m = re.match(r"^launcher-v(\d+(?:\.\d+)*)$", str(r.get("tag_name", "")))
+        if not m:
+            continue
+        v = parse_version(m.group(1))
+        if v > parse_version(current) and (best is None or v > best[0]):
+            best = (v, {"tag": r["tag_name"], "version": m.group(1), "url": r.get("html_url", ""),
+                        "notes": r.get("body") or ""})
+    return best[1] if best else None
+
+
+def check_launcher_update(current: str, timeout=15, opener=None):
+    """Проверяет, вышла ли новая версия самого лаунчера. Любая ошибка -> None (не мешаем работе)."""
+    try:
+        with _open(API_URL.format(owner=OWNER, repo=REPO) + "?per_page=30", timeout, opener) as r:
+            return parse_launcher_release(json.loads(r.read().decode("utf-8")), current)
+    except Exception:                                       # noqa: BLE001
+        return None
 
 
 def _open(url, timeout=20, opener=None):

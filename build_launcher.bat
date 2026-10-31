@@ -14,7 +14,7 @@ echo [1/2] Ставлю pyinstaller...
 python -m pip install --upgrade pyinstaller
 if errorlevel 1 goto fail
 echo [2/2] Собираю exe...
-python -m PyInstaller --noconfirm --clean --onefile --windowed --name "Portabilizer Launcher" launcher.py
+python -m PyInstaller --noconfirm --clean --onefile --windowed --name "Portabilizer Launcher" --icon launcher.ico launcher.py
 if errorlevel 1 goto fail
 echo.
 echo Готово: dist\Portabilizer Launcher.exe

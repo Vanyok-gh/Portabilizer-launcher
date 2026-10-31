@@ -13,12 +13,13 @@ import webbrowser
 from pathlib import Path
 
 import pz_core as C
+import pz_icons
 import pz_theme as T
 
-VERSION = "0.2"
+VERSION = "0.3"
 REPO_URL = f"https://github.com/{C.OWNER}/{C.REPO}"
 DEFAULTS = {"show_beta": True, "close_after_launch": False, "mode": "normal", "last_tag": "",
-            "versions_dir": ""}
+            "versions_dir": "", "versions_repo": ""}
 
 
 class Model:
@@ -31,6 +32,7 @@ class Model:
         self.api_url, self.opener = api_url, opener
         self.cache = cache if cache is not None else C.app_dir() / "releases_cache.json"
         self.releases = []
+        self.launcher_new = None            # новая версия самого лаунчера (dict) или None
         self.installed = {}
         self.online = False
         self.status = ""
@@ -46,7 +48,8 @@ class Model:
     def refresh(self) -> str:
         """Запрашивает релизы (с запасным кэшем) и сканирует диск. Возвращает текст статуса."""
         try:
-            self.releases = C.fetch_releases(self.api_url, opener=self.opener, cache=self.cache)
+            url = self.api_url or C.versions_api_url(self.settings)
+            self.releases = C.fetch_releases(url, opener=self.opener, cache=self.cache)
             self.online = True
             self.status = f"Версий в GitHub: {len(self.releases)}."
         except C.OfflineCache as e:
@@ -56,6 +59,7 @@ class Model:
             self.releases, self.online = [], False
             self.status = f"Не удалось получить список версий ({e}). Показаны установленные."
         self.scan_installed()
+        self.launcher_new = C.check_launcher_update(VERSION, opener=self.opener) if self.online else None
         return self.status
 
     # --- список для окна
@@ -329,6 +333,16 @@ def gui(_hook=None):
     # ------------------------------------------------------------ оформление
     cur = {"theme": None}
     combos = []
+    icon_refs = {}
+
+    def set_icon(classic):
+        try:                                   # «Классическая» тема - пиксельная иконка, иначе гладкая
+            key = "pixel" if classic else "smooth"
+            imgs = [tk.PhotoImage(data=pz_icons.ICONS[f"{key}{n}"]) for n in (64, 32)]
+            icon_refs["imgs"] = imgs
+            root.iconphoto(True, *imgs)
+        except Exception:
+            pass
 
     def apply_theme():
         t = T.pick_theme(settings, mode_var.get() == "r", themes)
@@ -377,6 +391,7 @@ def gui(_hook=None):
         for tag, key in (("inst", "ok"), ("avail", "fg"), ("new", "warn"), ("local", "muted")):
             tv.tag_configure(tag, foreground=c[key])
         T.set_dark_titlebar(root, bool(t) and t["kind"] == "dark")
+        set_icon(t is None)
         draw_swatches(t)
         if mode_var.get() == "r":
             r_hint.pack(anchor="w", pady=(6, 0), after=modef)
@@ -535,11 +550,24 @@ def gui(_hook=None):
         tv.state(["disabled"] if on else ["!disabled"])
 
     def check_new(startup=False):
+        ln = model.launcher_new
+        if ln and startup and settings.get("notified_launcher") != ln["tag"]:
+            settings["notified_launcher"] = ln["tag"]
+            save()
+            if messagebox.askyesno("Новая версия лаунчера",
+                                   f"Вышел новый Portabilizer Launcher {ln['version']} "
+                                   f"(у вас {VERSION}).\n\nОткрыть страницу загрузки?", parent=root):
+                webbrowser.open(ln["url"] or REPO_URL + "/releases")
         r = model.new_version()
         if r is None:
-            banner.pack_forget()
+            if ln:
+                banner_var.set(f"Вышел новый лаунчер {ln['version']}: {REPO_URL}/releases")
+                banner.pack(anchor="w", before=btn_main, pady=(8, 0))
+            else:
+                banner.pack_forget()
             return
-        banner_var.set(f"Доступна новая версия: {r.tag}. Выберите её и нажмите «Установить».")
+        banner_var.set(f"Доступна новая версия: {r.tag}. Выберите её и нажмите «Установить»."
+                       + (f"\nИ новый лаунчер {ln['version']}." if ln else ""))
         banner.pack(anchor="w", before=btn_main, pady=(8, 0))
         if startup and settings.get("notified_tag") != r.tag:
             settings["notified_tag"] = r.tag
