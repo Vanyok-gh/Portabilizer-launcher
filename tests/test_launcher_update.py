@@ -52,3 +52,29 @@ rs = [C.Release("V8.9"), C.Release("V8.7", notes="своё")]
 C.fill_notes_from_changelog(rs, cl)
 check("переносится" in rs[0].notes and rs[1].notes == "своё", "пустое заполняется, своё не трогается")
 print(f"changelog: всего {n} проверок")
+
+# --- установка: в первом файле нет exe -> берём следующий; голый exe; ничего подходящего
+import zipfile, threading, http.server, functools
+srv_dir = Path(tempfile.mkdtemp()); (srv_dir / "src.zip").write_bytes(b"")
+with zipfile.ZipFile(srv_dir / "portabilizer_v9.zip", "w") as z: z.writestr("portabilizer_v8.py", "print(1)")
+with zipfile.ZipFile(srv_dir / "Portabilizer-v9.zip", "w") as z: z.writestr("Portabilizer-v9/Portabilizer.exe", b"MZ" + b"\0" * 50)
+(srv_dir / "Portabilizer.exe").write_bytes(b"MZ" + b"\0" * 30)
+H = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(srv_dir))
+class Q(H.func):
+    def log_message(self, *a): pass
+httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Q, directory=str(srv_dir)))
+threading.Thread(target=httpd.serve_forever, daemon=True).start()
+base = f"http://127.0.0.1:{httpd.server_port}/"
+def asset(name): return {"name": name, "browser_download_url": base + name, "size": 1}
+def rel(*names): return C.parse_releases([{"tag_name": "v9.0", "assets": [asset(x) for x in names]}])[0]
+r1 = rel("portabilizer_v9.zip", "Portabilizer-v9.zip")        # первым идёт исходник без exe
+check(r1.asset_name == "Portabilizer-v9.zip" or r1.alts, "оба файла учтены")
+d = Path(tempfile.mkdtemp()); p = C.install_release(r1, d); check(C.find_exe(p), "поставилось из второго файла")
+r2 = rel("Portabilizer.exe", "portabilizer_v9.zip"); check(r2.asset_name == "Portabilizer.exe", "голый exe в приоритете")
+d = Path(tempfile.mkdtemp()); p = C.install_release(r2, d); check((p / "Portabilizer.exe").read_bytes()[:2] == b"MZ", "голый exe установлен")
+r3 = rel("portabilizer_v9.zip"); d = Path(tempfile.mkdtemp())
+try: C.install_release(r3, d); check(False, "должна быть ошибка")
+except ValueError as e: check("нет собранной программы" in str(e), f"понятная ошибка: {e}")
+check(not any(x.name.startswith("_install_") for x in d.iterdir()), "временные папки убраны")
+httpd.shutdown()
+print(f"установка из релиза: всего {n} проверок")

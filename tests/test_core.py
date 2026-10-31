@@ -84,7 +84,7 @@ try: C.install_release(by["v10.0"], vd); check(False, "zip slip не пойма�
 except ValueError as e: check("небезопасный" in str(e), "zip slip отклонён")
 check(not (tmp / "evil.txt").exists() and not (vd / "evil.txt").exists(), "файл вне папки не создан")
 try: C.install_release(by["v10.1"], vd); check(False, "архив без exe")
-except ValueError as e: check("нет Portabilizer.exe" in str(e), "архив без exe отклонён")
+except ValueError as e: check("нет собранной программы" in str(e), "архив без exe отклонён")
 try: C.install_release(by["v7.3"], vd); check(False, "релиз без файла")
 except ValueError: check(True, "релиз без файла отклонён")
 # отмена

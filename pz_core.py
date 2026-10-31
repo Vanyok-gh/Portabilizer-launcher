@@ -66,6 +66,7 @@ class Release:
     sha256: str = ""
     sha_url: str = ""          # отдельный файл с суммой, если в релизе он есть
     local: bool = False        # версия есть только на диске (нет в GitHub)
+    alts: list = dataclasses.field(default_factory=list)   # запасные файлы релиза (если в первом нет программы)
 
     @property
     def channel(self) -> str:
@@ -76,15 +77,20 @@ class Release:
         return bool(self.asset_url)
 
 
+def rank_assets(assets: list) -> list:
+    """Файлы релиза, из которых можно поставить программу (zip или готовый exe), лучшие первыми:
+    голый Portabilizer.exe, затем zip с 'portabilizer' в имени."""
+    ok = [a for a in assets or [] if str(a.get("name", "")).lower().endswith((".zip", ".exe"))]
+    ok.sort(key=lambda a: (not a["name"].lower().endswith(".exe"),
+                           "portabilizer" not in a["name"].lower(),
+                           "x64" not in a["name"].lower() and "win" not in a["name"].lower(),
+                           a["name"].lower()))
+    return ok
+
+
 def pick_asset(assets: list, tag: str = ""):
-    """Выбирает zip с программой. Сначала с 'portabilizer' в имени, затем любой zip."""
-    zips = [a for a in assets or [] if str(a.get("name", "")).lower().endswith(".zip")]
-    if not zips:
-        return None
-    zips.sort(key=lambda a: (("portabilizer" not in a["name"].lower()),
-                             ("x64" not in a["name"].lower() and "win" not in a["name"].lower()),
-                             a["name"].lower()))
-    return zips[0]
+    ranked = rank_assets(assets)
+    return ranked[0] if ranked else None
 
 
 def _sha_from(asset: dict, assets: list, body: str) -> tuple:
@@ -109,9 +115,15 @@ def parse_releases(data) -> list:
         if not re.match(r"^[vV]?\d", str(r["tag_name"])):     # например launcher-v0.2: не версия Portabilizer
             continue
         assets = r.get("assets") or []
-        a = pick_asset(assets, r["tag_name"])
+        ranked = rank_assets(assets)
+        a = ranked[0] if ranked else None
         sha, sha_url = _sha_from(a, assets, r.get("body") or "") if a else ("", "")
-        out.append(Release(
+        alts = []
+        for b in ranked[1:]:
+            bs, bu = _sha_from(b, assets, "")
+            alts.append({"name": b["name"], "url": b.get("browser_download_url", ""),
+                         "size": int(b.get("size") or 0), "sha256": bs, "sha_url": bu})
+        out.append(Release(alts=alts,
             tag=r["tag_name"], name=r.get("name") or r["tag_name"], notes=r.get("body") or "",
             prerelease=bool(r.get("prerelease")), published=(r.get("published_at") or "")[:10],
             asset_name=a["name"] if a else "", asset_url=a.get("browser_download_url", "") if a else "",
@@ -322,10 +334,31 @@ def _expected_sha(rel: Release, opener=None) -> str:
 
 def install_release(rel: Release, versions_dir: Path, progress=None, cancel=None, log=None,
                     opener=None) -> Path:
-    """Скачивает, проверяет сумму и ставит версию в versions_dir/<тег>. Возвращает папку."""
+    """Скачивает, проверяет сумму и ставит версию в versions_dir/<тег>. Возвращает папку.
+    Если в первом файле релиза нет программы (например, приложены исходники), пробует остальные."""
     log = log or (lambda m: None)
     if not rel.available:
-        raise ValueError("у этого релиза нет zip-файла с программой")
+        raise ValueError("у этого релиза нет файла с программой (нужен zip с Portabilizer.exe или сам exe)")
+    cands = [rel] + [dataclasses.replace(rel, asset_name=a["name"], asset_url=a["url"],
+                                          asset_size=a["size"], sha256=a["sha256"], sha_url=a["sha_url"],
+                                          alts=[]) for a in rel.alts if a.get("url")]
+    last = None
+    for c in cands:
+        try:
+            return _install_asset(c, versions_dir, progress, cancel, log, opener)
+        except NoExeInAsset as e:
+            last = e
+            log(f"В файле {c.asset_name} нет программы, смотрю другие файлы релиза...")
+    raise ValueError(f"в релизе {rel.tag} нет собранной программы ({EXE_NAME}): "
+                     f"приложены только файлы без неё. Автору релиза нужно приложить "
+                     f"готовый {EXE_NAME} или zip с ним.") from last
+
+
+class NoExeInAsset(ValueError):
+    pass
+
+
+def _install_asset(rel: Release, versions_dir: Path, progress, cancel, log, opener) -> Path:
     versions_dir = Path(versions_dir)
     versions_dir.mkdir(parents=True, exist_ok=True)
     final = versions_dir / rel.tag
@@ -342,11 +375,15 @@ def install_release(rel: Release, versions_dir: Path, progress=None, cancel=None
             "Внимание: у релиза нет контрольной суммы, целостность не проверена.")
         stage = work / "unpacked"
         stage.mkdir()
-        safe_extract(zpath, stage)
-        if not find_exe(stage):
-            raise ValueError(f"в архиве нет {EXE_NAME}. Похоже, к релизу приложены исходники, а не "
-                             f"собранная программа: соберите её через build.bat и приложите "
-                             f"zip с {EXE_NAME} (как у v8.7)")
+        if zpath.name.lower().endswith(".exe"):          # приложен сам exe
+            with open(zpath, "rb") as f:
+                if f.read(2) != b"MZ":
+                    raise NoExeInAsset("это не exe-файл")
+            shutil.move(str(zpath), str(stage / EXE_NAME))
+        else:
+            safe_extract(zpath, stage)
+            if not find_exe(stage):
+                raise NoExeInAsset(f"в архиве нет {EXE_NAME}")
         if final.exists():
             shutil.rmtree(final)
         shutil.move(str(stage), str(final))
