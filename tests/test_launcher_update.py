@@ -8,9 +8,9 @@ def check(c, m):
     global n; assert c, "ПРОВАЛ: " + m; n += 1
 
 # адрес репозитория версий
-check(C.versions_api_url({}).endswith("/Vanyok-gh/portabilizer-launcher/releases"), "по умолчанию")
-check(C.versions_api_url({"versions_repo": "Vanyok-gh/Portabilizer"}).endswith("/Vanyok-gh/Portabilizer/releases"), "свой репозиторий")
-check(C.versions_api_url({"versions_repo": "плохо//../x y"}).endswith("/portabilizer-launcher/releases"), "мусор -> по умолчанию")
+check(C.versions_api_url({}).endswith("/Vanyok-gh/Portabilizer/releases"), "по умолчанию")
+check(C.versions_api_url({"versions_repo": "Vanyok-gh/Other"}).endswith("/Vanyok-gh/Other/releases"), "свой репозиторий")
+check(C.versions_api_url({"versions_repo": "плохо//../x y"}).endswith("/Vanyok-gh/Portabilizer/releases"), "мусор -> по умолчанию")
 
 data = [{"tag_name": "launcher-v0.4", "html_url": "http://r/0.4", "body": "n"},
         {"tag_name": "launcher-v0.10", "html_url": "http://r/0.10"},

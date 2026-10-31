@@ -20,7 +20,7 @@ from pathlib import Path
 OWNER, REPO = "Vanyok-gh", "portabilizer-launcher"          # репозиторий самого лаунчера
 # откуда брать версии Portabilizer: пока тот же репозиторий; когда появится отдельный
 # (например Vanyok-gh/Portabilizer), достаточно поменять эту строку или параметр versions_repo в настройках
-VERSIONS_OWNER, VERSIONS_REPO = "Vanyok-gh", "portabilizer-launcher"
+VERSIONS_OWNER, VERSIONS_REPO = "Vanyok-gh", "Portabilizer"
 API_URL = "https://api.github.com/repos/{owner}/{repo}/releases"
 EXE_NAME = "Portabilizer.exe"
 USER_AGENT = "Portabilizer-Launcher"

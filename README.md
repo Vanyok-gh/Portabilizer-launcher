@@ -80,7 +80,7 @@ python tests/test_updates.py  # уведомление о новой верси�
 * `Portabilizer-launcher` (этот): код лаунчера и его релизы с тегами `launcher-v0.3`, `launcher-v0.4` ...
 * `Portabilizer`: релизы самой программы (`v8.9`, `v9.0` ...). Откуда лаунчер берёт версии, задаётся константами
   `VERSIONS_OWNER` / `VERSIONS_REPO` в `pz_core.py` или настройкой `versions_repo` (`владелец/репозиторий`) в
-  `launcher_settings.json`. Пока второго репозитория нет, версии берутся из этого.
+  `launcher_settings.json`. По умолчанию это `Vanyok-gh/Portabilizer`.
 
 Лаунчер сам проверяет, вышел ли релиз `launcher-vX.Y` новее установленного, и предлагает открыть страницу загрузки.
 
