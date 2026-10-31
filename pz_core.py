@@ -17,7 +17,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-OWNER, REPO = "Vanyok-gh", "portabilizer-launcher"          # репозиторий самого лаунчера
+OWNER, REPO = "Vanyok-gh", "Portabilizer-launcher"          # репозиторий самого лаунчера
 # откуда брать версии Portabilizer: пока тот же репозиторий; когда появится отдельный
 # (например Vanyok-gh/Portabilizer), достаточно поменять эту строку или параметр versions_repo в настройках
 VERSIONS_OWNER, VERSIONS_REPO = "Vanyok-gh", "Portabilizer"
@@ -184,7 +184,7 @@ def parse_launcher_release(data, current: str):
     for r in data if isinstance(data, list) else []:
         if not isinstance(r, dict) or r.get("draft") or r.get("prerelease"):
             continue
-        m = re.match(r"^launcher-v(\d+(?:\.\d+)*)$", str(r.get("tag_name", "")))
+        m = re.match(r"^(?:launcher-)?[vV](\d+(?:\.\d+)*)$", str(r.get("tag_name", "")))
         if not m:
             continue
         v = parse_version(m.group(1))

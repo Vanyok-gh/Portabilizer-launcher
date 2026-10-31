@@ -34,7 +34,9 @@ check(C.check_launcher_update("0.3", opener=opener(OSError("нет сети"))) 
 
 tmp = Path(tempfile.mkdtemp())
 mix = data + [{"tag_name": "v8.9", "assets": [{"name": "Portabilizer-v8.9.zip", "browser_download_url": "http://x", "size": 1}]}]
-m = L.Model({"versions_dir": str(tmp / "v")}, opener=opener(mix), cache=tmp / "c.json")
+def by_url(req, timeout=0):                       # два репозитория: лаунчер и версии Portabilizer
+    return Resp(json.dumps(data if "/Portabilizer-launcher/" in req.full_url else mix).encode())
+m = L.Model({"versions_dir": str(tmp / "v")}, opener=by_url, cache=tmp / "c.json")
 m.refresh()
 check(m.launcher_new and m.launcher_new["version"] == "0.10", "Model.refresh видит новый лаунчер")
 check([x.tag for x in m.releases] == ["v8.9"], "launcher-теги не попадают в список версий")
@@ -78,3 +80,5 @@ except ValueError as e: check("нет собранной программы" in 
 check(not any(x.name.startswith("_install_") for x in d.iterdir()), "временные папки убраны")
 httpd.shutdown()
 print(f"установка из релиза: всего {n} проверок")
+check(C.parse_launcher_release([{"tag_name": "V0.4", "html_url": "u"}], "0.3")["version"] == "0.4", "тег V0.4 (как у вас в релизе) распознаётся")
+print(f"итого {n} проверок")

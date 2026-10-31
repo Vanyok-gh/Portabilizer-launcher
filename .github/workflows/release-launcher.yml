@@ -1,9 +1,17 @@
-# Сборка Portabilizer Launcher.exe на сервере GitHub. Запускается, когда вы создаёте тег launcher-vX.Y
-# (например launcher-v0.3): exe собирается и сам прикладывается к релизу.
+# Собирает Portabilizer Launcher.exe на сервере GitHub и прикладывает zip к релизу.
+# Способ 1: создайте релиз с тегом launcher-v0.4 (или v0.4): сборка запустится сама.
+# Способ 2: Actions -> Release launcher -> Run workflow, укажите тег уже существующего релиза: exe добавится к нему.
 name: Release launcher
 on:
   push:
-    tags: ["launcher-v*"]
+    tags: ["launcher-v*", "v*", "V*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Тег релиза (например V0.3 или launcher-v0.4)"
+        required: true
+env:
+  TAG: ${{ inputs.tag || github.ref_name }}
 permissions:
   contents: write
 jobs:
@@ -19,11 +27,20 @@ jobs:
       - name: Pack
         shell: pwsh
         run: |
-          $v = "${{ github.ref_name }}" -replace '^launcher-',''
-          Compress-Archive -Path "dist\Portabilizer Launcher.exe" -DestinationPath "Portabilizer-Launcher-$v.zip"
-      - name: Publish release
+          $v = "${{ env.TAG }}" -replace '^(launcher-)?[vV]',''
+          Compress-Archive -Path "dist\Portabilizer Launcher.exe" -DestinationPath "Portabilizer-Launcher-v$v.zip"
+      - name: Publish
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${{ github.ref_name }}" (Get-ChildItem Portabilizer-Launcher-*.zip).FullName --title "Portabilizer Launcher ${{ github.ref_name }}" --generate-notes
+          $tag = "${{ env.TAG }}"
+          $zip = (Get-ChildItem Portabilizer-Launcher-v*.zip).FullName
+          gh release view $tag 2>$null
+          if ($LASTEXITCODE -eq 0) {
+            gh release upload $tag $zip "dist\Portabilizer Launcher.exe" --clobber
+            # убираем приложенные архивы исходников: они не нужны пользователям
+            foreach ($n in @("Portabilizer-launcher-main.zip")) { gh release delete-asset $tag $n --yes 2>$null }
+          } else {
+            gh release create $tag $zip "dist\Portabilizer Launcher.exe" --title "Portabilizer Launcher $tag" --generate-notes
+          }
