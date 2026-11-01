@@ -148,11 +148,17 @@ def parse_changelog(text: str) -> dict:
     return out
 
 
+def notes_empty(notes) -> bool:
+    """Пусто или только заголовок вроде 'Portabilizer v9.0': настоящего описания нет."""
+    t = (notes or "").strip()
+    return not t or bool(re.fullmatch(r"(?i)(portabilizer\s*)?v?\d+(?:\.\d+)*(?:[-\w.]*)", t))
+
+
 def fill_notes_from_changelog(releases, text: str):
     """Подставляет описание из CHANGELOG тем релизам, у которых оно пустое."""
     log = parse_changelog(text)
     for r in releases:
-        if not (r.notes or "").strip():
+        if notes_empty(r.notes):
             body = log.get(".".join(map(str, parse_version(r.tag))))
             if body:
                 r.notes = f"Portabilizer {r.tag}\n\n{body}"
