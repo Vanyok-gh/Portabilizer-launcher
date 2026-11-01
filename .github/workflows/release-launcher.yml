@@ -41,6 +41,9 @@ jobs:
             gh release upload $tag $zip "dist\Portabilizer Launcher.exe" --clobber
             # убираем приложенные архивы исходников: они не нужны пользователям
             foreach ($n in @("Portabilizer-launcher-main.zip")) { gh release delete-asset $tag $n --yes 2>$null }
+            $global:LASTEXITCODE = 0      # delete-asset возвращает ошибку, если такого файла нет: это не сбой сборки
           } else {
             gh release create $tag $zip "dist\Portabilizer Launcher.exe" --title "Portabilizer Launcher $tag" --generate-notes
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
+          exit 0
