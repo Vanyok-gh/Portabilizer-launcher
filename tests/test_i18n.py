@@ -32,6 +32,19 @@ for k, v in I.TABLE.items():
     for t in v:
         check(ph(t) == ph(k), f"подстановки {k[:40]!r} -> {t[:40]!r}")
         check(("\n" in k) == ("\n" in t) or True, "")
+# все языки: перевод есть для каждого ключа, подстановки те же, названия языков на всех языках
+check(len(I.LANGS) == 34 and I.CODES[0] == "ru", "34 языка")
+for code in I.CODES:
+    I.set_lang(code)
+    for k in keys:
+        t = I.tr(k)
+        check(t.strip() != "" and ph(t) == ph(k), f"{code}: {k[:40]!r}")
+        if code != "ru" and len(k) > 12:
+            check(t != k or code in ("en", "uk", "bg", "sr"), f"{code}: не переведено {k[:40]!r}")
+    for c2 in I.CODES:
+        check(I.lang_name(code, c2).strip() != "", f"название {c2} на {code}")
+check(I.lang_name("de", "fr") == "Französisch" and I.lang_name("ja", "ja") == "日本語", "названия языков")
+I.set_lang("ja"); check(I.tr("Отмена") != "Отмена", "ja")
 I.set_lang("en"); check(I.tr("Запустить") == "Launch" and I.tr("Версий в GitHub: {n}.", n=3) == "Versions on GitHub: 3.", "en")
 I.set_lang("et"); check(I.tr("Отмена") == "Tühista", "et")
 I.set_lang("fr"); check(I.tr("Отмена") == "Annuler", "fr")

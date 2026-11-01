@@ -15,9 +15,9 @@ from pathlib import Path
 import pz_core as C
 import pz_icons
 import pz_theme as T
-from pz_i18n import LANGS, detect_lang, get_lang, set_lang, tr
+from pz_i18n import LANGS, detect_lang, get_lang, lang_name, set_lang, tr
 
-VERSION = "0.4"
+VERSION = "0.5"
 REPO_URL = f"https://github.com/{C.OWNER}/{C.REPO}"
 DEFAULTS = {"show_beta": True, "close_after_launch": False, "mode": "normal", "last_tag": "",
             "versions_dir": "", "versions_repo": "", "offer_version_shortcut": True}
@@ -280,10 +280,10 @@ def gui(_hook=None):
     # ------------------------------------------------------------ правая панель
     nb = ttk.Notebook(root)
     nb.pack(side="right", fill="both", expand=True, padx=(0, 10), pady=10)
-    tab_news, tab_set, tab_vers, tab_look, tab_lang, tab_log, tab_about = (ttk.Frame(nb) for _ in range(7))
+    tab_news, tab_set, tab_vers, tab_look, tab_log, tab_about, tab_lang = (ttk.Frame(nb) for _ in range(7))
     for tab, title in ((tab_news, "Что нового"), (tab_set, "Лаунчер"), (tab_vers, "Менеджер версий"),
-                       (tab_look, "Оформление"), (tab_lang, "Язык"), (tab_log, "Журнал"),
-                       (tab_about, "О программе")):
+                       (tab_look, "Оформление"), (tab_log, "Журнал"), (tab_about, "О программе"),
+                       (tab_lang, "Язык")):
         nb.add(tab, text=tr(title))
 
     # --- Что нового: описание выбранной версии
@@ -411,6 +411,7 @@ def gui(_hook=None):
                 pass
         logbox.configure(**tcfg)
         news.configure(**tcfg)
+        lang_canvas.configure(bg=(t["bg"] if t else default_bg))
         for tag, key in (("inst", "ok"), ("avail", "fg"), ("new", "warn"), ("local", "muted")):
             tv.tag_configure(tag, foreground=c[key])
         T.set_dark_titlebar(root, bool(t) and t["kind"] == "dark")
@@ -521,14 +522,45 @@ def gui(_hook=None):
                                            pady=(14, 4))
     sync_look_vars()
 
-    # --- Язык
+    # --- Язык: как в Windows - сверху название на самом языке, под ним оно же на языке интерфейса
     lang_var = tk.StringVar(value=get_lang())
-    ttk.Label(tab_lang, text=tr("Язык интерфейса:")).pack(anchor="w", padx=12, pady=(14, 6))
-    for code, name in LANGS:
-        ttk.Radiobutton(tab_lang, text=name, value=code, variable=lang_var).pack(anchor="w", padx=24, pady=2)
+    ttk.Label(tab_lang, text=tr("Язык интерфейса:")).pack(anchor="w", padx=12, pady=(12, 2))
     ttk.Label(tab_lang, style="Muted.TLabel", wraplength=560, text=tr(
         "Язык меняется сразу: окно перезапустится само, версии и настройки сохранятся.")).pack(
-        anchor="w", padx=12, pady=(12, 0))
+        anchor="w", padx=12, pady=(0, 6))
+    lang_box = ttk.Frame(tab_lang)
+    lang_box.pack(fill="both", expand=True, padx=(12, 0), pady=(0, 10))
+    lang_canvas = tk.Canvas(lang_box, highlightthickness=0, bd=0)
+    lang_sb = ttk.Scrollbar(lang_box, orient="vertical", command=lang_canvas.yview)
+    lang_canvas.configure(yscrollcommand=lang_sb.set)
+    lang_sb.pack(side="right", fill="y")
+    lang_canvas.pack(side="left", fill="both", expand=True)
+    lang_inner = ttk.Frame(lang_canvas)
+    lang_win = lang_canvas.create_window((0, 0), window=lang_inner, anchor="nw")
+    lang_inner.bind("<Configure>", lambda _e: lang_canvas.configure(scrollregion=lang_canvas.bbox("all")))
+    lang_canvas.bind("<Configure>", lambda e: lang_canvas.itemconfigure(lang_win, width=e.width))
+    lang_canvas.bind("<Enter>", lambda _e: lang_canvas.bind_all(
+        "<MouseWheel>", lambda ev: lang_canvas.yview_scroll(-1 if ev.delta > 0 else 1, "units")))
+    lang_canvas.bind("<Leave>", lambda _e: lang_canvas.unbind_all("<MouseWheel>"))
+    now = get_lang()
+    for code, native in LANGS:
+        picked = code == now
+        row_f = ttk.Frame(lang_inner, padding=(4, 5))
+        row_f.pack(fill="x")
+        top = ttk.Label(row_f, text=native, style="Accent.TLabel" if picked else "TLabel")
+        top.pack(anchor="w")
+        here = lang_name(now, code)
+        labels = [row_f, top]
+        if here != native:
+            sub = ttk.Label(row_f, text=here, style="Muted.TLabel")
+            sub.pack(anchor="w")
+            labels.append(sub)
+        if picked:
+            ttk.Label(row_f, text="✓", style="Accent.TLabel").place(relx=1.0, x=-14, rely=0.5, anchor="e")
+        for w in labels:
+            w.bind("<Button-1>", lambda _e, c=code: lang_var.set(c))
+            w.configure(cursor="hand2")
+        ttk.Separator(lang_inner).pack(fill="x")
 
     def change_language(*_a):
         code = lang_var.get()

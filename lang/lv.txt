@@ -1,0 +1,149 @@
+1	Versijas GitHub: {n}.
+2	Nav savienojuma ar GitHub: parādīts pēdējais saglabātais saraksts.
+3	Neizdevās iegūt versiju sarakstu ({e}). Parādītas instalētās versijas.
+4	instalēta (sava)
+5	instalēta
+6	jauna, var instalēt
+7	var instalēt
+8	laidienā nav faila
+9	Palaist
+10	Instalēt
+11	Nav pieejama
+12	versija nav atrasta
+13	versija {tag} nav instalēta
+14	versija nav instalēta
+15	Versija nav atrasta.
+16	Versija: {tag}
+17	Kanāls: {ch}
+18	Izlaides datums: {d}
+19	Fails: {name} ({size})
+20	Instalēta: {path} ({size})
+21	Ir tikai diskā (nav no GitHub).
+22	Kas jauns:
+23	Apraksts nav norādīts.
+24	Ielādēju versiju sarakstu...
+25	Portabilizer versijas
+26	Versija
+27	Stāvoklis
+28	Parastais režīms
+29	R režīms (radikālais)
+30	R: pēc sekmīgas būvēšanas avota fails tiek dzēsts. Programma lūgs apstiprinājumu.
+31	Atcelt
+32	Informācija
+33	Mape
+34	Atsvaidzināt
+35	Kas jauns
+36	Palaidējs
+37	Versiju pārvaldnieks
+38	Izskats
+39	Žurnāls
+40	Par programmu
+41	Valoda
+42	Versiju mape:
+43	Rādīt izmēģinājuma versijas (Beta)
+44	Aizvērt palaidēju pēc versijas palaišanas
+45	Piedāvāt darbvirsmas saīsni pēc versijas instalēšanas
+46	Versiju avots: {url}. Jaunās versijas parādās sarakstā pēc “Atsvaidzināt”. Ar roku pievienotās versijas paliek versiju mapē un sarakstā.
+47	Izmērs
+48	Atvērt mapi
+49	Dzēst versiju
+50	Pievienot savu versiju (zip vai exe)...
+51	Instalē un palaiž Portabilizer versijas: parasto režīmu un R režīmu vienā versijā. Katra versija atrodas savā mapē un netraucē citām. Lejupielādētā faila kontrolsumma tiek pārbaudīta pirms instalēšanas.
+52	Repozitorijs: {url}
+53	Atvērt repozitoriju
+54	Loga izskats. Izmaiņas stājas spēkā uzreiz. R režīms ieslēdz sarkano motīvu.
+55	Motīvs:
+56	Tumši sarkans (R):
+57	Gaiši sarkans (R):
+58	Automātiski (kā Windows)
+59	Gaišs
+60	Tumšs
+61	Klasisks (sistēmas)
+62	Gaiši sarkans (R)
+63	Ogļu krāsa ar sarkanu akcentu
+64	Bordo
+65	Ķiršu
+66	Mana krāsa
+67	 (sava)
+68	Klasisks izskats: krāsas nosaka Windows.
+69	Pašlaik: {name}
+70	Galvenā krāsa
+71	Sava krāsa
+72	Vai ar šo krāsu tonēt arī loga fonu?\n\nNē - fons paliks neitrāls.
+73	Izvēlēties savu krāsu...
+74	Saskarnes valoda:
+75	Valoda mainās uzreiz: logs pats pārstartēsies, versijas un iestatījumi tiks saglabāti.
+76	Izvēlieties versiju sarakstā kreisajā pusē.
+77	Lejupielādēts {got} no {total}
+78	Jauna palaidēja versija
+79	Ir iznācis jauns Portabilizer Launcher {v} (jums ir {cur}).\n\nVai atvērt lejupielādes lapu?
+80	Ir iznācis jauns palaidējs {v}: {url}
+81	Pieejama jauna versija: {tag}. Izvēlieties to un nospiediet “Instalēt”.
+82	\nUn jauns palaidējs {v}.
+83	Jauna Portabilizer versija
+84	Ir iznākusi jauna versija: {tag}.\n\n{notes}\n\nVai instalēt tagad?
+85	Kļūda: {e}
+86	Pārbaudu versijas GitHub...
+87	Instalēju {tag}...
+88	Versija {tag} instalēta.
+89	Instalēšana atcelta.
+90	Neizdevās instalēt versiju.
+91	Instalēšanas kļūda {tag}: {err}
+92	Instalēšana
+93	Neizdevās instalēt {tag}:\n\n{err}
+94	Palaišana
+95	Neizdevās palaist {tag}:\n\n{e}
+96	Palaista versija {tag}
+97	 (R režīms)
+98	.
+99	Palaista: {tag}
+100	Neizdevās atvērt: {e}
+101	Versija {tag}
+102	Vai dzēst versiju {tag} no diska?\n\n{path}
+103	Versija {tag} dzēsta.
+104	Dzēšana
+105	Portabilizer versija
+106	Visi faili
+107	Versijas nosaukums
+108	Kā nosaukt versiju (piemēram, v7.3)?
+109	Versija {name} pievienota no {p}.
+110	Pievienot versiju
+111	Palaidēja iestatījumi
+112	Pievienot savu versiju...
+113	Dzēst izvēlēto versiju
+114	Izveidot palaidēja saīsni darbvirsmā
+115	Izveidot izvēlētās versijas saīsni darbvirsmā
+116	Atvērt versiju mapi
+117	Saīsne
+118	Saīsne tiek izveidota uzbūvētajam Portabilizer Launcher.exe (build_launcher.bat). Palaižot no pirmkoda, tā nav vajadzīga.
+119	Saīsne izveidota: {p}
+120	Saīsne izveidota:\n{p}
+121	Saīsne nav izveidota: {e}
+122	Neizdevās izveidot saīsni: {e}
+123	Vai izveidot Portabilizer Launcher saīsni darbvirsmā?
+124	Versija {tag} instalēta.\n\nVai izveidot šīs Portabilizer versijas saīsni darbvirsmā?
+125	Versijas saīsne: {p}
+126	Notiek instalēšana
+127	Pārtraukt instalēšanu un iziet?
+128	B
+129	KB
+130	MB
+131	GB
+132	nedroša ceļa vērtība arhīvā: {name}
+133	šim laidienam nav programmas faila (vajadzīgs zip ar Portabilizer.exe vai pats exe)
+134	Failā {name} nav programmas, pārbaudu citus laidiena failus...
+135	laidienā {tag} nav uzbūvētas programmas ({exe}): pievienoti tikai faili bez tās. Laidiena autoram jāpievieno gatavs {exe} vai zip ar to.
+136	Lejupielādēju {name} ({size})...
+137	kontrolsumma nesakrīt: fails ir bojāts vai aizstāts. Instalēšana atcelta.
+138	Kontrolsumma sakrīt.
+139	Uzmanību: laidienam nav kontrolsummas, integritāte nav pārbaudīta.
+140	šis nav exe fails
+141	arhīvā nav {exe}
+142	Instalēts: {p}
+143	fails nav atrasts
+144	versija “{name}” jau pastāv
+145	arhīvā nav {exe}. Izskatās, ka laidienam pievienots pirmkods, nevis uzbūvēta programma: uzbūvējiet to ar build.bat
+146	nepieciešams .zip vai .exe
+147	dzēst var tikai mapes versiju mapes iekšpusē
+148	darbvirsmas saīsnes tiek atbalstītas tikai sistēmā Windows
+149	neizdevās izveidot saīsni

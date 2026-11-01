@@ -1,0 +1,149 @@
+1	Versi di GitHub: {n}.
+2	Tidak ada koneksi ke GitHub: menampilkan daftar tersimpan terakhir.
+3	Gagal mendapatkan daftar versi ({e}). Menampilkan versi yang terpasang.
+4	terpasang (kustom)
+5	terpasang
+6	baru, dapat dipasang
+7	dapat dipasang
+8	tidak ada file di rilis
+9	Jalankan
+10	Pasang
+11	Tidak tersedia
+12	versi tidak ditemukan
+13	versi {tag} belum dipasang
+14	versi belum dipasang
+15	Versi tidak ditemukan.
+16	Versi: {tag}
+17	Kanal: {ch}
+18	Tanggal rilis: {d}
+19	File: {name} ({size})
+20	Terpasang: {path} ({size})
+21	Hanya ada di disk (bukan dari GitHub).
+22	Yang baru:
+23	Tidak ada deskripsi.
+24	Memuat daftar versi...
+25	Versi Portabilizer
+26	Versi
+27	Status
+28	Mode normal
+29	Mode R (radikal)
+30	R: setelah build berhasil, file sumber dihapus. Program akan meminta konfirmasi.
+31	Batal
+32	Info
+33	Folder
+34	Segarkan
+35	Yang baru
+36	Launcher
+37	Pengelola versi
+38	Tampilan
+39	Log
+40	Tentang
+41	Bahasa
+42	Folder versi:
+43	Tampilkan versi percobaan (Beta)
+44	Tutup launcher setelah menjalankan versi
+45	Tawarkan pintasan desktop setelah memasang versi
+46	Sumber versi: {url}. Versi baru muncul di daftar setelah «Segarkan». Versi yang ditambahkan manual tetap berada di folder versi dan di daftar.
+47	Ukuran
+48	Buka folder
+49	Hapus versi
+50	Tambahkan versi sendiri (zip atau exe)...
+51	Memasang dan menjalankan versi Portabilizer: mode normal dan mode R dalam satu versi. Setiap versi berada di foldernya sendiri dan tidak mengganggu yang lain. Checksum file yang diunduh diperiksa sebelum pemasangan.
+52	Repositori: {url}
+53	Buka repositori
+54	Tampilan jendela. Perubahan diterapkan langsung. Mode R mengaktifkan tema merah.
+55	Tema:
+56	Merah gelap (R):
+57	Merah terang (R):
+58	Otomatis (seperti Windows)
+59	Terang
+60	Gelap
+61	Klasik (sistem)
+62	Merah muda terang (R)
+63	Arang dengan aksen merah
+64	Merah marun
+65	Ceri
+66	Warna saya
+67	 (kustom)
+68	Tampilan klasik: warna ditentukan oleh Windows.
+69	Saat ini: {name}
+70	Warna utama
+71	Warna kustom
+72	Terapkan warna ini juga ke latar jendela?\n\nTidak - latar tetap netral.
+73	Pilih warna sendiri...
+74	Bahasa antarmuka:
+75	Bahasa berubah langsung: jendela akan dimulai ulang otomatis, versi dan pengaturan tetap tersimpan.
+76	Pilih versi dari daftar di sebelah kiri.
+77	Terunduh {got} dari {total}
+78	Versi launcher baru
+79	Portabilizer Launcher {v} yang baru telah dirilis (Anda memakai {cur}).\n\nBuka halaman unduhan?
+80	Launcher baru {v} telah dirilis: {url}
+81	Versi baru tersedia: {tag}. Pilih versi tersebut dan tekan «Pasang».
+82	\nDan launcher baru {v}.
+83	Versi Portabilizer baru
+84	Versi baru telah dirilis: {tag}.\n\n{notes}\n\nPasang sekarang?
+85	Kesalahan: {e}
+86	Memeriksa versi di GitHub...
+87	Memasang {tag}...
+88	Versi {tag} terpasang.
+89	Pemasangan dibatalkan.
+90	Gagal memasang versi.
+91	Kesalahan pemasangan {tag}: {err}
+92	Pemasangan
+93	Gagal memasang {tag}:\n\n{err}
+94	Menjalankan
+95	Gagal menjalankan {tag}:\n\n{e}
+96	Versi {tag} dijalankan
+97	 (mode R)
+98	.
+99	Dijalankan: {tag}
+100	Gagal membuka: {e}
+101	Versi {tag}
+102	Hapus versi {tag} dari disk?\n\n{path}
+103	Versi {tag} dihapus.
+104	Penghapusan
+105	Versi Portabilizer
+106	Semua file
+107	Nama versi
+108	Beri nama versi ini (misalnya, v7.3)?
+109	Versi {name} ditambahkan dari {p}.
+110	Tambah versi
+111	Pengaturan launcher
+112	Tambahkan versi sendiri...
+113	Hapus versi yang dipilih
+114	Buat pintasan launcher di desktop
+115	Buat pintasan versi yang dipilih di desktop
+116	Buka folder versi
+117	Pintasan
+118	Pintasan dibuat untuk Portabilizer Launcher.exe hasil build (build_launcher.bat). Tidak diperlukan saat dijalankan dari sumber.
+119	Pintasan dibuat: {p}
+120	Pintasan dibuat:\n{p}
+121	Pintasan tidak dibuat: {e}
+122	Gagal membuat pintasan: {e}
+123	Buat pintasan Portabilizer Launcher di desktop?
+124	Versi {tag} terpasang.\n\nBuat pintasan desktop untuk versi Portabilizer ini?
+125	Pintasan versi: {p}
+126	Pemasangan sedang berlangsung
+127	Batalkan pemasangan dan keluar?
+128	B
+129	KB
+130	MB
+131	GB
+132	jalur tidak aman di arsip: {name}
+133	rilis ini tidak memiliki file program (diperlukan zip berisi Portabilizer.exe atau file exe-nya)
+134	Tidak ada program di {name}, memeriksa file rilis lainnya...
+135	rilis {tag} tidak memiliki program hasil build ({exe}): hanya file tanpa program yang dilampirkan. Pembuat rilis perlu melampirkan {exe} yang sudah jadi atau zip berisinya.
+136	Mengunduh {name} ({size})...
+137	checksum tidak cocok: file rusak atau diganti. Pemasangan dibatalkan.
+138	Checksum cocok.
+139	Peringatan: rilis tidak memiliki checksum, integritas tidak diperiksa.
+140	ini bukan file exe
+141	tidak ada {exe} di arsip
+142	Terpasang: {p}
+143	file tidak ditemukan
+144	versi “{name}” sudah ada
+145	tidak ada {exe} di arsip. Sepertinya yang dilampirkan di rilis adalah kode sumber, bukan program hasil build: build dengan build.bat
+146	diperlukan .zip atau .exe
+147	hanya folder di dalam folder versi yang dapat dihapus
+148	pintasan desktop hanya didukung di Windows
+149	gagal membuat pintasan

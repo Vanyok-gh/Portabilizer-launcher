@@ -1,0 +1,149 @@
+1	GitHub'daki sürüm sayısı: {n}.
+2	GitHub ile bağlantı yok: en son kaydedilen liste gösteriliyor.
+3	Sürüm listesi alınamadı ({e}). Yüklü sürümler gösteriliyor.
+4	yüklü (özel)
+5	yüklü
+6	yeni, yüklenebilir
+7	yüklenebilir
+8	sürümde dosya yok
+9	Başlat
+10	Yükle
+11	Kullanılamıyor
+12	sürüm bulunamadı
+13	{tag} sürümü yüklü değil
+14	sürüm yüklü değil
+15	Sürüm bulunamadı.
+16	Sürüm: {tag}
+17	Kanal: {ch}
+18	Yayın tarihi: {d}
+19	Dosya: {name} ({size})
+20	Yüklendi: {path} ({size})
+21	Yalnızca diskte var (GitHub'dan değil).
+22	Yenilikler:
+23	Açıklama yok.
+24	Sürüm listesi yükleniyor...
+25	Portabilizer sürümleri
+26	Sürüm
+27	Durum
+28	Normal mod
+29	R modu (radikal)
+30	R: başarılı derlemeden sonra kaynak dosya silinir. Program onay isteyecek.
+31	İptal
+32	Bilgi
+33	Klasör
+34	Yenile
+35	Yenilikler
+36	Başlatıcı
+37	Sürüm yöneticisi
+38	Görünüm
+39	Günlük
+40	Hakkında
+41	Dil
+42	Sürüm klasörü:
+43	Deneme sürümlerini göster (Beta)
+44	Bir sürüm başlatıldıktan sonra başlatıcıyı kapat
+45	Sürüm yüklendikten sonra masaüstü kısayolu öner
+46	Sürüm kaynağı: {url}. Yeni sürümler «Yenile» işleminden sonra listede görünür. Elle eklenen sürümler sürüm klasöründe ve listede kalır.
+47	Boyut
+48	Klasörü aç
+49	Sürümü sil
+50	Kendi sürümünü ekle (zip veya exe)...
+51	Portabilizer sürümlerini yükler ve başlatır: normal mod ve R modu aynı sürümde. Her sürüm kendi klasöründe durur ve diğerlerini etkilemez. İndirilen dosyanın sağlama toplamı yüklemeden önce doğrulanır.
+52	Depo: {url}
+53	Depoyu aç
+54	Pencere görünümü. Değişiklikler hemen uygulanır. R modu kırmızı temayı açar.
+55	Tema:
+56	Koyu kırmızı (R):
+57	Açık kırmızı (R):
+58	Otomatik (Windows gibi)
+59	Açık
+60	Koyu
+61	Klasik (sistem)
+62	Açık kırmızı (R)
+63	Kırmızı vurgulu kömür
+64	Bordo
+65	Vişne
+66	Benim rengim
+67	 (özel)
+68	Klasik görünüm: renkleri Windows belirler.
+69	Şu an: {name}
+70	Ana renk
+71	Özel renk
+72	Pencere arka planı da bu renge boyansın mı?\n\nHayır - arka plan nötr kalır.
+73	Kendi rengini seç...
+74	Arayüz dili:
+75	Dil hemen değişir: pencere kendiliğinden yeniden başlar, sürümler ve ayarlar korunur.
+76	Soldaki listeden bir sürüm seçin.
+77	{total} içinden {got} indirildi
+78	Yeni başlatıcı sürümü
+79	Yeni Portabilizer Launcher {v} yayınlandı (sizde {cur} var).\n\nİndirme sayfası açılsın mı?
+80	Yeni başlatıcı {v} yayınlandı: {url}
+81	Yeni sürüm mevcut: {tag}. Onu seçip «Yükle» düğmesine basın.
+82	\nVe yeni başlatıcı {v}.
+83	Yeni Portabilizer sürümü
+84	Yeni sürüm yayınlandı: {tag}.\n\n{notes}\n\nŞimdi yüklensin mi?
+85	Hata: {e}
+86	GitHub'daki sürümler denetleniyor...
+87	{tag} yükleniyor...
+88	{tag} sürümü yüklendi.
+89	Yükleme iptal edildi.
+90	Sürüm yüklenemedi.
+91	{tag} yükleme hatası: {err}
+92	Yükleme
+93	{tag} yüklenemedi:\n\n{err}
+94	Başlatma
+95	{tag} başlatılamadı:\n\n{e}
+96	{tag} sürümü başlatıldı
+97	 (R modu)
+98	.
+99	Başlatıldı: {tag}
+100	Açılamadı: {e}
+101	Sürüm {tag}
+102	{tag} sürümü diskten silinsin mi?\n\n{path}
+103	{tag} sürümü silindi.
+104	Silme
+105	Portabilizer sürümü
+106	Tüm dosyalar
+107	Sürüm adı
+108	Sürüme ne ad verilsin (örneğin v7.3)?
+109	{name} sürümü {p} konumundan eklendi.
+110	Sürüm ekle
+111	Başlatıcı ayarları
+112	Kendi sürümünü ekle...
+113	Seçili sürümü sil
+114	Başlatıcı için masaüstü kısayolu oluştur
+115	Seçili sürüm için masaüstü kısayolu oluştur
+116	Sürüm klasörünü aç
+117	Kısayol
+118	Kısayol, derlenmiş Portabilizer Launcher.exe için oluşturulur (build_launcher.bat). Kaynak koddan çalıştırırken gerekmez.
+119	Kısayol oluşturuldu: {p}
+120	Kısayol oluşturuldu:\n{p}
+121	Kısayol oluşturulmadı: {e}
+122	Kısayol oluşturulamadı: {e}
+123	Masaüstünde Portabilizer Launcher kısayolu oluşturulsun mu?
+124	{tag} sürümü yüklendi.\n\nBu Portabilizer sürümü için masaüstü kısayolu oluşturulsun mu?
+125	Sürüm kısayolu: {p}
+126	Yükleme sürüyor
+127	Yükleme iptal edilip çıkılsın mı?
+128	B
+129	KB
+130	MB
+131	GB
+132	arşivde güvenli olmayan yol: {name}
+133	bu sürümde program dosyası yok (Portabilizer.exe içeren bir zip veya exe dosyasının kendisi gerekir)
+134	{name} dosyasında program yok, sürümün diğer dosyalarına bakılıyor...
+135	{tag} sürümünde derlenmiş program ({exe}) yok: yalnızca o olmayan dosyalar eklenmiş. Sürümü yayınlayanın hazır {exe} dosyasını veya onu içeren bir zip eklemesi gerekir.
+136	{name} indiriliyor ({size})...
+137	sağlama toplamı eşleşmedi: dosya bozuk veya değiştirilmiş. Yükleme iptal edildi.
+138	Sağlama toplamı eşleşti.
+139	Dikkat: sürümde sağlama toplamı yok, bütünlük doğrulanmadı.
+140	bu bir exe dosyası değil
+141	arşivde {exe} yok
+142	Yüklendi: {p}
+143	dosya bulunamadı
+144	«{name}» sürümü zaten var
+145	arşivde {exe} yok. Sürüme derlenmiş program yerine kaynak kod eklenmiş gibi görünüyor: build.bat ile derleyin
+146	.zip veya .exe gerekli
+147	yalnızca sürüm klasörünün içindeki klasörler silinebilir
+148	masaüstü kısayolları yalnızca Windows'ta desteklenir
+149	kısayol oluşturulamadı

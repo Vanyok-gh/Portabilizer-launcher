@@ -1,0 +1,149 @@
+1	Versioita GitHubissa: {n}.
+2	Ei yhteyttä GitHubiin: näytetään viimeksi tallennettu luettelo.
+3	Versioluettelon haku epäonnistui ({e}). Näytetään asennetut versiot.
+4	asennettu (oma)
+5	asennettu
+6	uusi, asennettavissa
+7	asennettavissa
+8	julkaisussa ei ole tiedostoa
+9	Käynnistä
+10	Asenna
+11	Ei saatavilla
+12	versiota ei löytynyt
+13	versiota {tag} ei ole asennettu
+14	versiota ei ole asennettu
+15	Versiota ei löytynyt.
+16	Versio: {tag}
+17	Kanava: {ch}
+18	Julkaisupäivä: {d}
+19	Tiedosto: {name} ({size})
+20	Asennettu: {path} ({size})
+21	Vain levyllä (ei GitHubista).
+22	Uutta:
+23	Ei kuvausta.
+24	Ladataan versioluetteloa...
+25	Portabilizer-versiot
+26	Versio
+27	Tila
+28	Normaalitila
+29	R-tila (radikaali)
+30	R: onnistuneen koonnin jälkeen lähdetiedosto poistetaan. Ohjelma pyytää vahvistuksen.
+31	Peruuta
+32	Tiedot
+33	Kansio
+34	Päivitä
+35	Uutta
+36	Käynnistin
+37	Versionhallinta
+38	Ulkoasu
+39	Loki
+40	Tietoja
+41	Kieli
+42	Versioiden kansio:
+43	Näytä kokeiluversiot (Beta)
+44	Sulje käynnistin version käynnistyksen jälkeen
+45	Ehdota pikakuvaketta työpöydälle version asennuksen jälkeen
+46	Versioiden lähde: {url}. Uudet versiot ilmestyvät luetteloon «Päivitä»-toiminnon jälkeen. Käsin lisätyt versiot pysyvät versioiden kansiossa ja luettelossa.
+47	Koko
+48	Avaa kansio
+49	Poista versio
+50	Lisää oma versio (zip tai exe)...
+51	Asentaa ja käynnistää Portabilizer-versioita: normaalitila ja R-tila samassa versiossa. Jokainen versio on omassa kansiossaan eikä häiritse muita. Ladatun tiedoston tarkistussumma varmistetaan ennen asennusta.
+52	Repositorio: {url}
+53	Avaa repositorio
+54	Ikkunan ulkoasu. Muutokset tulevat voimaan heti. R-tila ottaa punaisen teeman käyttöön.
+55	Teema:
+56	Tumma punainen (R):
+57	Vaalea punainen (R):
+58	Automaattinen (kuten Windowsissa)
+59	Vaalea
+60	Tumma
+61	Klassinen (järjestelmä)
+62	Vaalean punainen (R)
+63	Hiili punaisella korostuksella
+64	Viininpunainen
+65	Kirsikka
+66	Oma värini
+67	 (oma)
+68	Klassinen ulkoasu: värit määrää Windows.
+69	Nyt: {name}
+70	Pääväri
+71	Oma väri
+72	Sävytetäänkö myös ikkunan tausta tällä värillä?\n\nEi - tausta pysyy neutraalina.
+73	Valitse oma väri...
+74	Käyttöliittymän kieli:
+75	Kieli vaihtuu heti: ikkuna käynnistyy itse uudelleen, versiot ja asetukset säilyvät.
+76	Valitse versio vasemmalla olevasta luettelosta.
+77	Ladattu {got} / {total}
+78	Uusi käynnistimen versio
+79	Uusi Portabilizer Launcher {v} on julkaistu (sinulla on {cur}).\n\nAvataanko lataussivu?
+80	Uusi käynnistin {v} on julkaistu: {url}
+81	Uusi versio on saatavilla: {tag}. Valitse se ja paina «Asenna».
+82	\nJa uusi käynnistin {v}.
+83	Uusi Portabilizer-versio
+84	Uusi versio on julkaistu: {tag}.\n\n{notes}\n\nAsennetaanko nyt?
+85	Virhe: {e}
+86	Tarkistetaan versiot GitHubista...
+87	Asennetaan {tag}...
+88	Versio {tag} asennettu.
+89	Asennus peruttu.
+90	Version asennus epäonnistui.
+91	Asennusvirhe {tag}: {err}
+92	Asennus
+93	Asennus epäonnistui ({tag}):\n\n{err}
+94	Käynnistys
+95	Käynnistys epäonnistui ({tag}):\n\n{e}
+96	Versio {tag} käynnistetty
+97	 (R-tila)
+98	.
+99	Käynnistetty: {tag}
+100	Avaaminen epäonnistui: {e}
+101	Versio {tag}
+102	Poistetaanko versio {tag} levyltä?\n\n{path}
+103	Versio {tag} poistettu.
+104	Poisto
+105	Portabilizer-versio
+106	Kaikki tiedostot
+107	Version nimi
+108	Mikä versio nimetään (esimerkiksi v7.3)?
+109	Versio {name} lisätty kohteesta {p}.
+110	Lisää versio
+111	Käynnistimen asetukset
+112	Lisää oma versio...
+113	Poista valittu versio
+114	Luo käynnistimen pikakuvake työpöydälle
+115	Luo valitun version pikakuvake työpöydälle
+116	Avaa versioiden kansio
+117	Pikakuvake
+118	Pikakuvake luodaan koostetulle Portabilizer Launcher.exe -tiedostolle (build_launcher.bat). Lähdekoodista ajettaessa sitä ei tarvita.
+119	Pikakuvake luotu: {p}
+120	Pikakuvake luotu:\n{p}
+121	Pikakuvaketta ei luotu: {e}
+122	Pikakuvakkeen luonti epäonnistui: {e}
+123	Luodaanko Portabilizer Launcherin pikakuvake työpöydälle?
+124	Versio {tag} on asennettu.\n\nLuodaanko tämän Portabilizer-version pikakuvake työpöydälle?
+125	Version pikakuvake: {p}
+126	Asennus käynnissä
+127	Keskeytetäänkö asennus ja poistutaanko?
+128	t
+129	kt
+130	Mt
+131	Gt
+132	vaarallinen polku arkistossa: {name}
+133	tässä julkaisussa ei ole ohjelmatiedostoa (tarvitaan zip, jossa on Portabilizer.exe, tai itse exe)
+134	Tiedostossa {name} ei ole ohjelmaa, tarkistetaan julkaisun muut tiedostot...
+135	julkaisussa {tag} ei ole koostettua ohjelmaa ({exe}): liitteenä on vain tiedostoja ilman sitä. Julkaisun tekijän on liitettävä valmis {exe} tai zip, jossa se on.
+136	Ladataan {name} ({size})...
+137	tarkistussumma ei täsmännyt: tiedosto on vioittunut tai vaihdettu. Asennus peruttu.
+138	Tarkistussumma täsmää.
+139	Huomio: julkaisulla ei ole tarkistussummaa, eheyttä ei tarkistettu.
+140	tämä ei ole exe-tiedosto
+141	arkistossa ei ole tiedostoa {exe}
+142	Asennettu: {p}
+143	tiedostoa ei löytynyt
+144	versio «{name}» on jo olemassa
+145	arkistossa ei ole tiedostoa {exe}. Julkaisuun näyttää olevan liitetty lähdekoodi koostetun ohjelman sijaan: koosta se build.bat-tiedostolla
+146	tarvitaan .zip tai .exe
+147	vain versioiden kansion sisällä olevia kansioita voi poistaa
+148	työpöydän pikakuvakkeita tuetaan vain Windowsissa
+149	pikakuvakkeen luonti epäonnistui

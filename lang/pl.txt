@@ -1,0 +1,149 @@
+1	Wersji na GitHubie: {n}.
+2	Brak połączenia z GitHubem: wyświetlono ostatnio zapisaną listę.
+3	Nie udało się pobrać listy wersji ({e}). Wyświetlono zainstalowane.
+4	zainstalowana (własna)
+5	zainstalowana
+6	nowa, można zainstalować
+7	można zainstalować
+8	brak pliku w wydaniu
+9	Uruchom
+10	Zainstaluj
+11	Niedostępna
+12	nie znaleziono wersji
+13	wersja {tag} nie jest zainstalowana
+14	wersja nie jest zainstalowana
+15	Nie znaleziono wersji.
+16	Wersja: {tag}
+17	Kanał: {ch}
+18	Data wydania: {d}
+19	Plik: {name} ({size})
+20	Zainstalowano: {path} ({size})
+21	Tylko na dysku (nie z GitHuba).
+22	Co nowego:
+23	Brak opisu.
+24	Wczytuję listę wersji...
+25	Wersje Portabilizera
+26	Wersja
+27	Stan
+28	Tryb zwykły
+29	Tryb R (radykalny)
+30	R: po udanej kompilacji plik źródłowy jest usuwany. Program poprosi o potwierdzenie.
+31	Anuluj
+32	Info
+33	Folder
+34	Odśwież
+35	Co nowego
+36	Launcher
+37	Menedżer wersji
+38	Wygląd
+39	Dziennik
+40	O programie
+41	Język
+42	Folder wersji:
+43	Pokazuj wersje testowe (Beta)
+44	Zamykaj launcher po uruchomieniu wersji
+45	Proponuj skrót na pulpicie po zainstalowaniu wersji
+46	Źródło wersji: {url}. Nowe wersje pojawią się na liście po kliknięciu „Odśwież”. Wersje dodane ręcznie pozostają w folderze wersji i na liście.
+47	Rozmiar
+48	Otwórz folder
+49	Usuń wersję
+50	Dodaj własną wersję (zip lub exe)...
+51	Instaluje i uruchamia wersje Portabilizera: tryb zwykły i tryb R w jednej wersji. Każda wersja znajduje się we własnym folderze i nie przeszkadza pozostałym. Przed instalacją sprawdzana jest suma kontrolna pobranego pliku.
+52	Repozytorium: {url}
+53	Otwórz repozytorium
+54	Wygląd okna. Zmiany są stosowane od razu. Tryb R włącza czerwony motyw.
+55	Motyw:
+56	Ciemnoczerwony (R):
+57	Jasnoczerwony (R):
+58	Automatyczny (jak w Windows)
+59	Jasny
+60	Ciemny
+61	Klasyczny (systemowy)
+62	Jasnoczerwony (R)
+63	Grafitowy z czerwonym akcentem
+64	Burgund
+65	Wiśniowy
+66	Mój kolor
+67	 (własna)
+68	Wygląd klasyczny: kolory ustawia Windows.
+69	Teraz: {name}
+70	Kolor główny
+71	Własny kolor
+72	Zabarwić na ten kolor także tło okna?\n\nNie - tło pozostanie neutralne.
+73	Wybierz własny kolor...
+74	Język interfejsu:
+75	Język zmienia się od razu: okno uruchomi się ponownie samo, wersje i ustawienia zostaną zachowane.
+76	Wybierz wersję z listy po lewej.
+77	Pobrano {got} z {total}
+78	Nowa wersja launchera
+79	Ukazał się nowy Portabilizer Launcher {v} (masz {cur}).\n\nOtworzyć stronę pobierania?
+80	Ukazał się nowy launcher {v}: {url}
+81	Dostępna jest nowa wersja: {tag}. Wybierz ją i kliknij „Zainstaluj”.
+82	\nI nowy launcher {v}.
+83	Nowa wersja Portabilizera
+84	Ukazała się nowa wersja: {tag}.\n\n{notes}\n\nZainstalować teraz?
+85	Błąd: {e}
+86	Sprawdzam wersje na GitHubie...
+87	Instaluję {tag}...
+88	Zainstalowano wersję {tag}.
+89	Instalację anulowano.
+90	Nie udało się zainstalować wersji.
+91	Błąd instalacji {tag}: {err}
+92	Instalacja
+93	Nie udało się zainstalować {tag}:\n\n{err}
+94	Uruchamianie
+95	Nie udało się uruchomić {tag}:\n\n{e}
+96	Uruchomiono wersję {tag}
+97	 (tryb R)
+98	.
+99	Uruchomiono: {tag}
+100	Nie udało się otworzyć: {e}
+101	Wersja {tag}
+102	Usunąć wersję {tag} z dysku?\n\n{path}
+103	Usunięto wersję {tag}.
+104	Usuwanie
+105	Wersja Portabilizera
+106	Wszystkie pliki
+107	Nazwa wersji
+108	Jak nazwać wersję (na przykład v7.3)?
+109	Dodano wersję {name} z {p}.
+110	Dodaj wersję
+111	Ustawienia launchera
+112	Dodaj własną wersję...
+113	Usuń wybraną wersję
+114	Utwórz skrót launchera na pulpicie
+115	Utwórz skrót wybranej wersji na pulpicie
+116	Otwórz folder wersji
+117	Skrót
+118	Skrót jest tworzony dla skompilowanego Portabilizer Launcher.exe (build_launcher.bat). Przy uruchamianiu ze źródeł nie jest potrzebny.
+119	Utworzono skrót: {p}
+120	Utworzono skrót:\n{p}
+121	Nie utworzono skrótu: {e}
+122	Nie udało się utworzyć skrótu: {e}
+123	Utworzyć skrót Portabilizer Launcher na pulpicie?
+124	Zainstalowano wersję {tag}.\n\nUtworzyć skrót tej wersji Portabilizera na pulpicie?
+125	Skrót wersji: {p}
+126	Trwa instalacja
+127	Przerwać instalację i wyjść?
+128	B
+129	KB
+130	MB
+131	GB
+132	niebezpieczna ścieżka w archiwum: {name}
+133	to wydanie nie zawiera pliku z programem (potrzebny jest zip z Portabilizer.exe lub sam plik exe)
+134	W pliku {name} nie ma programu, sprawdzam pozostałe pliki wydania...
+135	wydanie {tag} nie zawiera skompilowanego programu ({exe}): dołączono tylko pliki bez niego. Autor wydania musi dołączyć gotowy {exe} lub zip z nim.
+136	Pobieram {name} ({size})...
+137	suma kontrolna się nie zgadza: plik jest uszkodzony lub podmieniony. Instalację anulowano.
+138	Suma kontrolna się zgadza.
+139	Uwaga: wydanie nie ma sumy kontrolnej, integralność nie została sprawdzona.
+140	to nie jest plik exe
+141	w archiwum brak {exe}
+142	Zainstalowano: {p}
+143	nie znaleziono pliku
+144	wersja „{name}” już istnieje
+145	w archiwum brak {exe}. Wygląda na to, że do wydania dołączono kod źródłowy zamiast skompilowanego programu: skompiluj go za pomocą build.bat
+146	wymagany jest plik .zip lub .exe
+147	usuwać można tylko foldery wewnątrz folderu wersji
+148	skróty na pulpicie są obsługiwane tylko w systemie Windows
+149	nie udało się utworzyć skrótu

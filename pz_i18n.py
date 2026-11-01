@@ -5,9 +5,18 @@
 """
 import locale
 
-LANGS = (("ru", "Русский"), ("en", "English"), ("et", "Eesti"), ("fr", "Français"), ("es", "Español"))
-CODES = tuple(c for c, _ in LANGS)
+try:
+    from pz_lang_data import CODES, NAMES, TEXTS         # сгенерировано tools/make_lang.py из lang/*.txt
+except ImportError:                                      # без данных остаются только четыре языка из TABLE
+    CODES, NAMES, TEXTS = ("ru", "en", "et", "fr", "es"), {}, {}
+BUILTIN = ("en", "et", "fr", "es")                       # эти языки лежат прямо в TABLE (по порядку столбцов)
+LANGS = tuple((c, NAMES.get(c, {}).get(c, c)) for c in CODES)   # (код, название на самом языке)
 _cur = {"lang": "ru"}
+
+
+def lang_name(ui: str, code: str) -> str:
+    """Название языка code, написанное на языке интерфейса ui."""
+    return NAMES.get(ui, {}).get(code) or NAMES.get(code, {}).get(code, code)
 
 
 def set_lang(code):
@@ -29,13 +38,14 @@ def detect_lang() -> str:
 
 
 def tr(key: str, **kw) -> str:
-    row = TABLE.get(key)
     lang = _cur["lang"]
     text = key
-    if row and lang != "ru":
-        i = CODES.index(lang) - 1
-        if i < len(row) and row[i]:
-            text = row[i]
+    if lang in BUILTIN:
+        row = TABLE.get(key)
+        if row and row[BUILTIN.index(lang)]:
+            text = row[BUILTIN.index(lang)]
+    elif lang in TEXTS:
+        text = TEXTS[lang].get(key) or key
     return text.format(**kw) if kw else text
 
 

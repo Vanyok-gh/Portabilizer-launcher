@@ -1,0 +1,149 @@
+1	Versijų „GitHub“: {n}.
+2	Nėra ryšio su „GitHub“: rodomas paskutinis išsaugotas sąrašas.
+3	Nepavyko gauti versijų sąrašo ({e}). Rodomos įdiegtos versijos.
+4	įdiegta (sava)
+5	įdiegta
+6	nauja, galima įdiegti
+7	galima įdiegti
+8	išleidime nėra failo
+9	Paleisti
+10	Įdiegti
+11	Nepasiekiama
+12	versija nerasta
+13	versija {tag} neįdiegta
+14	versija neįdiegta
+15	Versija nerasta.
+16	Versija: {tag}
+17	Kanalas: {ch}
+18	Išleidimo data: {d}
+19	Failas: {name} ({size})
+20	Įdiegta: {path} ({size})
+21	Yra tik diske (ne iš „GitHub“).
+22	Kas naujo:
+23	Aprašymas nenurodytas.
+24	Įkeliamas versijų sąrašas...
+25	Portabilizer versijos
+26	Versija
+27	Būsena
+28	Įprastas režimas
+29	R režimas (radikalusis)
+30	R: sėkmingai sukūrus šaltinio failas ištrinamas. Programa paprašys patvirtinimo.
+31	Atšaukti
+32	Informacija
+33	Aplankas
+34	Atnaujinti
+35	Kas naujo
+36	Paleidiklis
+37	Versijų tvarkyklė
+38	Išvaizda
+39	Žurnalas
+40	Apie programą
+41	Kalba
+42	Versijų aplankas:
+43	Rodyti bandomąsias versijas (Beta)
+44	Paleidus versiją uždaryti paleidiklį
+45	Įdiegus versiją siūlyti nuorodą darbalaukyje
+46	Versijų šaltinis: {url}. Naujos versijos atsiranda sąraše paspaudus „Atnaujinti“. Rankiniu būdu pridėtos versijos lieka versijų aplanke ir sąraše.
+47	Dydis
+48	Atidaryti aplanką
+49	Ištrinti versiją
+50	Pridėti savo versiją (zip arba exe)...
+51	Įdiegia ir paleidžia Portabilizer versijas: įprastą režimą ir R režimą vienoje versijoje. Kiekviena versija yra savo aplanke ir netrukdo kitoms. Atsisiųsto failo kontrolinė suma patikrinama prieš diegiant.
+52	Saugykla: {url}
+53	Atidaryti saugyklą
+54	Lango išvaizda. Pakeitimai taikomi iš karto. R režimas įjungia raudoną temą.
+55	Tema:
+56	Tamsiai raudona (R):
+57	Šviesiai raudona (R):
+58	Automatinė („Windows“ nustatymas)
+59	Šviesi
+60	Tamsi
+61	Klasikinė (sisteminė)
+62	Šviesiai raudona (R)
+63	Anglies spalva su raudonu akcentu
+64	Bordo
+65	Vyšninė
+66	Mano spalva
+67	 (sava)
+68	Klasikinė išvaizda: spalvas nustato „Windows“.
+69	Dabar: {name}
+70	Pagrindinė spalva
+71	Sava spalva
+72	Ar šia spalva atspalvinti ir lango foną?\n\nNe - fonas liks neutralus.
+73	Pasirinkti savo spalvą...
+74	Sąsajos kalba:
+75	Kalba pasikeičia iš karto: langas persijungs pats, versijos ir nustatymai bus išsaugoti.
+76	Pasirinkite versiją sąraše kairėje.
+77	Atsisiųsta {got} iš {total}
+78	Nauja paleidiklio versija
+79	Išleistas naujas „Portabilizer Launcher“ {v} (jūsų versija {cur}).\n\nAtidaryti atsisiuntimo puslapį?
+80	Išleistas naujas paleidiklis {v}: {url}
+81	Yra nauja versija: {tag}. Pasirinkite ją ir spustelėkite „Įdiegti“.
+82	\nTaip pat išleistas naujas paleidiklis {v}.
+83	Nauja Portabilizer versija
+84	Išleista nauja versija: {tag}.\n\n{notes}\n\nĮdiegti dabar?
+85	Klaida: {e}
+86	Tikrinamos versijos „GitHub“...
+87	Diegiama {tag}...
+88	Versija {tag} įdiegta.
+89	Diegimas atšauktas.
+90	Nepavyko įdiegti versijos.
+91	Diegimo klaida {tag}: {err}
+92	Diegimas
+93	Nepavyko įdiegti {tag}:\n\n{err}
+94	Paleidimas
+95	Nepavyko paleisti {tag}:\n\n{e}
+96	Paleista versija {tag}
+97	 (R režimas)
+98	.
+99	Paleista: {tag}
+100	Nepavyko atidaryti: {e}
+101	Versija {tag}
+102	Ištrinti versiją {tag} iš disko?\n\n{path}
+103	Versija {tag} ištrinta.
+104	Ištrynimas
+105	Portabilizer versija
+106	Visi failai
+107	Versijos pavadinimas
+108	Kaip pavadinti versiją (pavyzdžiui, v7.3)?
+109	Versija {name} pridėta iš {p}.
+110	Pridėti versiją
+111	Paleidiklio nustatymai
+112	Pridėti savo versiją...
+113	Ištrinti pasirinktą versiją
+114	Sukurti paleidiklio nuorodą darbalaukyje
+115	Sukurti pasirinktos versijos nuorodą darbalaukyje
+116	Atidaryti versijų aplanką
+117	Nuoroda
+118	Nuoroda kuriama sukompiliuotam Portabilizer Launcher.exe (build_launcher.bat). Paleidžiant iš šaltinio kodo jos nereikia.
+119	Nuoroda sukurta: {p}
+120	Nuoroda sukurta:\n{p}
+121	Nuoroda nesukurta: {e}
+122	Nepavyko sukurti nuorodos: {e}
+123	Sukurti Portabilizer Launcher nuorodą darbalaukyje?
+124	Versija {tag} įdiegta.\n\nSukurti šios Portabilizer versijos nuorodą darbalaukyje?
+125	Versijos nuoroda: {p}
+126	Vyksta diegimas
+127	Nutraukti diegimą ir išeiti?
+128	B
+129	KB
+130	MB
+131	GB
+132	nesaugus kelias archyve: {name}
+133	šiame išleidime nėra programos failo (reikia zip su Portabilizer.exe arba paties exe)
+134	Faile {name} nėra programos, tikrinami kiti išleidimo failai...
+135	išleidime {tag} nėra sukompiliuotos programos ({exe}): pridėti tik failai be jos. Išleidimo autorius turi pridėti paruoštą {exe} arba zip su juo.
+136	Atsisiunčiama {name} ({size})...
+137	kontrolinė suma nesutampa: failas pažeistas arba pakeistas. Diegimas atšauktas.
+138	Kontrolinė suma sutampa.
+139	Dėmesio: išleidimas neturi kontrolinės sumos, vientisumas netikrintas.
+140	tai nėra exe failas
+141	archyve nėra {exe}
+142	Įdiegta: {p}
+143	failas nerastas
+144	versija „{name}“ jau yra
+145	archyve nėra {exe}. Panašu, kad prie išleidimo pridėtas šaltinio kodas, o ne sukompiliuota programa: sukompiliuokite ją naudodami build.bat
+146	reikalingas .zip arba .exe
+147	galima trinti tik aplankus versijų aplanko viduje
+148	nuorodos darbalaukyje palaikomos tik sistemoje „Windows“
+149	nepavyko sukurti nuorodos

@@ -1,0 +1,149 @@
+1	Số phiên bản trên GitHub: {n}.
+2	Không có kết nối tới GitHub: đang hiển thị danh sách đã lưu gần nhất.
+3	Không thể lấy danh sách phiên bản ({e}). Đang hiển thị các phiên bản đã cài.
+4	đã cài (tùy chỉnh)
+5	đã cài
+6	mới, có thể cài đặt
+7	có thể cài đặt
+8	bản phát hành không có tệp
+9	Khởi chạy
+10	Cài đặt
+11	Không khả dụng
+12	không tìm thấy phiên bản
+13	phiên bản {tag} chưa được cài
+14	phiên bản chưa được cài
+15	Không tìm thấy phiên bản.
+16	Phiên bản: {tag}
+17	Kênh: {ch}
+18	Ngày phát hành: {d}
+19	Tệp: {name} ({size})
+20	Đã cài: {path} ({size})
+21	Chỉ có trên ổ đĩa (không phải từ GitHub).
+22	Có gì mới:
+23	Không có mô tả.
+24	Đang tải danh sách phiên bản...
+25	Các phiên bản Portabilizer
+26	Phiên bản
+27	Trạng thái
+28	Chế độ thường
+29	Chế độ R (cực đoan)
+30	R: sau khi dựng thành công, tệp nguồn sẽ bị xóa. Chương trình sẽ yêu cầu xác nhận.
+31	Hủy
+32	Thông tin
+33	Thư mục
+34	Làm mới
+35	Có gì mới
+36	Launcher
+37	Quản lý phiên bản
+38	Giao diện
+39	Nhật ký
+40	Giới thiệu
+41	Ngôn ngữ
+42	Thư mục phiên bản:
+43	Hiện các phiên bản thử nghiệm (Beta)
+44	Đóng launcher sau khi khởi chạy phiên bản
+45	Đề xuất tạo lối tắt trên màn hình nền sau khi cài đặt phiên bản
+46	Nguồn phiên bản: {url}. Phiên bản mới sẽ xuất hiện trong danh sách sau khi nhấn «Làm mới». Các phiên bản thêm thủ công vẫn nằm trong thư mục phiên bản và trong danh sách.
+47	Kích thước
+48	Mở thư mục
+49	Xóa phiên bản
+50	Thêm phiên bản của bạn (zip hoặc exe)...
+51	Cài đặt và khởi chạy các phiên bản Portabilizer: chế độ thường và chế độ R trong cùng một phiên bản. Mỗi phiên bản nằm trong thư mục riêng và không ảnh hưởng đến các phiên bản khác. Tổng kiểm tra của tệp tải về được xác minh trước khi cài đặt.
+52	Kho mã: {url}
+53	Mở kho mã
+54	Giao diện cửa sổ. Thay đổi được áp dụng ngay. Chế độ R bật giao diện màu đỏ.
+55	Giao diện:
+56	Đỏ tối (R):
+57	Đỏ sáng (R):
+58	Tự động (theo Windows)
+59	Sáng
+60	Tối
+61	Cổ điển (hệ thống)
+62	Đỏ nhạt (R)
+63	Than chì với điểm nhấn đỏ
+64	Đỏ rượu vang
+65	Đỏ anh đào
+66	Màu của tôi
+67	 (tùy chỉnh)
+68	Giao diện cổ điển: màu sắc do Windows quyết định.
+69	Hiện tại: {name}
+70	Màu chính
+71	Màu tùy chỉnh
+72	Áp dụng màu này cho cả nền cửa sổ?\n\nKhông - nền sẽ giữ màu trung tính.
+73	Chọn màu của bạn...
+74	Ngôn ngữ giao diện:
+75	Ngôn ngữ thay đổi ngay: cửa sổ sẽ tự khởi động lại, các phiên bản và cài đặt được giữ nguyên.
+76	Hãy chọn một phiên bản trong danh sách bên trái.
+77	Đã tải {got} / {total}
+78	Phiên bản launcher mới
+79	Portabilizer Launcher {v} mới đã ra mắt (bạn đang dùng {cur}).\n\nMở trang tải về?
+80	Launcher {v} mới đã ra mắt: {url}
+81	Có phiên bản mới: {tag}. Hãy chọn nó và nhấn «Cài đặt».
+82	\nVà có launcher {v} mới.
+83	Phiên bản Portabilizer mới
+84	Phiên bản mới đã ra mắt: {tag}.\n\n{notes}\n\nCài đặt ngay bây giờ?
+85	Lỗi: {e}
+86	Đang kiểm tra phiên bản trên GitHub...
+87	Đang cài đặt {tag}...
+88	Đã cài đặt phiên bản {tag}.
+89	Đã hủy cài đặt.
+90	Không thể cài đặt phiên bản.
+91	Lỗi cài đặt {tag}: {err}
+92	Cài đặt
+93	Không thể cài đặt {tag}:\n\n{err}
+94	Khởi chạy
+95	Không thể khởi chạy {tag}:\n\n{e}
+96	Đã khởi chạy phiên bản {tag}
+97	 (chế độ R)
+98	.
+99	Đã khởi chạy: {tag}
+100	Không thể mở: {e}
+101	Phiên bản {tag}
+102	Xóa phiên bản {tag} khỏi ổ đĩa?\n\n{path}
+103	Đã xóa phiên bản {tag}.
+104	Xóa
+105	Phiên bản Portabilizer
+106	Tất cả tệp
+107	Tên phiên bản
+108	Đặt tên cho phiên bản này là gì (ví dụ: v7.3)?
+109	Đã thêm phiên bản {name} từ {p}.
+110	Thêm phiên bản
+111	Cài đặt launcher
+112	Thêm phiên bản của bạn...
+113	Xóa phiên bản đã chọn
+114	Tạo lối tắt launcher trên màn hình nền
+115	Tạo lối tắt cho phiên bản đã chọn trên màn hình nền
+116	Mở thư mục phiên bản
+117	Lối tắt
+118	Lối tắt được tạo cho Portabilizer Launcher.exe đã dựng (build_launcher.bat). Không cần khi chạy từ mã nguồn.
+119	Đã tạo lối tắt: {p}
+120	Đã tạo lối tắt:\n{p}
+121	Chưa tạo được lối tắt: {e}
+122	Không thể tạo lối tắt: {e}
+123	Tạo lối tắt Portabilizer Launcher trên màn hình nền?
+124	Đã cài đặt phiên bản {tag}.\n\nTạo lối tắt cho phiên bản Portabilizer này trên màn hình nền?
+125	Lối tắt phiên bản: {p}
+126	Đang cài đặt
+127	Hủy cài đặt và thoát?
+128	B
+129	KB
+130	MB
+131	GB
+132	đường dẫn không an toàn trong tệp nén: {name}
+133	bản phát hành này không có tệp chương trình (cần zip chứa Portabilizer.exe hoặc chính tệp exe)
+134	Không có chương trình trong {name}, đang xem các tệp khác của bản phát hành...
+135	bản phát hành {tag} không có chương trình đã dựng ({exe}): chỉ có các tệp không chứa nó. Tác giả bản phát hành cần đính kèm {exe} đã dựng hoặc zip chứa nó.
+136	Đang tải {name} ({size})...
+137	tổng kiểm tra không khớp: tệp bị hỏng hoặc bị thay thế. Đã hủy cài đặt.
+138	Tổng kiểm tra khớp.
+139	Chú ý: bản phát hành không có tổng kiểm tra, tính toàn vẹn chưa được xác minh.
+140	đây không phải tệp exe
+141	không có {exe} trong tệp nén
+142	Đã cài đặt: {p}
+143	không tìm thấy tệp
+144	phiên bản “{name}” đã tồn tại
+145	không có {exe} trong tệp nén. Có vẻ bản phát hành đính kèm mã nguồn chứ không phải chương trình đã dựng: hãy dựng bằng build.bat
+146	cần .zip hoặc .exe
+147	chỉ có thể xóa các thư mục nằm trong thư mục phiên bản
+148	lối tắt trên màn hình nền chỉ được hỗ trợ trên Windows
+149	không thể tạo lối tắt

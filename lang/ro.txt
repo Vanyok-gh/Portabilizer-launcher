@@ -1,0 +1,149 @@
+1	Versiuni pe GitHub: {n}.
+2	Fără conexiune la GitHub: se afișează ultima listă salvată.
+3	Nu s-a putut obține lista de versiuni ({e}). Se afișează versiunile instalate.
+4	instalată (proprie)
+5	instalată
+6	nouă, poate fi instalată
+7	poate fi instalată
+8	nu există fișier în lansare
+9	Pornește
+10	Instalează
+11	Indisponibilă
+12	versiune negăsită
+13	versiunea {tag} nu este instalată
+14	versiunea nu este instalată
+15	Versiunea nu a fost găsită.
+16	Versiune: {tag}
+17	Canal: {ch}
+18	Data lansării: {d}
+19	Fișier: {name} ({size})
+20	Instalată: {path} ({size})
+21	Există doar pe disc (nu provine de pe GitHub).
+22	Noutăți:
+23	Nu există descriere.
+24	Se încarcă lista de versiuni...
+25	Versiuni Portabilizer
+26	Versiune
+27	Stare
+28	Mod normal
+29	Mod R (radical)
+30	R: după o compilare reușită, fișierul sursă este șters. Programul va cere confirmare.
+31	Anulează
+32	Info
+33	Folder
+34	Actualizează
+35	Noutăți
+36	Launcher
+37	Manager de versiuni
+38	Aspect
+39	Jurnal
+40	Despre
+41	Limbă
+42	Folderul versiunilor:
+43	Afișează versiunile de probă (Beta)
+44	Închide launcherul după pornirea unei versiuni
+45	Oferă o scurtătură pe desktop după instalarea unei versiuni
+46	Sursa versiunilor: {url}. Versiunile noi apar în listă după „Actualizează”. Versiunile adăugate manual rămân în folderul versiunilor și în listă.
+47	Dimensiune
+48	Deschide folderul
+49	Șterge versiunea
+50	Adaugă propria versiune (zip sau exe)...
+51	Instalează și pornește versiuni Portabilizer: modul normal și modul R într-o singură versiune. Fiecare versiune se află în propriul folder și nu le deranjează pe celelalte. Suma de control a fișierului descărcat este verificată înainte de instalare.
+52	Depozit: {url}
+53	Deschide depozitul
+54	Aspectul ferestrei. Modificările se aplică imediat. Modul R activează tema roșie.
+55	Temă:
+56	Roșu închis (R):
+57	Roșu deschis (R):
+58	Automat (ca în Windows)
+59	Luminoasă
+60	Întunecată
+61	Clasică (de sistem)
+62	Roșu deschis (R)
+63	Cărbune cu accent roșu
+64	Vișiniu
+65	Cireșiu
+66	Culoarea mea
+67	 (proprie)
+68	Aspect clasic: culorile sunt stabilite de Windows.
+69	Acum: {name}
+70	Culoare principală
+71	Culoare proprie
+72	Colorez cu această culoare și fundalul ferestrei?\n\nNu - fundalul rămâne neutru.
+73	Alege propria culoare...
+74	Limba interfeței:
+75	Limba se schimbă imediat: fereastra repornește singură, versiunile și setările se păstrează.
+76	Alegeți o versiune din lista din stânga.
+77	Descărcat {got} din {total}
+78	Versiune nouă a launcherului
+79	A apărut un nou Portabilizer Launcher {v} (aveți {cur}).\n\nDeschideți pagina de descărcare?
+80	A apărut un nou launcher {v}: {url}
+81	Este disponibilă o versiune nouă: {tag}. Selectați-o și apăsați „Instalează”.
+82	\nȘi un nou launcher {v}.
+83	Versiune nouă Portabilizer
+84	A apărut o versiune nouă: {tag}.\n\n{notes}\n\nO instalați acum?
+85	Eroare: {e}
+86	Se verifică versiunile pe GitHub...
+87	Se instalează {tag}...
+88	Versiunea {tag} a fost instalată.
+89	Instalare anulată.
+90	Nu s-a putut instala versiunea.
+91	Eroare la instalarea {tag}: {err}
+92	Instalare
+93	Nu s-a putut instala {tag}:\n\n{err}
+94	Pornire
+95	Nu s-a putut porni {tag}:\n\n{e}
+96	Versiunea {tag} a fost pornită
+97	 (mod R)
+98	.
+99	Pornit: {tag}
+100	Nu s-a putut deschide: {e}
+101	Versiunea {tag}
+102	Ștergeți versiunea {tag} de pe disc?\n\n{path}
+103	Versiunea {tag} a fost ștearsă.
+104	Ștergere
+105	Versiune Portabilizer
+106	Toate fișierele
+107	Numele versiunii
+108	Cum denumiți versiunea (de exemplu, v7.3)?
+109	Versiunea {name} a fost adăugată din {p}.
+110	Adaugă versiune
+111	Setările launcherului
+112	Adaugă propria versiune...
+113	Șterge versiunea selectată
+114	Creează o scurtătură pe desktop pentru launcher
+115	Creează o scurtătură pe desktop pentru versiunea selectată
+116	Deschide folderul versiunilor
+117	Scurtătură
+118	Scurtătura se creează pentru Portabilizer Launcher.exe compilat (build_launcher.bat). Nu este necesară la rularea din sursă.
+119	Scurtătură creată: {p}
+120	Scurtătură creată:\n{p}
+121	Scurtătura nu a fost creată: {e}
+122	Nu s-a putut crea scurtătura: {e}
+123	Creați o scurtătură Portabilizer Launcher pe desktop?
+124	Versiunea {tag} a fost instalată.\n\nCreați o scurtătură pe desktop pentru această versiune Portabilizer?
+125	Scurtătura versiunii: {p}
+126	Instalare în curs
+127	Întrerupeți instalarea și ieșiți?
+128	B
+129	KB
+130	MB
+131	GB
+132	cale nesigură în arhivă: {name}
+133	această lansare nu are un fișier cu programul (este necesar un zip cu Portabilizer.exe sau chiar exe-ul)
+134	În fișierul {name} nu există program, caut în celelalte fișiere ale lansării...
+135	lansarea {tag} nu conține programul compilat ({exe}): sunt atașate doar fișiere fără el. Autorul lansării trebuie să atașeze {exe} gata compilat sau un zip cu acesta.
+136	Se descarcă {name} ({size})...
+137	suma de control nu se potrivește: fișierul este deteriorat sau înlocuit. Instalare anulată.
+138	Suma de control se potrivește.
+139	Atenție: lansarea nu are sumă de control, integritatea nu a fost verificată.
+140	acesta nu este un fișier exe
+141	în arhivă nu există {exe}
+142	Instalat: {p}
+143	fișierul nu a fost găsit
+144	versiunea „{name}” există deja
+145	în arhivă nu există {exe}. Se pare că la lansare au fost atașate sursele, nu programul compilat: compilați-l cu build.bat
+146	este necesar un .zip sau .exe
+147	pot fi șterse doar folderele din interiorul folderului versiunilor
+148	scurtăturile pe desktop sunt acceptate doar în Windows
+149	nu s-a putut crea scurtătura

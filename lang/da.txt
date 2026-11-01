@@ -1,0 +1,149 @@
+1	Versioner på GitHub: {n}.
+2	Ingen forbindelse til GitHub: viser den senest gemte liste.
+3	Versionslisten kunne ikke hentes ({e}). Viser installerede versioner.
+4	installeret (egen)
+5	installeret
+6	ny, kan installeres
+7	kan installeres
+8	ingen fil i udgivelsen
+9	Start
+10	Installer
+11	Utilgængelig
+12	versionen blev ikke fundet
+13	version {tag} er ikke installeret
+14	versionen er ikke installeret
+15	Versionen blev ikke fundet.
+16	Version: {tag}
+17	Kanal: {ch}
+18	Udgivelsesdato: {d}
+19	Fil: {name} ({size})
+20	Installeret: {path} ({size})
+21	Findes kun på disken (ikke fra GitHub).
+22	Hvad er nyt:
+23	Ingen beskrivelse.
+24	Henter versionslisten...
+25	Portabilizer-versioner
+26	Version
+27	Status
+28	Normal tilstand
+29	Tilstand R (radikal)
+30	R: efter en vellykket bygning slettes kildefilen. Programmet beder om bekræftelse.
+31	Annuller
+32	Info
+33	Mappe
+34	Opdater
+35	Hvad er nyt
+36	Launcher
+37	Versionsstyring
+38	Udseende
+39	Log
+40	Om
+41	Sprog
+42	Versionsmappe:
+43	Vis prøveversioner (Beta)
+44	Luk launcheren efter start af en version
+45	Tilbyd genvej på skrivebordet efter installation af en version
+46	Versionskilde: {url}. Nye versioner vises på listen efter «Opdater». Versioner, der er tilføjet manuelt, forbliver i versionsmappen og på listen.
+47	Størrelse
+48	Åbn mappen
+49	Slet version
+50	Tilføj din egen version (zip eller exe)...
+51	Installerer og starter Portabilizer-versioner: normal tilstand og tilstand R i én version. Hver version ligger i sin egen mappe og forstyrrer ikke de andre. Kontrolsummen på den downloadede fil kontrolleres før installation.
+52	Repository: {url}
+53	Åbn repository
+54	Vinduets udseende. Ændringer træder i kraft med det samme. Tilstand R aktiverer det røde tema.
+55	Tema:
+56	Mørkerød (R):
+57	Lysrød (R):
+58	Auto (som i Windows)
+59	Lys
+60	Mørk
+61	Klassisk (system)
+62	Lysrød (R)
+63	Trækul med rød accent
+64	Bordeaux
+65	Kirsebær
+66	Min farve
+67	 (egen)
+68	Klassisk udseende: farverne bestemmes af Windows.
+69	Nu: {name}
+70	Hovedfarve
+71	Egen farve
+72	Skal vinduets baggrund også farves med denne farve?\n\nNej - baggrunden forbliver neutral.
+73	Vælg din egen farve...
+74	Grænsefladesprog:
+75	Sproget skifter med det samme: vinduet genstarter af sig selv, versioner og indstillinger bevares.
+76	Vælg en version på listen til venstre.
+77	Downloadet {got} af {total}
+78	Ny launcher-version
+79	Der er udkommet en ny Portabilizer Launcher {v} (du har {cur}).\n\nVil du åbne downloadsiden?
+80	Der er udkommet en ny launcher {v}: {url}
+81	En ny version er tilgængelig: {tag}. Vælg den, og tryk på «Installer».
+82	\nOg en ny launcher {v}.
+83	Ny Portabilizer-version
+84	Der er udkommet en ny version: {tag}.\n\n{notes}\n\nInstaller nu?
+85	Fejl: {e}
+86	Tjekker versioner på GitHub...
+87	Installerer {tag}...
+88	Version {tag} er installeret.
+89	Installationen blev annulleret.
+90	Versionen kunne ikke installeres.
+91	Installationsfejl {tag}: {err}
+92	Installation
+93	{tag} kunne ikke installeres:\n\n{err}
+94	Start
+95	{tag} kunne ikke startes:\n\n{e}
+96	Version {tag} startet
+97	 (tilstand R)
+98	.
+99	Startet: {tag}
+100	Kunne ikke åbne: {e}
+101	Version {tag}
+102	Slette version {tag} fra disken?\n\n{path}
+103	Version {tag} er slettet.
+104	Sletning
+105	Portabilizer-version
+106	Alle filer
+107	Versionsnavn
+108	Hvad skal versionen hedde (for eksempel v7.3)?
+109	Version {name} er tilføjet fra {p}.
+110	Tilføj version
+111	Launcher-indstillinger
+112	Tilføj din egen version...
+113	Slet den valgte version
+114	Opret genvej til launcheren på skrivebordet
+115	Opret genvej til den valgte version på skrivebordet
+116	Åbn versionsmappen
+117	Genvej
+118	Genvejen oprettes til den byggede Portabilizer Launcher.exe (build_launcher.bat). Den er ikke nødvendig, når du kører fra kildekoden.
+119	Genvej oprettet: {p}
+120	Genvej oprettet:\n{p}
+121	Genvejen blev ikke oprettet: {e}
+122	Genvejen kunne ikke oprettes: {e}
+123	Oprette en genvej til Portabilizer Launcher på skrivebordet?
+124	Version {tag} er installeret.\n\nOprette en genvej til denne Portabilizer-version på skrivebordet?
+125	Versionsgenvej: {p}
+126	Installation i gang
+127	Afbryde installationen og afslutte?
+128	B
+129	KB
+130	MB
+131	GB
+132	usikker sti i arkivet: {name}
+133	denne udgivelse har ingen programfil (der skal bruges en zip med Portabilizer.exe eller selve exe-filen)
+134	Intet program i {name}, tjekker udgivelsens andre filer...
+135	udgivelse {tag} har intet bygget program ({exe}): der er kun vedhæftet filer uden det. Udgiveren skal vedhæfte den færdige {exe} eller en zip med den.
+136	Downloader {name} ({size})...
+137	kontrolsummen stemmer ikke: filen er beskadiget eller udskiftet. Installationen blev annulleret.
+138	Kontrolsummen stemmer.
+139	Advarsel: udgivelsen har ingen kontrolsum, integriteten blev ikke kontrolleret.
+140	dette er ikke en exe-fil
+141	der er ingen {exe} i arkivet
+142	Installeret: {p}
+143	filen blev ikke fundet
+144	versionen «{name}» findes allerede
+145	der er ingen {exe} i arkivet. Det ser ud til, at kildekoden er vedhæftet i stedet for det byggede program: byg det med build.bat
+146	der skal bruges en .zip eller .exe
+147	kun mapper inde i versionsmappen kan slettes
+148	genveje på skrivebordet understøttes kun i Windows
+149	genvejen kunne ikke oprettes

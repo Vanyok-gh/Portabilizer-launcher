@@ -1,0 +1,149 @@
+1	Versies op GitHub: {n}.
+2	Geen verbinding met GitHub: de laatst opgeslagen lijst wordt getoond.
+3	Kan de versielijst niet ophalen ({e}). Geïnstalleerde versies worden getoond.
+4	geïnstalleerd (eigen)
+5	geïnstalleerd
+6	nieuw, kan worden geïnstalleerd
+7	kan worden geïnstalleerd
+8	geen bestand in de release
+9	Starten
+10	Installeren
+11	Niet beschikbaar
+12	versie niet gevonden
+13	versie {tag} is niet geïnstalleerd
+14	versie is niet geïnstalleerd
+15	Versie niet gevonden.
+16	Versie: {tag}
+17	Kanaal: {ch}
+18	Releasedatum: {d}
+19	Bestand: {name} ({size})
+20	Geïnstalleerd: {path} ({size})
+21	Alleen op schijf (niet van GitHub).
+22	Wat is er nieuw:
+23	Geen beschrijving opgegeven.
+24	Versielijst laden...
+25	Portabilizer-versies
+26	Versie
+27	Status
+28	Normale modus
+29	Modus R (radicaal)
+30	R: na een geslaagde build wordt het bronbestand verwijderd. Het programma vraagt om bevestiging.
+31	Annuleren
+32	Info
+33	Map
+34	Vernieuwen
+35	Wat is er nieuw
+36	Launcher
+37	Versiebeheer
+38	Uiterlijk
+39	Logboek
+40	Over
+41	Taal
+42	Versiemap:
+43	Testversies (Beta) tonen
+44	Launcher sluiten na het starten van een versie
+45	Na het installeren van een versie een bureaubladsnelkoppeling aanbieden
+46	Bron van versies: {url}. Nieuwe versies verschijnen in de lijst na «Vernieuwen». Handmatig toegevoegde versies blijven in de versiemap en in de lijst staan.
+47	Grootte
+48	Map openen
+49	Versie verwijderen
+50	Eigen versie toevoegen (zip of exe)...
+51	Installeert en start Portabilizer-versies: normale modus en modus R in één versie. Elke versie staat in een eigen map en hindert de andere niet. De controlesom van het gedownloade bestand wordt vóór de installatie gecontroleerd.
+52	Repository: {url}
+53	Repository openen
+54	Uiterlijk van het venster. Wijzigingen worden direct toegepast. Modus R schakelt het rode thema in.
+55	Thema:
+56	Donkerrood (R):
+57	Lichtrood (R):
+58	Automatisch (zoals Windows)
+59	Licht
+60	Donker
+61	Klassiek (systeem)
+62	Lichtrood (R)
+63	Antraciet met rood accent
+64	Bordeaux
+65	Kersenrood
+66	Mijn kleur
+67	 (eigen)
+68	Klassieke weergave: de kleuren worden door Windows bepaald.
+69	Nu: {name}
+70	Hoofdkleur
+71	Eigen kleur
+72	De achtergrond van het venster ook in deze kleur tinten?\n\nNee - de achtergrond blijft neutraal.
+73	Eigen kleur kiezen...
+74	Interfacetaal:
+75	De taal verandert direct: het venster start zelf opnieuw op, versies en instellingen blijven behouden.
+76	Kies een versie in de lijst links.
+77	{got} van {total} gedownload
+78	Nieuwe launcherversie
+79	Er is een nieuwe Portabilizer Launcher {v} uit (u hebt {cur}).\n\nDe downloadpagina openen?
+80	Er is een nieuwe launcher {v} uit: {url}
+81	Er is een nieuwe versie beschikbaar: {tag}. Selecteer deze en klik op «Installeren».
+82	\nEn een nieuwe launcher {v}.
+83	Nieuwe Portabilizer-versie
+84	Er is een nieuwe versie uit: {tag}.\n\n{notes}\n\nNu installeren?
+85	Fout: {e}
+86	Versies op GitHub controleren...
+87	{tag} wordt geïnstalleerd...
+88	Versie {tag} is geïnstalleerd.
+89	Installatie geannuleerd.
+90	Kan de versie niet installeren.
+91	Installatiefout {tag}: {err}
+92	Installatie
+93	Kan {tag} niet installeren:\n\n{err}
+94	Starten
+95	Kan {tag} niet starten:\n\n{e}
+96	Versie {tag} gestart
+97	 (modus R)
+98	.
+99	Gestart: {tag}
+100	Kan niet openen: {e}
+101	Versie {tag}
+102	Versie {tag} van de schijf verwijderen?\n\n{path}
+103	Versie {tag} verwijderd.
+104	Verwijderen
+105	Portabilizer-versie
+106	Alle bestanden
+107	Versienaam
+108	Hoe wilt u de versie noemen (bijvoorbeeld v7.3)?
+109	Versie {name} toegevoegd vanuit {p}.
+110	Versie toevoegen
+111	Launcherinstellingen
+112	Eigen versie toevoegen...
+113	Geselecteerde versie verwijderen
+114	Bureaubladsnelkoppeling voor de launcher maken
+115	Bureaubladsnelkoppeling voor de geselecteerde versie maken
+116	Versiemap openen
+117	Snelkoppeling
+118	De snelkoppeling wordt gemaakt voor de gebouwde Portabilizer Launcher.exe (build_launcher.bat). Vanuit de broncode is deze niet nodig.
+119	Snelkoppeling gemaakt: {p}
+120	Snelkoppeling gemaakt:\n{p}
+121	Snelkoppeling niet gemaakt: {e}
+122	Kan de snelkoppeling niet maken: {e}
+123	Een snelkoppeling naar Portabilizer Launcher op het bureaublad maken?
+124	Versie {tag} is geïnstalleerd.\n\nEen bureaubladsnelkoppeling voor deze Portabilizer-versie maken?
+125	Versiesnelkoppeling: {p}
+126	Installatie bezig
+127	De installatie afbreken en afsluiten?
+128	B
+129	KB
+130	MB
+131	GB
+132	onveilig pad in het archief: {name}
+133	deze release bevat geen programmabestand (een zip met Portabilizer.exe of de exe zelf is vereist)
+134	Geen programma in {name}, andere bestanden van de release worden bekeken...
+135	release {tag} bevat geen gebouwd programma ({exe}): alleen bestanden zonder dat programma zijn bijgevoegd. De auteur van de release moet de kant-en-klare {exe} of een zip daarmee bijvoegen.
+136	{name} ({size}) wordt gedownload...
+137	controlesom komt niet overeen: het bestand is beschadigd of vervangen. Installatie geannuleerd.
+138	Controlesom komt overeen.
+139	Let op: de release heeft geen controlesom, de integriteit is niet gecontroleerd.
+140	dit is geen exe-bestand
+141	{exe} ontbreekt in het archief
+142	Geïnstalleerd: {p}
+143	bestand niet gevonden
+144	versie «{name}» bestaat al
+145	{exe} ontbreekt in het archief. Waarschijnlijk is bij de release de broncode bijgevoegd in plaats van het gebouwde programma: bouw het met build.bat
+146	een .zip of .exe is vereist
+147	alleen mappen binnen de versiemap kunnen worden verwijderd
+148	bureaubladsnelkoppelingen worden alleen in Windows ondersteund
+149	kan de snelkoppeling niet maken
