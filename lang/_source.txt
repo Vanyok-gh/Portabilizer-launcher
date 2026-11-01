@@ -1,0 +1,149 @@
+1	Версий в GitHub: {n}.	Versions on GitHub: {n}.
+2	Нет связи с GitHub: показан последний сохранённый список.	No connection to GitHub: showing the last saved list.
+3	Не удалось получить список версий ({e}). Показаны установленные.	Could not get the version list ({e}). Showing installed versions.
+4	установлена (своя)	installed (custom)
+5	установлена	installed
+6	новая, можно установить	new, can be installed
+7	можно установить	can be installed
+8	нет файла в релизе	no file in the release
+9	Запустить	Launch
+10	Установить	Install
+11	Недоступна	Unavailable
+12	версия не найдена	version not found
+13	версия {tag} не установлена	version {tag} is not installed
+14	версия не установлена	version is not installed
+15	Версия не найдена.	Version not found.
+16	Версия: {tag}	Version: {tag}
+17	Канал: {ch}	Channel: {ch}
+18	Дата выпуска: {d}	Release date: {d}
+19	Файл: {name} ({size})	File: {name} ({size})
+20	Установлена: {path} ({size})	Installed: {path} ({size})
+21	Есть только на диске (не из GitHub).	Only on disk (not from GitHub).
+22	Что нового:	What's new:
+23	Описание не указано.	No description.
+24	Загружаю список версий...	Loading the version list...
+25	Версии Portabilizer	Portabilizer versions
+26	Версия	Version
+27	Состояние	Status
+28	Обычный режим	Normal mode
+29	Режим R (радикальный)	Mode R (radical)
+30	R: после успешной сборки исходный файл удаляется. Программа попросит подтверждение.	R: after a successful build the source file is deleted. The program will ask for confirmation.
+31	Отмена	Cancel
+32	Инфо	Info
+33	Папка	Folder
+34	Обновить	Refresh
+35	Что нового	What's new
+36	Лаунчер	Launcher
+37	Менеджер версий	Version manager
+38	Оформление	Appearance
+39	Журнал	Log
+40	О программе	About
+41	Язык	Language
+42	Папка версий:	Versions folder:
+43	Показывать пробные версии (Beta)	Show trial versions (Beta)
+44	Закрывать лаунчер после запуска версии	Close the launcher after starting a version
+45	Предлагать ярлык на рабочем столе после установки версии	Offer a desktop shortcut after installing a version
+46	Источник версий: {url}. Новые версии появляются в списке после «Обновить». Версии, добавленные вручную, остаются в папке версий и в списке.	Versions come from: {url}. New versions appear in the list after “Refresh”. Versions added by hand stay in the versions folder and in the list.
+47	Размер	Size
+48	Открыть папку	Open folder
+49	Удалить версию	Delete version
+50	Добавить свою версию (zip или exe)...	Add your own version (zip or exe)...
+51	Устанавливает и запускает версии Portabilizer: обычный режим и режим R в одной версии. Каждая версия лежит в своей папке и не мешает другим. Контрольная сумма скачанного файла проверяется перед установкой.	Installs and launches Portabilizer versions: normal mode and mode R in one version. Each version lives in its own folder and does not interfere with others. The checksum of the downloaded file is verified before installation.
+52	Репозиторий: {url}	Repository: {url}
+53	Открыть репозиторий	Open repository
+54	Внешний вид окна. Изменения применяются сразу. Режим R включает красную тему.	Window appearance. Changes apply immediately. Mode R switches on the red theme.
+55	Тема:	Theme:
+56	Тёмная красная (R):	Dark red (R):
+57	Светлая красная (R):	Light red (R):
+58	Авто (как в Windows)	Auto (like Windows)
+59	Светлая	Light
+60	Тёмная	Dark
+61	Классическая (системная)	Classic (system)
+62	Светло-красная (R)	Light red (R)
+63	Уголь с красным акцентом	Charcoal with red accent
+64	Бордо	Burgundy
+65	Вишнёвая	Cherry
+66	Мой цвет	My colour
+67	 (своя)	 (custom)
+68	Классический вид: цвета задаёт Windows.	Classic look: colours are set by Windows.
+69	Сейчас: {name}	Now: {name}
+70	Главный цвет	Main colour
+71	Свой цвет	Custom colour
+72	Подкрасить в этот цвет и фон окна?\n\nНет - фон останется нейтральным.	Tint the window background with this colour too?\n\nNo - the background stays neutral.
+73	Выбрать свой цвет...	Choose your own colour...
+74	Язык интерфейса:	Interface language:
+75	Язык меняется сразу: окно перезапустится само, версии и настройки сохранятся.	The language changes at once: the window restarts by itself, versions and settings are kept.
+76	Выберите версию в списке слева.	Select a version in the list on the left.
+77	Скачано {got} из {total}	Downloaded {got} of {total}
+78	Новая версия лаунчера	New launcher version
+79	Вышел новый Portabilizer Launcher {v} (у вас {cur}).\n\nОткрыть страницу загрузки?	A new Portabilizer Launcher {v} is out (you have {cur}).\n\nOpen the download page?
+80	Вышел новый лаунчер {v}: {url}	A new launcher {v} is out: {url}
+81	Доступна новая версия: {tag}. Выберите её и нажмите «Установить».	A new version is available: {tag}. Select it and press “Install”.
+82	\nИ новый лаунчер {v}.	\nAnd a new launcher {v}.
+83	Новая версия Portabilizer	New Portabilizer version
+84	Вышла новая версия: {tag}.\n\n{notes}\n\nУстановить сейчас?	A new version is out: {tag}.\n\n{notes}\n\nInstall now?
+85	Ошибка: {e}	Error: {e}
+86	Проверяю версии в GitHub...	Checking versions on GitHub...
+87	Устанавливаю {tag}...	Installing {tag}...
+88	Версия {tag} установлена.	Version {tag} installed.
+89	Установка отменена.	Installation cancelled.
+90	Не удалось установить версию.	Could not install the version.
+91	Ошибка установки {tag}: {err}	Installation error {tag}: {err}
+92	Установка	Installation
+93	Не удалось установить {tag}:\n\n{err}	Could not install {tag}:\n\n{err}
+94	Запуск	Launch
+95	Не удалось запустить {tag}:\n\n{e}	Could not launch {tag}:\n\n{e}
+96	Запущена версия {tag}	Version {tag} started
+97	 (режим R)	 (mode R)
+98	.	.
+99	Запущено: {tag}	Started: {tag}
+100	Не удалось открыть: {e}	Could not open: {e}
+101	Версия {tag}	Version {tag}
+102	Удалить версию {tag} с диска?\n\n{path}	Delete version {tag} from the disk?\n\n{path}
+103	Удалена версия {tag}.	Version {tag} deleted.
+104	Удаление	Deletion
+105	Версия Portabilizer	Portabilizer version
+106	Все файлы	All files
+107	Название версии	Version name
+108	Как назвать версию (например, v7.3)?	What to call the version (for example, v7.3)?
+109	Добавлена версия {name} из {p}.	Version {name} added from {p}.
+110	Добавить версию	Add version
+111	Настройки лаунчера	Launcher settings
+112	Добавить свою версию...	Add your own version...
+113	Удалить выбранную версию	Delete the selected version
+114	Создать ярлык на рабочем столе	Create a desktop shortcut for the launcher
+115	Создать ярлык выбранной версии на рабочем столе	Create a desktop shortcut for the selected version
+116	Открыть папку версий	Open the versions folder
+117	Ярлык	Shortcut
+118	Ярлык создаётся для собранного Portabilizer Launcher.exe (build_launcher.bat). Из исходников он не нужен.	The shortcut is made for the built Portabilizer Launcher.exe (build_launcher.bat). It is not needed when running from source.
+119	Создан ярлык: {p}	Shortcut created: {p}
+120	Ярлык создан:\n{p}	Shortcut created:\n{p}
+121	Ярлык не создан: {e}	Shortcut not created: {e}
+122	Не удалось создать ярлык: {e}	Could not create the shortcut: {e}
+123	Создать ярлык Portabilizer Launcher на рабочем столе?	Create a Portabilizer Launcher shortcut on the desktop?
+124	Версия {tag} установлена.\n\nСоздать ярлык этой версии Portabilizer на рабочем столе?	Version {tag} is installed.\n\nCreate a desktop shortcut for this Portabilizer version?
+125	Ярлык версии: {p}	Version shortcut: {p}
+126	Идёт установка	Installation in progress
+127	Прервать установку и выйти?	Abort the installation and exit?
+128	Б	B
+129	КБ	KB
+130	МБ	MB
+131	ГБ	GB
+132	небезопасный путь в архиве: {name}	unsafe path in the archive: {name}
+133	у этого релиза нет файла с программой (нужен zip с Portabilizer.exe или сам exe)	this release has no program file (a zip with Portabilizer.exe or the exe itself is needed)
+134	В файле {name} нет программы, смотрю другие файлы релиза...	No program in {name}, checking other files of the release...
+135	в релизе {tag} нет собранной программы ({exe}): приложены только файлы без неё. Автору релиза нужно приложить готовый {exe} или zip с ним.	release {tag} has no built program ({exe}): only files without it are attached. The release author needs to attach the built {exe} or a zip with it.
+136	Скачиваю {name} ({size})...	Downloading {name} ({size})...
+137	контрольная сумма не совпала: файл повреждён или подменён. Установка отменена.	checksum mismatch: the file is damaged or replaced. Installation cancelled.
+138	Контрольная сумма совпала.	Checksum matches.
+139	Внимание: у релиза нет контрольной суммы, целостность не проверена.	Warning: the release has no checksum, integrity was not verified.
+140	это не exe-файл	this is not an exe file
+141	в архиве нет {exe}	there is no {exe} in the archive
+142	Установлено: {p}	Installed: {p}
+143	файл не найден	file not found
+144	версия «{name}» уже есть	version “{name}” already exists
+145	в архиве нет {exe}. Похоже, к релизу приложены исходники, а не собранная программа: соберите её через build.bat	there is no {exe} in the archive. It looks like source code was attached instead of the built program: build it with build.bat
+146	нужен .zip или .exe	a .zip or .exe is needed
+147	удалять можно только папки внутри папки версий	only folders inside the versions folder can be deleted
+148	ярлыки на рабочем столе поддерживаются только в Windows	desktop shortcuts are supported only on Windows
+149	не удалось создать ярлык	could not create the shortcut

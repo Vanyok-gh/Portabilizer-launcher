@@ -1,0 +1,149 @@
+1	Versionen auf GitHub: {n}.
+2	Keine Verbindung zu GitHub: Die zuletzt gespeicherte Liste wird angezeigt.
+3	Die Versionsliste konnte nicht abgerufen werden ({e}). Installierte Versionen werden angezeigt.
+4	installiert (eigene)
+5	installiert
+6	neu, kann installiert werden
+7	kann installiert werden
+8	keine Datei im Release
+9	Starten
+10	Installieren
+11	Nicht verfügbar
+12	Version nicht gefunden
+13	Version {tag} ist nicht installiert
+14	Version ist nicht installiert
+15	Version nicht gefunden.
+16	Version: {tag}
+17	Kanal: {ch}
+18	Veröffentlicht am: {d}
+19	Datei: {name} ({size})
+20	Installiert: {path} ({size})
+21	Nur auf dem Datenträger vorhanden (nicht von GitHub).
+22	Was ist neu:
+23	Keine Beschreibung.
+24	Versionsliste wird geladen...
+25	Portabilizer-Versionen
+26	Version
+27	Status
+28	Normaler Modus
+29	Modus R (radikal)
+30	R: Nach erfolgreichem Build wird die Quelldatei gelöscht. Das Programm fragt vorher nach einer Bestätigung.
+31	Abbrechen
+32	Info
+33	Ordner
+34	Aktualisieren
+35	Was ist neu
+36	Launcher
+37	Versionsverwaltung
+38	Darstellung
+39	Protokoll
+40	Über
+41	Sprache
+42	Versionsordner:
+43	Testversionen anzeigen (Beta)
+44	Launcher nach dem Start einer Version schließen
+45	Nach der Installation einer Version eine Desktopverknüpfung anbieten
+46	Versionsquelle: {url}. Neue Versionen erscheinen nach „Aktualisieren“ in der Liste. Manuell hinzugefügte Versionen bleiben im Versionsordner und in der Liste.
+47	Größe
+48	Ordner öffnen
+49	Version löschen
+50	Eigene Version hinzufügen (zip oder exe)...
+51	Installiert und startet Portabilizer-Versionen: normaler Modus und Modus R in einer Version. Jede Version liegt in einem eigenen Ordner und stört die anderen nicht. Die Prüfsumme der heruntergeladenen Datei wird vor der Installation geprüft.
+52	Repository: {url}
+53	Repository öffnen
+54	Aussehen des Fensters. Änderungen werden sofort übernommen. Modus R aktiviert das rote Design.
+55	Design:
+56	Dunkelrot (R):
+57	Hellrot (R):
+58	Automatisch (wie Windows)
+59	Hell
+60	Dunkel
+61	Klassisch (System)
+62	Hellrot (R)
+63	Anthrazit mit roter Akzentfarbe
+64	Burgunder
+65	Kirschrot
+66	Eigene Farbe
+67	 (eigene)
+68	Klassische Ansicht: Die Farben werden von Windows vorgegeben.
+69	Aktuell: {name}
+70	Hauptfarbe
+71	Eigene Farbe
+72	Den Fensterhintergrund auch in dieser Farbe tönen?\n\nNein – der Hintergrund bleibt neutral.
+73	Eigene Farbe wählen...
+74	Sprache der Oberfläche:
+75	Die Sprache wird sofort geändert: Das Fenster startet automatisch neu, Versionen und Einstellungen bleiben erhalten.
+76	Wählen Sie links in der Liste eine Version aus.
+77	{got} von {total} heruntergeladen
+78	Neue Launcher-Version
+79	Es ist ein neuer Portabilizer Launcher {v} erschienen (Sie haben {cur}).\n\nDie Download-Seite öffnen?
+80	Neuer Launcher {v} erschienen: {url}
+81	Eine neue Version ist verfügbar: {tag}. Wählen Sie sie aus und klicken Sie auf „Installieren“.
+82	\nUnd ein neuer Launcher {v}.
+83	Neue Portabilizer-Version
+84	Eine neue Version ist erschienen: {tag}.\n\n{notes}\n\nJetzt installieren?
+85	Fehler: {e}
+86	Versionen auf GitHub werden geprüft...
+87	{tag} wird installiert...
+88	Version {tag} installiert.
+89	Installation abgebrochen.
+90	Die Version konnte nicht installiert werden.
+91	Installationsfehler {tag}: {err}
+92	Installation
+93	{tag} konnte nicht installiert werden:\n\n{err}
+94	Start
+95	{tag} konnte nicht gestartet werden:\n\n{e}
+96	Version {tag} gestartet
+97	 (Modus R)
+98	.
+99	Gestartet: {tag}
+100	Öffnen fehlgeschlagen: {e}
+101	Version {tag}
+102	Version {tag} vom Datenträger löschen?\n\n{path}
+103	Version {tag} gelöscht.
+104	Löschen
+105	Portabilizer-Version
+106	Alle Dateien
+107	Name der Version
+108	Wie soll die Version heißen (z. B. v7.3)?
+109	Version {name} aus {p} hinzugefügt.
+110	Version hinzufügen
+111	Launcher-Einstellungen
+112	Eigene Version hinzufügen...
+113	Ausgewählte Version löschen
+114	Desktopverknüpfung für den Launcher erstellen
+115	Desktopverknüpfung für die ausgewählte Version erstellen
+116	Versionsordner öffnen
+117	Verknüpfung
+118	Die Verknüpfung wird für die gebaute Portabilizer Launcher.exe erstellt (build_launcher.bat). Beim Start aus dem Quellcode wird sie nicht benötigt.
+119	Verknüpfung erstellt: {p}
+120	Verknüpfung erstellt:\n{p}
+121	Verknüpfung nicht erstellt: {e}
+122	Die Verknüpfung konnte nicht erstellt werden: {e}
+123	Eine Portabilizer-Launcher-Verknüpfung auf dem Desktop erstellen?
+124	Version {tag} wurde installiert.\n\nEine Desktopverknüpfung für diese Portabilizer-Version erstellen?
+125	Versionsverknüpfung: {p}
+126	Installation läuft
+127	Installation abbrechen und beenden?
+128	B
+129	KB
+130	MB
+131	GB
+132	unsicherer Pfad im Archiv: {name}
+133	Dieses Release enthält keine Programmdatei (benötigt wird eine zip mit Portabilizer.exe oder die exe selbst)
+134	{name} enthält kein Programm, weitere Dateien des Releases werden geprüft...
+135	Release {tag} enthält kein gebautes Programm ({exe}): Es sind nur Dateien ohne das Programm angehängt. Der Autor des Releases muss die fertige {exe} oder eine zip damit anhängen.
+136	{name} ({size}) wird heruntergeladen...
+137	Die Prüfsumme stimmt nicht überein: Die Datei ist beschädigt oder ausgetauscht worden. Installation abgebrochen.
+138	Die Prüfsumme stimmt überein.
+139	Achtung: Das Release hat keine Prüfsumme, die Integrität wurde nicht geprüft.
+140	Das ist keine exe-Datei
+141	Das Archiv enthält keine {exe}
+142	Installiert: {p}
+143	Datei nicht gefunden
+144	Die Version „{name}“ existiert bereits
+145	Das Archiv enthält keine {exe}. Anscheinend wurde dem Release der Quellcode statt des gebauten Programms angehängt: Bauen Sie es mit build.bat
+146	Erforderlich ist eine .zip- oder .exe-Datei
+147	Es können nur Ordner innerhalb des Versionsordners gelöscht werden
+148	Desktopverknüpfungen werden nur unter Windows unterstützt
+149	Die Verknüpfung konnte nicht erstellt werden

@@ -1,0 +1,149 @@
+1	Versões no GitHub: {n}.
+2	Sem conexão com o GitHub: exibindo a última lista salva.
+3	Não foi possível obter a lista de versões ({e}). Exibindo as versões instaladas.
+4	instalada (personalizada)
+5	instalada
+6	nova, pode ser instalada
+7	pode ser instalada
+8	nenhum arquivo na release
+9	Iniciar
+10	Instalar
+11	Indisponível
+12	versão não encontrada
+13	a versão {tag} não está instalada
+14	a versão não está instalada
+15	Versão não encontrada.
+16	Versão: {tag}
+17	Canal: {ch}
+18	Data de lançamento: {d}
+19	Arquivo: {name} ({size})
+20	Instalada: {path} ({size})
+21	Existe apenas no disco (não é do GitHub).
+22	Novidades:
+23	Sem descrição.
+24	Carregando a lista de versões...
+25	Versões do Portabilizer
+26	Versão
+27	Status
+28	Modo normal
+29	Modo R (radical)
+30	R: após uma compilação bem-sucedida, o arquivo de origem é excluído. O programa pedirá confirmação.
+31	Cancelar
+32	Info
+33	Pasta
+34	Atualizar
+35	Novidades
+36	Launcher
+37	Gerenciador de versões
+38	Aparência
+39	Registro
+40	Sobre
+41	Idioma
+42	Pasta de versões:
+43	Mostrar versões de teste (Beta)
+44	Fechar o launcher após iniciar uma versão
+45	Oferecer um atalho na área de trabalho após instalar uma versão
+46	Origem das versões: {url}. As novas versões aparecem na lista após «Atualizar». As versões adicionadas manualmente permanecem na pasta de versões e na lista.
+47	Tamanho
+48	Abrir pasta
+49	Excluir versão
+50	Adicionar sua própria versão (zip ou exe)...
+51	Instala e inicia versões do Portabilizer: modo normal e modo R em uma única versão. Cada versão fica em sua própria pasta e não interfere nas outras. A soma de verificação do arquivo baixado é conferida antes da instalação.
+52	Repositório: {url}
+53	Abrir repositório
+54	Aparência da janela. As alterações são aplicadas imediatamente. O modo R ativa o tema vermelho.
+55	Tema:
+56	Vermelho escuro (R):
+57	Vermelho claro (R):
+58	Automático (como no Windows)
+59	Claro
+60	Escuro
+61	Clássico (do sistema)
+62	Vermelho claro (R)
+63	Carvão com destaque vermelho
+64	Bordô
+65	Cereja
+66	Minha cor
+67	 (personalizada)
+68	Aparência clássica: as cores são definidas pelo Windows.
+69	Atual: {name}
+70	Cor principal
+71	Cor personalizada
+72	Aplicar esta cor também ao fundo da janela?\n\nNão - o fundo permanecerá neutro.
+73	Escolher sua própria cor...
+74	Idioma da interface:
+75	O idioma muda imediatamente: a janela é reiniciada sozinha e as versões e configurações são mantidas.
+76	Selecione uma versão na lista à esquerda.
+77	{got} de {total} baixados
+78	Nova versão do launcher
+79	Saiu um novo Portabilizer Launcher {v} (você tem a {cur}).\n\nAbrir a página de download?
+80	Saiu um novo launcher {v}: {url}
+81	Há uma nova versão disponível: {tag}. Selecione-a e clique em «Instalar».
+82	\nE um novo launcher {v}.
+83	Nova versão do Portabilizer
+84	Saiu uma nova versão: {tag}.\n\n{notes}\n\nInstalar agora?
+85	Erro: {e}
+86	Verificando versões no GitHub...
+87	Instalando {tag}...
+88	Versão {tag} instalada.
+89	Instalação cancelada.
+90	Não foi possível instalar a versão.
+91	Erro de instalação {tag}: {err}
+92	Instalação
+93	Não foi possível instalar {tag}:\n\n{err}
+94	Iniciar
+95	Não foi possível iniciar {tag}:\n\n{e}
+96	Versão {tag} iniciada
+97	 (modo R)
+98	.
+99	Iniciada: {tag}
+100	Não foi possível abrir: {e}
+101	Versão {tag}
+102	Excluir a versão {tag} do disco?\n\n{path}
+103	Versão {tag} excluída.
+104	Exclusão
+105	Versão do Portabilizer
+106	Todos os arquivos
+107	Nome da versão
+108	Que nome dar à versão (por exemplo, v7.3)?
+109	Versão {name} adicionada de {p}.
+110	Adicionar versão
+111	Configurações do launcher
+112	Adicionar sua própria versão...
+113	Excluir a versão selecionada
+114	Criar um atalho do launcher na área de trabalho
+115	Criar um atalho da versão selecionada na área de trabalho
+116	Abrir a pasta de versões
+117	Atalho
+118	O atalho é criado para o Portabilizer Launcher.exe compilado (build_launcher.bat). Ele não é necessário ao executar a partir do código-fonte.
+119	Atalho criado: {p}
+120	Atalho criado:\n{p}
+121	Atalho não criado: {e}
+122	Não foi possível criar o atalho: {e}
+123	Criar um atalho do Portabilizer Launcher na área de trabalho?
+124	A versão {tag} foi instalada.\n\nCriar um atalho desta versão do Portabilizer na área de trabalho?
+125	Atalho da versão: {p}
+126	Instalação em andamento
+127	Interromper a instalação e sair?
+128	B
+129	KB
+130	MB
+131	GB
+132	caminho inseguro no arquivo compactado: {name}
+133	esta release não tem o arquivo do programa (é necessário um zip com Portabilizer.exe ou o próprio exe)
+134	Não há programa em {name}, verificando os outros arquivos da release...
+135	a release {tag} não tem o programa compilado ({exe}): foram anexados apenas arquivos sem ele. O autor da release precisa anexar o {exe} pronto ou um zip com ele.
+136	Baixando {name} ({size})...
+137	a soma de verificação não confere: o arquivo está danificado ou foi substituído. Instalação cancelada.
+138	A soma de verificação confere.
+139	Atenção: a release não tem soma de verificação, a integridade não foi verificada.
+140	este não é um arquivo exe
+141	não há {exe} no arquivo compactado
+142	Instalada: {p}
+143	arquivo não encontrado
+144	a versão «{name}» já existe
+145	não há {exe} no arquivo compactado. Parece que o código-fonte foi anexado à release em vez do programa compilado: compile-o com build.bat
+146	é necessário um arquivo .zip ou .exe
+147	só é possível excluir pastas dentro da pasta de versões
+148	atalhos na área de trabalho são compatíveis apenas com o Windows
+149	não foi possível criar o atalho

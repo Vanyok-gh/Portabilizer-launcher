@@ -1,0 +1,149 @@
+1	Versioni su GitHub: {n}.
+2	Nessuna connessione a GitHub: viene mostrato l'ultimo elenco salvato.
+3	Impossibile ottenere l'elenco delle versioni ({e}). Vengono mostrate quelle installate.
+4	installata (personale)
+5	installata
+6	nuova, può essere installata
+7	può essere installata
+8	nessun file nella release
+9	Avvia
+10	Installa
+11	Non disponibile
+12	versione non trovata
+13	la versione {tag} non è installata
+14	la versione non è installata
+15	Versione non trovata.
+16	Versione: {tag}
+17	Canale: {ch}
+18	Data di rilascio: {d}
+19	File: {name} ({size})
+20	Installata: {path} ({size})
+21	Presente solo sul disco (non da GitHub).
+22	Novità:
+23	Nessuna descrizione.
+24	Caricamento dell'elenco delle versioni...
+25	Versioni di Portabilizer
+26	Versione
+27	Stato
+28	Modalità normale
+29	Modalità R (radicale)
+30	R: dopo una compilazione riuscita il file sorgente viene eliminato. Il programma chiederà conferma.
+31	Annulla
+32	Info
+33	Cartella
+34	Aggiorna
+35	Novità
+36	Launcher
+37	Gestione versioni
+38	Aspetto
+39	Registro
+40	Informazioni
+41	Lingua
+42	Cartella delle versioni:
+43	Mostra le versioni di prova (Beta)
+44	Chiudi il launcher dopo l'avvio di una versione
+45	Proponi un collegamento sul desktop dopo l'installazione di una versione
+46	Origine delle versioni: {url}. Le nuove versioni compaiono nell'elenco dopo «Aggiorna». Le versioni aggiunte manualmente restano nella cartella delle versioni e nell'elenco.
+47	Dimensione
+48	Apri cartella
+49	Elimina versione
+50	Aggiungi una versione personale (zip o exe)...
+51	Installa e avvia le versioni di Portabilizer: modalità normale e modalità R in un'unica versione. Ogni versione si trova nella propria cartella e non interferisce con le altre. Il checksum del file scaricato viene verificato prima dell'installazione.
+52	Repository: {url}
+53	Apri repository
+54	Aspetto della finestra. Le modifiche si applicano subito. La modalità R attiva il tema rosso.
+55	Tema:
+56	Rosso scuro (R):
+57	Rosso chiaro (R):
+58	Automatico (come Windows)
+59	Chiaro
+60	Scuro
+61	Classico (di sistema)
+62	Rosso chiaro (R)
+63	Antracite con accento rosso
+64	Bordeaux
+65	Ciliegia
+66	Il mio colore
+67	 (personale)
+68	Aspetto classico: i colori sono definiti da Windows.
+69	Attuale: {name}
+70	Colore principale
+71	Colore personalizzato
+72	Applicare questo colore anche allo sfondo della finestra?\n\nNo - lo sfondo resterà neutro.
+73	Scegli un colore personalizzato...
+74	Lingua dell'interfaccia:
+75	La lingua cambia subito: la finestra si riavvia da sola, versioni e impostazioni vengono mantenute.
+76	Seleziona una versione dall'elenco a sinistra.
+77	Scaricati {got} di {total}
+78	Nuova versione del launcher
+79	È disponibile un nuovo Portabilizer Launcher {v} (hai la {cur}).\n\nAprire la pagina di download?
+80	È disponibile un nuovo launcher {v}: {url}
+81	È disponibile una nuova versione: {tag}. Selezionala e premi «Installa».
+82	\nE un nuovo launcher {v}.
+83	Nuova versione di Portabilizer
+84	È disponibile una nuova versione: {tag}.\n\n{notes}\n\nInstallare ora?
+85	Errore: {e}
+86	Controllo delle versioni su GitHub...
+87	Installazione di {tag}...
+88	Versione {tag} installata.
+89	Installazione annullata.
+90	Impossibile installare la versione.
+91	Errore di installazione {tag}: {err}
+92	Installazione
+93	Impossibile installare {tag}:\n\n{err}
+94	Avvio
+95	Impossibile avviare {tag}:\n\n{e}
+96	Versione {tag} avviata
+97	 (modalità R)
+98	.
+99	Avviata: {tag}
+100	Impossibile aprire: {e}
+101	Versione {tag}
+102	Eliminare la versione {tag} dal disco?\n\n{path}
+103	Versione {tag} eliminata.
+104	Eliminazione
+105	Versione di Portabilizer
+106	Tutti i file
+107	Nome della versione
+108	Come chiamare la versione (ad esempio v7.3)?
+109	Versione {name} aggiunta da {p}.
+110	Aggiungi versione
+111	Impostazioni del launcher
+112	Aggiungi una versione personale...
+113	Elimina la versione selezionata
+114	Crea un collegamento al launcher sul desktop
+115	Crea un collegamento sul desktop alla versione selezionata
+116	Apri la cartella delle versioni
+117	Collegamento
+118	Il collegamento viene creato per Portabilizer Launcher.exe compilato (build_launcher.bat). Non serve se si esegue dai sorgenti.
+119	Collegamento creato: {p}
+120	Collegamento creato:\n{p}
+121	Collegamento non creato: {e}
+122	Impossibile creare il collegamento: {e}
+123	Creare un collegamento a Portabilizer Launcher sul desktop?
+124	Versione {tag} installata.\n\nCreare un collegamento sul desktop a questa versione di Portabilizer?
+125	Collegamento alla versione: {p}
+126	Installazione in corso
+127	Interrompere l'installazione e uscire?
+128	B
+129	KB
+130	MB
+131	GB
+132	percorso non sicuro nell'archivio: {name}
+133	questa release non contiene il file del programma (serve uno zip con Portabilizer.exe oppure l'exe stesso)
+134	Nessun programma in {name}, controllo gli altri file della release...
+135	la release {tag} non contiene il programma compilato ({exe}): sono allegati solo file senza di esso. L'autore della release deve allegare {exe} già pronto o uno zip che lo contenga.
+136	Download di {name} ({size})...
+137	il checksum non corrisponde: il file è danneggiato o è stato sostituito. Installazione annullata.
+138	Il checksum corrisponde.
+139	Attenzione: la release non ha un checksum, l'integrità non è stata verificata.
+140	non è un file exe
+141	nell'archivio non c'è {exe}
+142	Installata: {p}
+143	file non trovato
+144	la versione «{name}» esiste già
+145	nell'archivio non c'è {exe}. Sembra che alla release siano stati allegati i sorgenti invece del programma compilato: compilalo con build.bat
+146	serve un file .zip o .exe
+147	si possono eliminare solo le cartelle all'interno della cartella delle versioni
+148	i collegamenti sul desktop sono supportati solo in Windows
+149	impossibile creare il collegamento

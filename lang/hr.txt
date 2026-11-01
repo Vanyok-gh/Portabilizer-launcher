@@ -1,0 +1,149 @@
+1	Verzija na GitHubu: {n}.
+2	Nema veze s GitHubom: prikazan je posljednji spremljeni popis.
+3	Nije moguće dohvatiti popis verzija ({e}). Prikazane su instalirane verzije.
+4	instalirana (vlastita)
+5	instalirana
+6	nova, može se instalirati
+7	može se instalirati
+8	nema datoteke u izdanju
+9	Pokreni
+10	Instaliraj
+11	Nedostupna
+12	verzija nije pronađena
+13	verzija {tag} nije instalirana
+14	verzija nije instalirana
+15	Verzija nije pronađena.
+16	Verzija: {tag}
+17	Kanal: {ch}
+18	Datum izdanja: {d}
+19	Datoteka: {name} ({size})
+20	Instalirano: {path} ({size})
+21	Postoji samo na disku (nije s GitHuba).
+22	Što je novo:
+23	Opis nije naveden.
+24	Učitavam popis verzija...
+25	Verzije programa Portabilizer
+26	Verzija
+27	Stanje
+28	Uobičajeni način rada
+29	Način R (radikalni)
+30	R: nakon uspješne izrade izvorna se datoteka briše. Program će zatražiti potvrdu.
+31	Odustani
+32	Informacije
+33	Mapa
+34	Osvježi
+35	Što je novo
+36	Pokretač
+37	Upravitelj verzija
+38	Izgled
+39	Dnevnik
+40	O programu
+41	Jezik
+42	Mapa verzija:
+43	Prikaži probne verzije (Beta)
+44	Zatvori pokretač nakon pokretanja verzije
+45	Ponudi prečac na radnoj površini nakon instalacije verzije
+46	Izvor verzija: {url}. Nove se verzije pojavljuju na popisu nakon klika na „Osvježi”. Ručno dodane verzije ostaju u mapi verzija i na popisu.
+47	Veličina
+48	Otvori mapu
+49	Izbriši verziju
+50	Dodaj vlastitu verziju (zip ili exe)...
+51	Instalira i pokreće verzije programa Portabilizer: uobičajeni način rada i način R u jednoj verziji. Svaka verzija nalazi se u vlastitoj mapi i ne smeta drugima. Kontrolni zbroj preuzete datoteke provjerava se prije instalacije.
+52	Repozitorij: {url}
+53	Otvori repozitorij
+54	Izgled prozora. Promjene se primjenjuju odmah. Način R uključuje crvenu temu.
+55	Tema:
+56	Tamnocrvena (R):
+57	Svijetlocrvena (R):
+58	Automatski (kao u sustavu Windows)
+59	Svijetla
+60	Tamna
+61	Klasična (sustavna)
+62	Svijetlocrvena (R)
+63	Ugljen s crvenim naglaskom
+64	Bordo
+65	Višnja
+66	Moja boja
+67	 (vlastita)
+68	Klasičan izgled: boje određuje Windows.
+69	Trenutačno: {name}
+70	Glavna boja
+71	Vlastita boja
+72	Obojiti i pozadinu prozora ovom bojom?\n\nNe - pozadina ostaje neutralna.
+73	Odaberi vlastitu boju...
+74	Jezik sučelja:
+75	Jezik se mijenja odmah: prozor će se sam ponovno pokrenuti, verzije i postavke bit će sačuvane.
+76	Odaberite verziju na popisu slijeva.
+77	Preuzeto {got} od {total}
+78	Nova verzija pokretača
+79	Izašao je novi Portabilizer Launcher {v} (vi imate {cur}).\n\nOtvoriti stranicu za preuzimanje?
+80	Izašao je novi pokretač {v}: {url}
+81	Dostupna je nova verzija: {tag}. Odaberite je i pritisnite „Instaliraj”.
+82	\nI novi pokretač {v}.
+83	Nova verzija programa Portabilizer
+84	Izašla je nova verzija: {tag}.\n\n{notes}\n\nInstalirati sada?
+85	Pogreška: {e}
+86	Provjeravam verzije na GitHubu...
+87	Instaliram {tag}...
+88	Verzija {tag} je instalirana.
+89	Instalacija je otkazana.
+90	Nije moguće instalirati verziju.
+91	Pogreška pri instalaciji {tag}: {err}
+92	Instalacija
+93	Nije moguće instalirati {tag}:\n\n{err}
+94	Pokretanje
+95	Nije moguće pokrenuti {tag}:\n\n{e}
+96	Pokrenuta je verzija {tag}
+97	 (način R)
+98	.
+99	Pokrenuto: {tag}
+100	Nije moguće otvoriti: {e}
+101	Verzija {tag}
+102	Izbrisati verziju {tag} s diska?\n\n{path}
+103	Verzija {tag} je izbrisana.
+104	Brisanje
+105	Verzija programa Portabilizer
+106	Sve datoteke
+107	Naziv verzije
+108	Kako nazvati verziju (npr. v7.3)?
+109	Verzija {name} dodana je iz {p}.
+110	Dodaj verziju
+111	Postavke pokretača
+112	Dodaj vlastitu verziju...
+113	Izbriši odabranu verziju
+114	Stvori prečac pokretača na radnoj površini
+115	Stvori prečac odabrane verzije na radnoj površini
+116	Otvori mapu verzija
+117	Prečac
+118	Prečac se stvara za izrađeni Portabilizer Launcher.exe (build_launcher.bat). Pri pokretanju iz izvornog koda nije potreban.
+119	Prečac je stvoren: {p}
+120	Prečac je stvoren:\n{p}
+121	Prečac nije stvoren: {e}
+122	Nije moguće stvoriti prečac: {e}
+123	Stvoriti prečac za Portabilizer Launcher na radnoj površini?
+124	Verzija {tag} je instalirana.\n\nStvoriti prečac ove verzije programa Portabilizer na radnoj površini?
+125	Prečac verzije: {p}
+126	Instalacija je u tijeku
+127	Prekinuti instalaciju i izaći?
+128	B
+129	KB
+130	MB
+131	GB
+132	nesigurna putanja u arhivi: {name}
+133	ovo izdanje nema datoteku s programom (potreban je zip s Portabilizer.exe ili sam exe)
+134	U datoteci {name} nema programa, provjeravam ostale datoteke izdanja...
+135	u izdanju {tag} nema izrađenog programa ({exe}): priložene su samo datoteke bez njega. Autor izdanja treba priložiti gotov {exe} ili zip s njim.
+136	Preuzimam {name} ({size})...
+137	kontrolni zbroj se ne podudara: datoteka je oštećena ili zamijenjena. Instalacija je otkazana.
+138	Kontrolni zbroj se podudara.
+139	Upozorenje: izdanje nema kontrolni zbroj, cjelovitost nije provjerena.
+140	ovo nije exe datoteka
+141	u arhivi nema {exe}
+142	Instalirano: {p}
+143	datoteka nije pronađena
+144	verzija „{name}” već postoji
+145	u arhivi nema {exe}. Izgleda da je izdanju priložen izvorni kod, a ne izrađeni program: izradite ga pomoću build.bat
+146	potreban je .zip ili .exe
+147	brisati se mogu samo mape unutar mape verzija
+148	prečaci na radnoj površini podržani su samo u sustavu Windows
+149	nije moguće stvoriti prečac

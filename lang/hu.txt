@@ -1,0 +1,149 @@
+1	Verziók a GitHubon: {n}.
+2	Nincs kapcsolat a GitHubbal: az utoljára mentett lista látható.
+3	Nem sikerült lekérni a verziók listáját ({e}). A telepített verziók láthatók.
+4	telepítve (saját)
+5	telepítve
+6	új, telepíthető
+7	telepíthető
+8	nincs fájl a kiadásban
+9	Indítás
+10	Telepítés
+11	Nem elérhető
+12	a verzió nem található
+13	a(z) {tag} verzió nincs telepítve
+14	a verzió nincs telepítve
+15	A verzió nem található.
+16	Verzió: {tag}
+17	Csatorna: {ch}
+18	Kiadás dátuma: {d}
+19	Fájl: {name} ({size})
+20	Telepítve: {path} ({size})
+21	Csak a lemezen van (nem a GitHubról).
+22	Újdonságok:
+23	Nincs leírás.
+24	Verziólista betöltése...
+25	Portabilizer verziók
+26	Verzió
+27	Állapot
+28	Normál mód
+29	R mód (radikális)
+30	R: sikeres összeállítás után a forrásfájl törlődik. A program megerősítést kér.
+31	Mégse
+32	Infó
+33	Mappa
+34	Frissítés
+35	Újdonságok
+36	Launcher
+37	Verziókezelő
+38	Megjelenés
+39	Napló
+40	Névjegy
+41	Nyelv
+42	Verziók mappája:
+43	Próbaverziók (Beta) megjelenítése
+44	Launcher bezárása a verzió indítása után
+45	Asztali parancsikon felajánlása a verzió telepítése után
+46	A verziók forrása: {url}. Az új verziók a „Frissítés” után jelennek meg a listában. A kézzel hozzáadott verziók a verziók mappájában és a listában maradnak.
+47	Méret
+48	Mappa megnyitása
+49	Verzió törlése
+50	Saját verzió hozzáadása (zip vagy exe)...
+51	Portabilizer verziókat telepít és indít: normál mód és R mód egyetlen verzióban. Minden verzió a saját mappájában van, és nem zavarja a többit. A letöltött fájl ellenőrző összegét a rendszer telepítés előtt ellenőrzi.
+52	Tárház: {url}
+53	Tárház megnyitása
+54	Az ablak megjelenése. A módosítások azonnal érvénybe lépnek. Az R mód bekapcsolja a piros témát.
+55	Téma:
+56	Sötét piros (R):
+57	Világos piros (R):
+58	Automatikus (mint a Windowsban)
+59	Világos
+60	Sötét
+61	Klasszikus (rendszer)
+62	Világospiros (R)
+63	Szén piros kiemeléssel
+64	Bordó
+65	Meggypiros
+66	Saját színem
+67	 (saját)
+68	Klasszikus megjelenés: a színeket a Windows adja meg.
+69	Jelenleg: {name}
+70	Fő szín
+71	Egyéni szín
+72	Az ablak hátterét is ezzel a színnel színezzük?\n\nNem - a háttér semleges marad.
+73	Egyéni szín kiválasztása...
+74	A felület nyelve:
+75	A nyelv azonnal változik: az ablak magától újraindul, a verziók és a beállítások megmaradnak.
+76	Válasszon egy verziót a bal oldali listából.
+77	Letöltve: {got} / {total}
+78	A launcher új verziója
+79	Megjelent a Portabilizer Launcher új verziója: {v} (az Öné: {cur}).\n\nMegnyitja a letöltési oldalt?
+80	Megjelent a launcher új verziója: {v}: {url}
+81	Új verzió érhető el: {tag}. Válassza ki, és nyomja meg a „Telepítés” gombot.
+82	\nÉs megjelent az új launcher is: {v}.
+83	A Portabilizer új verziója
+84	Megjelent az új verzió: {tag}.\n\n{notes}\n\nTelepíti most?
+85	Hiba: {e}
+86	Verziók ellenőrzése a GitHubon...
+87	{tag} telepítése...
+88	A(z) {tag} verzió telepítve.
+89	A telepítés megszakítva.
+90	A verziót nem sikerült telepíteni.
+91	Telepítési hiba ({tag}): {err}
+92	Telepítés
+93	Nem sikerült telepíteni: {tag}\n\n{err}
+94	Indítás
+95	Nem sikerült elindítani: {tag}\n\n{e}
+96	A(z) {tag} verzió elindítva
+97	 (R mód)
+98	.
+99	Elindítva: {tag}
+100	Nem sikerült megnyitni: {e}
+101	{tag} verzió
+102	Törli a(z) {tag} verziót a lemezről?\n\n{path}
+103	A(z) {tag} verzió törölve.
+104	Törlés
+105	Portabilizer verzió
+106	Minden fájl
+107	A verzió neve
+108	Hogyan nevezze el a verziót (például v7.3)?
+109	A(z) {name} verzió hozzáadva innen: {p}.
+110	Verzió hozzáadása
+111	A launcher beállításai
+112	Saját verzió hozzáadása...
+113	A kijelölt verzió törlése
+114	Asztali parancsikon létrehozása a launcherhez
+115	Asztali parancsikon létrehozása a kijelölt verzióhoz
+116	A verziók mappájának megnyitása
+117	Parancsikon
+118	A parancsikon az elkészített Portabilizer Launcher.exe fájlhoz készül (build_launcher.bat). Forráskódból futtatva nincs rá szükség.
+119	Parancsikon létrehozva: {p}
+120	Parancsikon létrehozva:\n{p}
+121	A parancsikon nem jött létre: {e}
+122	Nem sikerült létrehozni a parancsikont: {e}
+123	Létrehoz egy Portabilizer Launcher parancsikont az asztalon?
+124	A(z) {tag} verzió telepítve.\n\nLétrehoz asztali parancsikont a Portabilizer ezen verziójához?
+125	Verzió parancsikonja: {p}
+126	Telepítés folyamatban
+127	Megszakítja a telepítést és kilép?
+128	B
+129	KB
+130	MB
+131	GB
+132	nem biztonságos útvonal az archívumban: {name}
+133	ebben a kiadásban nincs programfájl (Portabilizer.exe-t tartalmazó zip vagy maga az exe szükséges)
+134	A(z) {name} fájlban nincs program, a kiadás többi fájlját nézem...
+135	a(z) {tag} kiadásban nincs elkészített program ({exe}): csak a nélküle lévő fájlok vannak csatolva. A kiadás szerzőjének csatolnia kell az elkészített {exe} fájlt vagy egy zip-et vele.
+136	{name} letöltése ({size})...
+137	az ellenőrző összeg nem egyezik: a fájl sérült vagy kicserélték. A telepítés megszakítva.
+138	Az ellenőrző összeg egyezik.
+139	Figyelem: a kiadásnak nincs ellenőrző összege, az integritás nem lett ellenőrizve.
+140	ez nem exe fájl
+141	az archívumban nincs {exe}
+142	Telepítve: {p}
+143	a fájl nem található
+144	a(z) „{name}” verzió már létezik
+145	az archívumban nincs {exe}. Úgy tűnik, a kiadáshoz forráskódot csatoltak az elkészített program helyett: készítse el a build.bat segítségével
+146	.zip vagy .exe szükséges
+147	csak a verziók mappáján belüli mappák törölhetők
+148	az asztali parancsikonok csak Windowson támogatottak
+149	nem sikerült létrehozni a parancsikont

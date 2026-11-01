@@ -1,0 +1,149 @@
+1	Verzí na GitHubu: {n}.
+2	Bez spojení s GitHubem: zobrazen poslední uložený seznam.
+3	Nepodařilo se získat seznam verzí ({e}). Zobrazeny nainstalované verze.
+4	nainstalována (vlastní)
+5	nainstalována
+6	nová, lze nainstalovat
+7	lze nainstalovat
+8	ve vydání není soubor
+9	Spustit
+10	Nainstalovat
+11	Nedostupná
+12	verze nenalezena
+13	verze {tag} není nainstalována
+14	verze není nainstalována
+15	Verze nenalezena.
+16	Verze: {tag}
+17	Kanál: {ch}
+18	Datum vydání: {d}
+19	Soubor: {name} ({size})
+20	Nainstalováno: {path} ({size})
+21	Pouze na disku (není z GitHubu).
+22	Co je nového:
+23	Popis není uveden.
+24	Načítám seznam verzí...
+25	Verze Portabilizeru
+26	Verze
+27	Stav
+28	Normální režim
+29	Režim R (radikální)
+30	R: po úspěšném sestavení se zdrojový soubor smaže. Program požádá o potvrzení.
+31	Zrušit
+32	Info
+33	Složka
+34	Obnovit
+35	Co je nového
+36	Launcher
+37	Správce verzí
+38	Vzhled
+39	Protokol
+40	O programu
+41	Jazyk
+42	Složka verzí:
+43	Zobrazovat zkušební verze (Beta)
+44	Zavřít launcher po spuštění verze
+45	Nabízet zástupce na ploše po instalaci verze
+46	Zdroj verzí: {url}. Nové verze se objeví v seznamu po kliknutí na „Obnovit“. Ručně přidané verze zůstanou ve složce verzí i v seznamu.
+47	Velikost
+48	Otevřít složku
+49	Smazat verzi
+50	Přidat vlastní verzi (zip nebo exe)...
+51	Instaluje a spouští verze Portabilizeru: normální režim i režim R v jedné verzi. Každá verze je ve své vlastní složce a ostatním nepřekáží. Kontrolní součet staženého souboru se před instalací ověřuje.
+52	Repozitář: {url}
+53	Otevřít repozitář
+54	Vzhled okna. Změny se projeví ihned. Režim R zapíná červený motiv.
+55	Motiv:
+56	Tmavě červená (R):
+57	Světle červená (R):
+58	Automaticky (podle Windows)
+59	Světlý
+60	Tmavý
+61	Klasický (systémový)
+62	Světle červená (R)
+63	Uhlová s červeným akcentem
+64	Vínová
+65	Višňová
+66	Moje barva
+67	 (vlastní)
+68	Klasický vzhled: barvy určuje Windows.
+69	Nyní: {name}
+70	Hlavní barva
+71	Vlastní barva
+72	Obarvit touto barvou i pozadí okna?\n\nNe - pozadí zůstane neutrální.
+73	Vybrat vlastní barvu...
+74	Jazyk rozhraní:
+75	Jazyk se změní ihned: okno se samo restartuje, verze a nastavení zůstanou zachovány.
+76	Vyberte verzi v seznamu vlevo.
+77	Staženo {got} z {total}
+78	Nová verze launcheru
+79	Vyšel nový Portabilizer Launcher {v} (máte {cur}).\n\nOtevřít stránku ke stažení?
+80	Vyšel nový launcher {v}: {url}
+81	Je dostupná nová verze: {tag}. Vyberte ji a klikněte na „Nainstalovat“.
+82	\nA také nový launcher {v}.
+83	Nová verze Portabilizeru
+84	Vyšla nová verze: {tag}.\n\n{notes}\n\nNainstalovat nyní?
+85	Chyba: {e}
+86	Kontroluji verze na GitHubu...
+87	Instaluji {tag}...
+88	Verze {tag} je nainstalována.
+89	Instalace byla zrušena.
+90	Verzi se nepodařilo nainstalovat.
+91	Chyba instalace {tag}: {err}
+92	Instalace
+93	Nepodařilo se nainstalovat {tag}:\n\n{err}
+94	Spuštění
+95	Nepodařilo se spustit {tag}:\n\n{e}
+96	Spuštěna verze {tag}
+97	 (režim R)
+98	.
+99	Spuštěno: {tag}
+100	Nepodařilo se otevřít: {e}
+101	Verze {tag}
+102	Smazat verzi {tag} z disku?\n\n{path}
+103	Verze {tag} byla smazána.
+104	Smazání
+105	Verze Portabilizeru
+106	Všechny soubory
+107	Název verze
+108	Jak verzi pojmenovat (například v7.3)?
+109	Verze {name} přidána z {p}.
+110	Přidat verzi
+111	Nastavení launcheru
+112	Přidat vlastní verzi...
+113	Smazat vybranou verzi
+114	Vytvořit zástupce launcheru na ploše
+115	Vytvořit zástupce vybrané verze na ploše
+116	Otevřít složku verzí
+117	Zástupce
+118	Zástupce se vytváří pro sestavený Portabilizer Launcher.exe (build_launcher.bat). Při spuštění ze zdrojových kódů není potřeba.
+119	Zástupce vytvořen: {p}
+120	Zástupce vytvořen:\n{p}
+121	Zástupce nebyl vytvořen: {e}
+122	Nepodařilo se vytvořit zástupce: {e}
+123	Vytvořit zástupce Portabilizer Launcheru na ploše?
+124	Verze {tag} je nainstalována.\n\nVytvořit zástupce této verze Portabilizeru na ploše?
+125	Zástupce verze: {p}
+126	Probíhá instalace
+127	Přerušit instalaci a ukončit program?
+128	B
+129	KB
+130	MB
+131	GB
+132	nebezpečná cesta v archivu: {name}
+133	toto vydání neobsahuje soubor s programem (je potřeba zip s Portabilizer.exe nebo samotný exe)
+134	V souboru {name} není program, prohledávám další soubory vydání...
+135	ve vydání {tag} není sestavený program ({exe}): jsou přiloženy jen soubory bez něj. Autor vydání musí přiložit hotový {exe} nebo zip s ním.
+136	Stahuji {name} ({size})...
+137	kontrolní součet nesouhlasí: soubor je poškozen nebo podvržen. Instalace byla zrušena.
+138	Kontrolní součet souhlasí.
+139	Upozornění: vydání nemá kontrolní součet, integrita nebyla ověřena.
+140	toto není soubor exe
+141	v archivu není {exe}
+142	Nainstalováno: {p}
+143	soubor nenalezen
+144	verze „{name}“ už existuje
+145	v archivu není {exe}. Vypadá to, že k vydání byly přiloženy zdrojové kódy místo sestaveného programu: sestavte jej pomocí build.bat
+146	je potřeba .zip nebo .exe
+147	smazat lze pouze složky uvnitř složky verzí
+148	zástupci na ploše jsou podporováni pouze ve Windows
+149	nepodařilo se vytvořit zástupce

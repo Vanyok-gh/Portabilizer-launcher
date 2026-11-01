@@ -1,0 +1,407 @@
+"""Языки интерфейса лаунчера: русский (исходный), английский, эстонский, французский, испанский.
+
+Ключ перевода - русская фраза из кода. tr("фраза") возвращает её на выбранном языке; если перевода нет,
+остаётся русский текст. Подстановки пишутся как {имя}: tr("Версия {tag}", tag="v9.0").
+"""
+import locale
+
+try:
+    from pz_lang_data import CODES, NAMES, TEXTS         # сгенерировано tools/make_lang.py из lang/*.txt
+except ImportError:                                      # без данных остаются только четыре языка из TABLE
+    CODES, NAMES, TEXTS = ("ru", "en", "et", "fr", "es"), {}, {}
+BUILTIN = ("en", "et", "fr", "es")                       # эти языки лежат прямо в TABLE (по порядку столбцов)
+LANGS = tuple((c, NAMES.get(c, {}).get(c, c)) for c in CODES)   # (код, название на самом языке)
+_cur = {"lang": "ru"}
+
+
+def lang_name(ui: str, code: str) -> str:
+    """Название языка code, написанное на языке интерфейса ui."""
+    return NAMES.get(ui, {}).get(code) or NAMES.get(code, {}).get(code, code)
+
+
+def set_lang(code):
+    _cur["lang"] = code if code in CODES else "ru"
+    return _cur["lang"]
+
+
+def get_lang() -> str:
+    return _cur["lang"]
+
+
+def detect_lang() -> str:
+    """Язык системы, если он среди поддерживаемых; иначе английский."""
+    try:
+        loc = (locale.getlocale()[0] or locale.getdefaultlocale()[0] or "")[:2].lower()
+    except Exception:                                    # noqa: BLE001
+        loc = ""
+    return loc if loc in CODES else "en"
+
+
+def tr(key: str, **kw) -> str:
+    lang = _cur["lang"]
+    text = key
+    if lang in BUILTIN:
+        row = TABLE.get(key)
+        if row and row[BUILTIN.index(lang)]:
+            text = row[BUILTIN.index(lang)]
+    elif lang in TEXTS:
+        text = TEXTS[lang].get(key) or key
+    return text.format(**kw) if kw else text
+
+
+# русский ключ: (английский, эстонский, французский, испанский)
+TABLE = {
+    # --- модель
+    "Версий в GitHub: {n}.": ("Versions on GitHub: {n}.", "Versioone GitHubis: {n}.",
+                              "Versions sur GitHub : {n}.", "Versiones en GitHub: {n}."),
+    "Нет связи с GitHub: показан последний сохранённый список.": (
+        "No connection to GitHub: showing the last saved list.",
+        "GitHubiga ühendus puudub: näidatakse viimati salvestatud loendit.",
+        "Pas de connexion à GitHub : dernière liste enregistrée affichée.",
+        "Sin conexión con GitHub: se muestra la última lista guardada."),
+    "Не удалось получить список версий ({e}). Показаны установленные.": (
+        "Could not get the version list ({e}). Showing installed versions.",
+        "Versioonide loendit ei õnnestunud hankida ({e}). Näidatakse paigaldatud versioone.",
+        "Impossible d'obtenir la liste des versions ({e}). Versions installées affichées.",
+        "No se pudo obtener la lista de versiones ({e}). Se muestran las instaladas."),
+    "установлена (своя)": ("installed (custom)", "paigaldatud (oma)", "installée (personnelle)",
+                           "instalada (propia)"),
+    "установлена": ("installed", "paigaldatud", "installée", "instalada"),
+    "новая, можно установить": ("new, can be installed", "uus, saab paigaldada",
+                                "nouvelle, installable", "nueva, se puede instalar"),
+    "можно установить": ("can be installed", "saab paigaldada", "installable", "se puede instalar"),
+    "нет файла в релизе": ("no file in the release", "väljalaskes pole faili",
+                           "aucun fichier dans la version", "sin archivo en la versión"),
+    "Запустить": ("Launch", "Käivita", "Lancer", "Iniciar"),
+    "Установить": ("Install", "Paigalda", "Installer", "Instalar"),
+    "Недоступна": ("Unavailable", "Pole saadaval", "Indisponible", "No disponible"),
+    "версия не найдена": ("version not found", "versiooni ei leitud", "version introuvable",
+                          "versión no encontrada"),
+    "версия {tag} не установлена": ("version {tag} is not installed", "versioon {tag} pole paigaldatud",
+                                    "la version {tag} n'est pas installée",
+                                    "la versión {tag} no está instalada"),
+    "версия не установлена": ("version is not installed", "versioon pole paigaldatud",
+                              "la version n'est pas installée", "la versión no está instalada"),
+    "Версия не найдена.": ("Version not found.", "Versiooni ei leitud.", "Version introuvable.",
+                           "Versión no encontrada."),
+    "Версия: {tag}": ("Version: {tag}", "Versioon: {tag}", "Version : {tag}", "Versión: {tag}"),
+    "Канал: {ch}": ("Channel: {ch}", "Kanal: {ch}", "Canal : {ch}", "Canal: {ch}"),
+    "Дата выпуска: {d}": ("Release date: {d}", "Väljalaskekuupäev: {d}", "Date de sortie : {d}",
+                          "Fecha de lanzamiento: {d}"),
+    "Файл: {name} ({size})": ("File: {name} ({size})", "Fail: {name} ({size})",
+                              "Fichier : {name} ({size})", "Archivo: {name} ({size})"),
+    "Установлена: {path} ({size})": ("Installed: {path} ({size})", "Paigaldatud: {path} ({size})",
+                                     "Installée : {path} ({size})", "Instalada: {path} ({size})"),
+    "Есть только на диске (не из GitHub).": ("Only on disk (not from GitHub).",
+                                             "Ainult kettal (pole GitHubist).",
+                                             "Uniquement sur le disque (pas de GitHub).",
+                                             "Solo en el disco (no de GitHub)."),
+    "Что нового:": ("What's new:", "Mis on uut:", "Nouveautés :", "Novedades:"),
+    "Описание не указано.": ("No description.", "Kirjeldust pole.", "Aucune description.",
+                             "Sin descripción."),
+    # --- левая панель
+    "Загружаю список версий...": ("Loading the version list...", "Laen versioonide loendit...",
+                                  "Chargement de la liste des versions...",
+                                  "Cargando la lista de versiones..."),
+    "Версии Portabilizer": ("Portabilizer versions", "Portabilizeri versioonid",
+                            "Versions de Portabilizer", "Versiones de Portabilizer"),
+    "Версия": ("Version", "Versioon", "Version", "Versión"),
+    "Состояние": ("Status", "Olek", "État", "Estado"),
+    "Обычный режим": ("Normal mode", "Tavarežiim", "Mode normal", "Modo normal"),
+    "Режим R (радикальный)": ("Mode R (radical)", "R-režiim (radikaalne)", "Mode R (radical)",
+                              "Modo R (radical)"),
+    "R: после успешной сборки исходный файл удаляется. Программа попросит подтверждение.": (
+        "R: after a successful build the source file is deleted. The program will ask for confirmation.",
+        "R: pärast edukat koostamist kustutatakse lähtefail. Programm küsib kinnitust.",
+        "R : après une création réussie, le fichier source est supprimé. Le programme demandera confirmation.",
+        "R: tras una creación correcta se borra el archivo original. El programa pedirá confirmación."),
+    "Отмена": ("Cancel", "Tühista", "Annuler", "Cancelar"),
+    "Инфо": ("Info", "Info", "Infos", "Info"),
+    "Папка": ("Folder", "Kaust", "Dossier", "Carpeta"),
+    "Обновить": ("Refresh", "Värskenda", "Actualiser", "Actualizar"),
+    # --- вкладки
+    "Что нового": ("What's new", "Mis on uut", "Nouveautés", "Novedades"),
+    "Лаунчер": ("Launcher", "Käivitaja", "Lanceur", "Lanzador"),
+    "Менеджер версий": ("Version manager", "Versioonihaldur", "Gestionnaire de versions",
+                        "Gestor de versiones"),
+    "Оформление": ("Appearance", "Välimus", "Apparence", "Apariencia"),
+    "Журнал": ("Log", "Logi", "Journal", "Registro"),
+    "О программе": ("About", "Programmist", "À propos", "Acerca de"),
+    "Язык": ("Language", "Keel", "Langue", "Idioma"),
+    # --- настройки
+    "Папка версий:": ("Versions folder:", "Versioonide kaust:", "Dossier des versions :",
+                      "Carpeta de versiones:"),
+    "Показывать пробные версии (Beta)": ("Show trial versions (Beta)", "Näita prooviversioone (Beta)",
+                                         "Afficher les versions d'essai (Bêta)",
+                                         "Mostrar versiones de prueba (Beta)"),
+    "Закрывать лаунчер после запуска версии": ("Close the launcher after starting a version",
+                                               "Sulge käivitaja pärast versiooni käivitamist",
+                                               "Fermer le lanceur après le démarrage d'une version",
+                                               "Cerrar el lanzador al iniciar una versión"),
+    "Предлагать ярлык на рабочем столе после установки версии": (
+        "Offer a desktop shortcut after installing a version",
+        "Paku töölauaotseteed pärast versiooni paigaldamist",
+        "Proposer un raccourci sur le bureau après l'installation d'une version",
+        "Ofrecer un acceso directo en el escritorio tras instalar una versión"),
+    "Источник версий: {url}. Новые версии появляются в списке после «Обновить». Версии, добавленные вручную, остаются в папке версий и в списке.": (
+        "Versions come from: {url}. New versions appear in the list after “Refresh”. Versions added by hand stay in the versions folder and in the list.",
+        "Versioonide allikas: {url}. Uued versioonid ilmuvad loendisse pärast „Värskenda“. Käsitsi lisatud versioonid jäävad versioonide kausta ja loendisse.",
+        "Source des versions : {url}. Les nouvelles versions apparaissent dans la liste après « Actualiser ». Les versions ajoutées à la main restent dans le dossier des versions et dans la liste.",
+        "Origen de las versiones: {url}. Las versiones nuevas aparecen en la lista tras «Actualizar». Las versiones añadidas a mano permanecen en la carpeta de versiones y en la lista."),
+    "Размер": ("Size", "Suurus", "Taille", "Tamaño"),
+    "Открыть папку": ("Open folder", "Ava kaust", "Ouvrir le dossier", "Abrir carpeta"),
+    "Удалить версию": ("Delete version", "Kustuta versioon", "Supprimer la version",
+                       "Eliminar versión"),
+    "Добавить свою версию (zip или exe)...": ("Add your own version (zip or exe)...",
+                                              "Lisa oma versioon (zip või exe)...",
+                                              "Ajouter votre version (zip ou exe)...",
+                                              "Añadir tu propia versión (zip o exe)..."),
+    "Устанавливает и запускает версии Portabilizer: обычный режим и режим R в одной версии. Каждая версия лежит в своей папке и не мешает другим. Контрольная сумма скачанного файла проверяется перед установкой.": (
+        "Installs and launches Portabilizer versions: normal mode and mode R in one version. Each version lives in its own folder and does not interfere with others. The checksum of the downloaded file is verified before installation.",
+        "Paigaldab ja käivitab Portabilizeri versioone: tavarežiim ja R-režiim ühes versioonis. Iga versioon asub oma kaustas ega sega teisi. Allalaaditud faili kontrollsumma kontrollitakse enne paigaldamist.",
+        "Installe et lance les versions de Portabilizer : mode normal et mode R dans la même version. Chaque version est dans son propre dossier et ne gêne pas les autres. La somme de contrôle du fichier téléchargé est vérifiée avant l'installation.",
+        "Instala e inicia versiones de Portabilizer: modo normal y modo R en la misma versión. Cada versión está en su propia carpeta y no molesta a las demás. La suma de comprobación del archivo descargado se verifica antes de instalar."),
+    "Репозиторий: {url}": ("Repository: {url}", "Hoidla: {url}", "Dépôt : {url}", "Repositorio: {url}"),
+    "Открыть репозиторий": ("Open repository", "Ava hoidla", "Ouvrir le dépôt", "Abrir repositorio"),
+    # --- оформление
+    "Внешний вид окна. Изменения применяются сразу. Режим R включает красную тему.": (
+        "Window appearance. Changes apply immediately. Mode R switches on the red theme.",
+        "Akna välimus. Muudatused rakenduvad kohe. R-režiim lülitab sisse punase teema.",
+        "Apparence de la fenêtre. Les changements s'appliquent immédiatement. Le mode R active le thème rouge.",
+        "Aspecto de la ventana. Los cambios se aplican al instante. El modo R activa el tema rojo."),
+    "Тема:": ("Theme:", "Teema:", "Thème :", "Tema:"),
+    "Тёмная красная (R):": ("Dark red (R):", "Tume punane (R):", "Rouge sombre (R) :", "Rojo oscuro (R):"),
+    "Светлая красная (R):": ("Light red (R):", "Hele punane (R):", "Rouge clair (R) :", "Rojo claro (R):"),
+    "Авто (как в Windows)": ("Auto (like Windows)", "Automaatne (nagu Windowsis)",
+                             "Auto (comme Windows)", "Automático (como Windows)"),
+    "Светлая": ("Light", "Hele", "Clair", "Claro"),
+    "Тёмная": ("Dark", "Tume", "Sombre", "Oscuro"),
+    "Классическая (системная)": ("Classic (system)", "Klassikaline (süsteemi)", "Classique (système)",
+                                 "Clásico (del sistema)"),
+    "Светло-красная (R)": ("Light red (R)", "Hele punane (R)", "Rouge clair (R)", "Rojo claro (R)"),
+    "Уголь с красным акцентом": ("Charcoal with red accent", "Süsi punase aktsendiga",
+                                 "Anthracite avec accent rouge", "Carbón con acento rojo"),
+    "Бордо": ("Burgundy", "Burgundia", "Bordeaux", "Burdeos"),
+    "Вишнёвая": ("Cherry", "Kirsipunane", "Cerise", "Cereza"),
+    "Мой цвет": ("My colour", "Minu värv", "Ma couleur", "Mi color"),
+    " (своя)": (" (custom)", " (oma)", " (personnelle)", " (propia)"),
+    "Классический вид: цвета задаёт Windows.": ("Classic look: colours are set by Windows.",
+                                                "Klassikaline vaade: värvid määrab Windows.",
+                                                "Apparence classique : les couleurs viennent de Windows.",
+                                                "Aspecto clásico: los colores los define Windows."),
+    "Сейчас: {name}": ("Now: {name}", "Praegu: {name}", "Actuel : {name}", "Ahora: {name}"),
+    "Главный цвет": ("Main colour", "Põhivärv", "Couleur principale", "Color principal"),
+    "Свой цвет": ("Custom colour", "Oma värv", "Couleur personnalisée", "Color personalizado"),
+    "Подкрасить в этот цвет и фон окна?\n\nНет - фон останется нейтральным.": (
+        "Tint the window background with this colour too?\n\nNo - the background stays neutral.",
+        "Kas värvida ka akna taust selle värviga?\n\nEi - taust jääb neutraalseks.",
+        "Teinter aussi le fond de la fenêtre de cette couleur ?\n\nNon - le fond reste neutre.",
+        "¿Teñir también el fondo de la ventana con este color?\n\nNo: el fondo se queda neutro."),
+    "Выбрать свой цвет...": ("Choose your own colour...", "Vali oma värv...", "Choisir votre couleur...",
+                             "Elegir tu propio color..."),
+    # --- язык
+    "Язык интерфейса:": ("Interface language:", "Liidese keel:", "Langue de l'interface :",
+                         "Idioma de la interfaz:"),
+    "Язык меняется сразу: окно перезапустится само, версии и настройки сохранятся.": (
+        "The language changes at once: the window restarts by itself, versions and settings are kept.",
+        "Keel muutub kohe: aken taaskäivitub ise, versioonid ja seaded säilivad.",
+        "La langue change tout de suite : la fenêtre redémarre seule, les versions et réglages sont conservés.",
+        "El idioma cambia al instante: la ventana se reinicia sola, las versiones y ajustes se conservan."),
+    # --- список и действия
+    "Выберите версию в списке слева.": ("Select a version in the list on the left.",
+                                        "Vali vasakul loendist versioon.",
+                                        "Sélectionnez une version dans la liste à gauche.",
+                                        "Selecciona una versión en la lista de la izquierda."),
+    "Скачано {got} из {total}": ("Downloaded {got} of {total}", "Alla laaditud {got} / {total}",
+                                 "Téléchargé {got} sur {total}", "Descargado {got} de {total}"),
+    "Новая версия лаунчера": ("New launcher version", "Käivitaja uus versioon",
+                              "Nouvelle version du lanceur", "Nueva versión del lanzador"),
+    "Вышел новый Portabilizer Launcher {v} (у вас {cur}).\n\nОткрыть страницу загрузки?": (
+        "A new Portabilizer Launcher {v} is out (you have {cur}).\n\nOpen the download page?",
+        "Ilmus uus Portabilizer Launcher {v} (teil on {cur}).\n\nKas avada allalaadimise leht?",
+        "Un nouveau Portabilizer Launcher {v} est sorti (vous avez {cur}).\n\nOuvrir la page de téléchargement ?",
+        "Ha salido un nuevo Portabilizer Launcher {v} (tienes {cur}).\n\n¿Abrir la página de descarga?"),
+    "Вышел новый лаунчер {v}: {url}": ("A new launcher {v} is out: {url}", "Ilmus uus käivitaja {v}: {url}",
+                                       "Un nouveau lanceur {v} est sorti : {url}",
+                                       "Ha salido un nuevo lanzador {v}: {url}"),
+    "Доступна новая версия: {tag}. Выберите её и нажмите «Установить».": (
+        "A new version is available: {tag}. Select it and press “Install”.",
+        "Saadaval on uus versioon: {tag}. Vali see ja vajuta „Paigalda“.",
+        "Une nouvelle version est disponible : {tag}. Sélectionnez-la et cliquez sur « Installer ».",
+        "Hay una nueva versión: {tag}. Selecciónala y pulsa «Instalar»."),
+    "\nИ новый лаунчер {v}.": ("\nAnd a new launcher {v}.", "\nJa uus käivitaja {v}.",
+                              "\nEt un nouveau lanceur {v}.", "\nY un nuevo lanzador {v}."),
+    "Новая версия Portabilizer": ("New Portabilizer version", "Portabilizeri uus versioon",
+                                  "Nouvelle version de Portabilizer", "Nueva versión de Portabilizer"),
+    "Вышла новая версия: {tag}.\n\n{notes}\n\nУстановить сейчас?": (
+        "A new version is out: {tag}.\n\n{notes}\n\nInstall now?",
+        "Ilmus uus versioon: {tag}.\n\n{notes}\n\nKas paigaldada kohe?",
+        "Une nouvelle version est sortie : {tag}.\n\n{notes}\n\nInstaller maintenant ?",
+        "Ha salido una nueva versión: {tag}.\n\n{notes}\n\n¿Instalar ahora?"),
+    "Ошибка: {e}": ("Error: {e}", "Viga: {e}", "Erreur : {e}", "Error: {e}"),
+    "Проверяю версии в GitHub...": ("Checking versions on GitHub...", "Kontrollin versioone GitHubis...",
+                                    "Vérification des versions sur GitHub...",
+                                    "Comprobando versiones en GitHub..."),
+    "Устанавливаю {tag}...": ("Installing {tag}...", "Paigaldan {tag}...", "Installation de {tag}...",
+                              "Instalando {tag}..."),
+    "Версия {tag} установлена.": ("Version {tag} installed.", "Versioon {tag} on paigaldatud.",
+                                  "Version {tag} installée.", "Versión {tag} instalada."),
+    "Установка отменена.": ("Installation cancelled.", "Paigaldamine tühistati.",
+                            "Installation annulée.", "Instalación cancelada."),
+    "Не удалось установить версию.": ("Could not install the version.", "Versiooni paigaldamine ebaõnnestus.",
+                                      "Impossible d'installer la version.", "No se pudo instalar la versión."),
+    "Ошибка установки {tag}: {err}": ("Installation error {tag}: {err}", "Paigaldusviga {tag}: {err}",
+                                      "Erreur d'installation {tag} : {err}",
+                                      "Error de instalación {tag}: {err}"),
+    "Установка": ("Installation", "Paigaldamine", "Installation", "Instalación"),
+    "Не удалось установить {tag}:\n\n{err}": ("Could not install {tag}:\n\n{err}",
+                                              "Versiooni {tag} paigaldamine ebaõnnestus:\n\n{err}",
+                                              "Impossible d'installer {tag} :\n\n{err}",
+                                              "No se pudo instalar {tag}:\n\n{err}"),
+    "Запуск": ("Launch", "Käivitamine", "Lancement", "Inicio"),
+    "Не удалось запустить {tag}:\n\n{e}": ("Could not launch {tag}:\n\n{e}",
+                                           "Versiooni {tag} käivitamine ebaõnnestus:\n\n{e}",
+                                           "Impossible de lancer {tag} :\n\n{e}",
+                                           "No se pudo iniciar {tag}:\n\n{e}"),
+    "Запущена версия {tag}": ("Version {tag} started", "Versioon {tag} käivitati", "Version {tag} lancée",
+                              "Versión {tag} iniciada"),
+    " (режим R)": (" (mode R)", " (R-režiim)", " (mode R)", " (modo R)"),
+    ".": (".", ".", ".", "."),
+    "Запущено: {tag}": ("Started: {tag}", "Käivitatud: {tag}", "Lancé : {tag}", "Iniciado: {tag}"),
+    "Не удалось открыть: {e}": ("Could not open: {e}", "Avamine ebaõnnestus: {e}",
+                                "Impossible d'ouvrir : {e}", "No se pudo abrir: {e}"),
+    "Версия {tag}": ("Version {tag}", "Versioon {tag}", "Version {tag}", "Versión {tag}"),
+    "Удалить версию {tag} с диска?\n\n{path}": ("Delete version {tag} from the disk?\n\n{path}",
+                                                "Kas kustutada versioon {tag} kettalt?\n\n{path}",
+                                                "Supprimer la version {tag} du disque ?\n\n{path}",
+                                                "¿Eliminar la versión {tag} del disco?\n\n{path}"),
+    "Удалена версия {tag}.": ("Version {tag} deleted.", "Versioon {tag} kustutati.",
+                              "Version {tag} supprimée.", "Versión {tag} eliminada."),
+    "Удаление": ("Deletion", "Kustutamine", "Suppression", "Eliminación"),
+    "Версия Portabilizer": ("Portabilizer version", "Portabilizeri versioon", "Version de Portabilizer",
+                            "Versión de Portabilizer"),
+    "Все файлы": ("All files", "Kõik failid", "Tous les fichiers", "Todos los archivos"),
+    "Название версии": ("Version name", "Versiooni nimi", "Nom de la version", "Nombre de la versión"),
+    "Как назвать версию (например, v7.3)?": ("What to call the version (for example, v7.3)?",
+                                              "Kuidas versiooni nimetada (nt v7.3)?",
+                                              "Comment nommer la version (par exemple v7.3) ?",
+                                              "¿Cómo llamar a la versión (por ejemplo, v7.3)?"),
+    "Добавлена версия {name} из {p}.": ("Version {name} added from {p}.", "Versioon {name} lisati: {p}.",
+                                        "Version {name} ajoutée depuis {p}.",
+                                        "Versión {name} añadida desde {p}."),
+    "Добавить версию": ("Add version", "Lisa versioon", "Ajouter une version", "Añadir versión"),
+    "Настройки лаунчера": ("Launcher settings", "Käivitaja seaded", "Réglages du lanceur",
+                           "Ajustes del lanzador"),
+    "Добавить свою версию...": ("Add your own version...", "Lisa oma versioon...",
+                                "Ajouter votre version...", "Añadir tu propia versión..."),
+    "Удалить выбранную версию": ("Delete the selected version", "Kustuta valitud versioon",
+                                 "Supprimer la version sélectionnée", "Eliminar la versión seleccionada"),
+    "Создать ярлык на рабочем столе": ("Create a desktop shortcut for the launcher",
+                                       "Loo käivitajale töölauaotsetee",
+                                       "Créer un raccourci du lanceur sur le bureau",
+                                       "Crear acceso directo del lanzador en el escritorio"),
+    "Создать ярлык выбранной версии на рабочем столе": (
+        "Create a desktop shortcut for the selected version",
+        "Loo valitud versioonile töölauaotsetee",
+        "Créer un raccourci de la version sélectionnée sur le bureau",
+        "Crear acceso directo de la versión seleccionada en el escritorio"),
+    "Открыть папку версий": ("Open the versions folder", "Ava versioonide kaust",
+                             "Ouvrir le dossier des versions", "Abrir la carpeta de versiones"),
+    "Ярлык": ("Shortcut", "Otsetee", "Raccourci", "Acceso directo"),
+    "Ярлык создаётся для собранного Portabilizer Launcher.exe (build_launcher.bat). Из исходников он не нужен.": (
+        "The shortcut is made for the built Portabilizer Launcher.exe (build_launcher.bat). It is not needed when running from source.",
+        "Otsetee luuakse valmis Portabilizer Launcher.exe jaoks (build_launcher.bat). Lähtekoodist käivitades pole seda vaja.",
+        "Le raccourci est créé pour Portabilizer Launcher.exe compilé (build_launcher.bat). Inutile depuis les sources.",
+        "El acceso directo se crea para Portabilizer Launcher.exe ya compilado (build_launcher.bat). No hace falta desde el código fuente."),
+    "Создан ярлык: {p}": ("Shortcut created: {p}", "Otsetee loodud: {p}", "Raccourci créé : {p}",
+                          "Acceso directo creado: {p}"),
+    "Ярлык создан:\n{p}": ("Shortcut created:\n{p}", "Otsetee loodud:\n{p}", "Raccourci créé :\n{p}",
+                           "Acceso directo creado:\n{p}"),
+    "Ярлык не создан: {e}": ("Shortcut not created: {e}", "Otseteed ei loodud: {e}",
+                             "Raccourci non créé : {e}", "Acceso directo no creado: {e}"),
+    "Не удалось создать ярлык: {e}": ("Could not create the shortcut: {e}",
+                                      "Otsetee loomine ebaõnnestus: {e}",
+                                      "Impossible de créer le raccourci : {e}",
+                                      "No se pudo crear el acceso directo: {e}"),
+    "Создать ярлык Portabilizer Launcher на рабочем столе?": (
+        "Create a Portabilizer Launcher shortcut on the desktop?",
+        "Kas luua Portabilizer Launcheri otsetee töölauale?",
+        "Créer un raccourci Portabilizer Launcher sur le bureau ?",
+        "¿Crear un acceso directo de Portabilizer Launcher en el escritorio?"),
+    "Версия {tag} установлена.\n\nСоздать ярлык этой версии Portabilizer на рабочем столе?": (
+        "Version {tag} is installed.\n\nCreate a desktop shortcut for this Portabilizer version?",
+        "Versioon {tag} on paigaldatud.\n\nKas luua sellele Portabilizeri versioonile töölauaotsetee?",
+        "La version {tag} est installée.\n\nCréer un raccourci de cette version de Portabilizer sur le bureau ?",
+        "La versión {tag} está instalada.\n\n¿Crear un acceso directo de esta versión de Portabilizer en el escritorio?"),
+    "Ярлык версии: {p}": ("Version shortcut: {p}", "Versiooni otsetee: {p}", "Raccourci de la version : {p}",
+                          "Acceso directo de la versión: {p}"),
+    "Идёт установка": ("Installation in progress", "Paigaldamine käib", "Installation en cours",
+                       "Instalación en curso"),
+    "Прервать установку и выйти?": ("Abort the installation and exit?", "Kas katkestada paigaldamine ja väljuda?",
+                                    "Interrompre l'installation et quitter ?",
+                                    "¿Cancelar la instalación y salir?"),
+    # --- ядро
+    "Б": ("B", "B", "o", "B"), "КБ": ("KB", "KB", "Ko", "KB"), "МБ": ("MB", "MB", "Mo", "MB"),
+    "ГБ": ("GB", "GB", "Go", "GB"),
+    "небезопасный путь в архиве: {name}": ("unsafe path in the archive: {name}",
+                                           "ohtlik tee arhiivis: {name}",
+                                           "chemin dangereux dans l'archive : {name}",
+                                           "ruta peligrosa en el archivo: {name}"),
+    "у этого релиза нет файла с программой (нужен zip с Portabilizer.exe или сам exe)": (
+        "this release has no program file (a zip with Portabilizer.exe or the exe itself is needed)",
+        "sellel väljalaskel pole programmifaili (vaja on zip koos Portabilizer.exe-ga või exe ise)",
+        "cette version n'a pas de fichier du programme (il faut un zip avec Portabilizer.exe ou l'exe lui-même)",
+        "esta versión no tiene el archivo del programa (hace falta un zip con Portabilizer.exe o el exe)"),
+    "В файле {name} нет программы, смотрю другие файлы релиза...": (
+        "No program in {name}, checking other files of the release...",
+        "Failis {name} pole programmi, vaatan väljalaske teisi faile...",
+        "Pas de programme dans {name}, je regarde les autres fichiers de la version...",
+        "No hay programa en {name}, miro los demás archivos de la versión..."),
+    "в релизе {tag} нет собранной программы ({exe}): приложены только файлы без неё. Автору релиза нужно приложить готовый {exe} или zip с ним.": (
+        "release {tag} has no built program ({exe}): only files without it are attached. The release author needs to attach the built {exe} or a zip with it.",
+        "väljalaskes {tag} pole valmis programmi ({exe}): lisatud on ainult failid ilma selleta. Autor peab lisama valmis {exe} või zipi koos sellega.",
+        "la version {tag} ne contient pas le programme compilé ({exe}) : seuls des fichiers sans lui sont joints. L'auteur doit joindre {exe} compilé ou un zip qui le contient.",
+        "la versión {tag} no incluye el programa compilado ({exe}): solo hay archivos sin él. El autor debe adjuntar {exe} compilado o un zip con él."),
+    "Скачиваю {name} ({size})...": ("Downloading {name} ({size})...", "Laen alla {name} ({size})...",
+                                    "Téléchargement de {name} ({size})...",
+                                    "Descargando {name} ({size})..."),
+    "контрольная сумма не совпала: файл повреждён или подменён. Установка отменена.": (
+        "checksum mismatch: the file is damaged or replaced. Installation cancelled.",
+        "kontrollsumma ei klapi: fail on riknenud või asendatud. Paigaldamine tühistati.",
+        "la somme de contrôle ne correspond pas : fichier endommagé ou remplacé. Installation annulée.",
+        "la suma de comprobación no coincide: el archivo está dañado o fue sustituido. Instalación cancelada."),
+    "Контрольная сумма совпала.": ("Checksum matches.", "Kontrollsumma klapib.",
+                                   "La somme de contrôle correspond.", "La suma de comprobación coincide."),
+    "Внимание: у релиза нет контрольной суммы, целостность не проверена.": (
+        "Warning: the release has no checksum, integrity was not verified.",
+        "Tähelepanu: väljalaskel pole kontrollsummat, terviklust ei kontrollitud.",
+        "Attention : la version n'a pas de somme de contrôle, l'intégrité n'a pas été vérifiée.",
+        "Atención: la versión no tiene suma de comprobación, no se verificó la integridad."),
+    "это не exe-файл": ("this is not an exe file", "see pole exe-fail", "ce n'est pas un fichier exe",
+                        "no es un archivo exe"),
+    "в архиве нет {exe}": ("there is no {exe} in the archive", "arhiivis pole {exe}-d",
+                           "il n'y a pas de {exe} dans l'archive", "no hay {exe} en el archivo"),
+    "Установлено: {p}": ("Installed: {p}", "Paigaldatud: {p}", "Installé : {p}", "Instalado: {p}"),
+    "файл не найден": ("file not found", "faili ei leitud", "fichier introuvable",
+                       "archivo no encontrado"),
+    "версия «{name}» уже есть": ("version “{name}” already exists", "versioon „{name}“ on juba olemas",
+                                 "la version « {name} » existe déjà", "la versión «{name}» ya existe"),
+    "в архиве нет {exe}. Похоже, к релизу приложены исходники, а не собранная программа: соберите её через build.bat": (
+        "there is no {exe} in the archive. It looks like source code was attached instead of the built program: build it with build.bat",
+        "arhiivis pole {exe}-d. Paistab, et lisatud on lähtekood, mitte valmis programm: koosta see build.bat abil",
+        "il n'y a pas de {exe} dans l'archive. Il semble que ce soit le code source et non le programme compilé : compilez-le avec build.bat",
+        "no hay {exe} en el archivo. Parece que se adjuntó el código fuente y no el programa compilado: compílalo con build.bat"),
+    "нужен .zip или .exe": ("a .zip or .exe is needed", "vaja on .zip või .exe", "il faut un .zip ou .exe",
+                            "hace falta un .zip o .exe"),
+    "удалять можно только папки внутри папки версий": (
+        "only folders inside the versions folder can be deleted",
+        "kustutada saab ainult versioonide kausta sees olevaid kaustu",
+        "on ne peut supprimer que des dossiers dans le dossier des versions",
+        "solo se pueden eliminar carpetas dentro de la carpeta de versiones"),
+    "ярлыки на рабочем столе поддерживаются только в Windows": (
+        "desktop shortcuts are supported only on Windows", "töölauaotseteed toetab ainult Windows",
+        "les raccourcis sur le bureau ne sont pris en charge que sous Windows",
+        "los accesos directos del escritorio solo funcionan en Windows"),
+    "не удалось создать ярлык": ("could not create the shortcut", "otsetee loomine ebaõnnestus",
+                                 "impossible de créer le raccourci", "no se pudo crear el acceso directo"),
+}

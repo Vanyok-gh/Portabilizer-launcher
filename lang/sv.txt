@@ -1,0 +1,149 @@
+1	Versioner på GitHub: {n}.
+2	Ingen anslutning till GitHub: visar den senast sparade listan.
+3	Det gick inte att hämta versionslistan ({e}). Visar installerade versioner.
+4	installerad (egen)
+5	installerad
+6	ny, kan installeras
+7	kan installeras
+8	ingen fil i releasen
+9	Starta
+10	Installera
+11	Otillgänglig
+12	versionen hittades inte
+13	version {tag} är inte installerad
+14	versionen är inte installerad
+15	Versionen hittades inte.
+16	Version: {tag}
+17	Kanal: {ch}
+18	Utgivningsdatum: {d}
+19	Fil: {name} ({size})
+20	Installerad: {path} ({size})
+21	Finns bara på disken (inte från GitHub).
+22	Nyheter:
+23	Ingen beskrivning.
+24	Läser in versionslistan...
+25	Portabilizer-versioner
+26	Version
+27	Status
+28	Normalt läge
+29	Läge R (radikalt)
+30	R: efter en lyckad bygge tas källfilen bort. Programmet ber om bekräftelse.
+31	Avbryt
+32	Info
+33	Mapp
+34	Uppdatera
+35	Nyheter
+36	Launcher
+37	Versionshanterare
+38	Utseende
+39	Logg
+40	Om
+41	Språk
+42	Versionsmapp:
+43	Visa testversioner (Beta)
+44	Stäng launchern när en version startas
+45	Erbjud genväg på skrivbordet efter att en version installerats
+46	Versionskälla: {url}. Nya versioner visas i listan efter «Uppdatera». Versioner som lagts till manuellt finns kvar i versionsmappen och i listan.
+47	Storlek
+48	Öppna mappen
+49	Ta bort version
+50	Lägg till egen version (zip eller exe)...
+51	Installerar och startar Portabilizer-versioner: normalt läge och läge R i en och samma version. Varje version ligger i sin egen mapp och stör inte de andra. Kontrollsumman för den hämtade filen verifieras före installationen.
+52	Repositorium: {url}
+53	Öppna repositoriet
+54	Fönstrets utseende. Ändringar tillämpas direkt. Läge R aktiverar det röda temat.
+55	Tema:
+56	Mörkröd (R):
+57	Ljusröd (R):
+58	Auto (som i Windows)
+59	Ljust
+60	Mörkt
+61	Klassiskt (system)
+62	Ljusröd (R)
+63	Kol med röd accent
+64	Vinrött
+65	Körsbär
+66	Min färg
+67	 (egen)
+68	Klassiskt utseende: färgerna styrs av Windows.
+69	Just nu: {name}
+70	Huvudfärg
+71	Egen färg
+72	Vill du färga fönstrets bakgrund i den här färgen också?\n\nNej - bakgrunden förblir neutral.
+73	Välj egen färg...
+74	Gränssnittsspråk:
+75	Språket ändras direkt: fönstret startar om av sig självt, versioner och inställningar behålls.
+76	Välj en version i listan till vänster.
+77	Hämtat {got} av {total}
+78	Ny launcher-version
+79	En ny Portabilizer Launcher {v} har kommit (du har {cur}).\n\nÖppna nedladdningssidan?
+80	En ny launcher {v} har kommit: {url}
+81	En ny version finns: {tag}. Välj den och tryck på «Installera».
+82	\nOch en ny launcher {v}.
+83	Ny Portabilizer-version
+84	En ny version har kommit: {tag}.\n\n{notes}\n\nInstallera nu?
+85	Fel: {e}
+86	Kontrollerar versioner på GitHub...
+87	Installerar {tag}...
+88	Version {tag} installerad.
+89	Installationen avbröts.
+90	Det gick inte att installera versionen.
+91	Installationsfel {tag}: {err}
+92	Installation
+93	Det gick inte att installera {tag}:\n\n{err}
+94	Start
+95	Det gick inte att starta {tag}:\n\n{e}
+96	Version {tag} startad
+97	 (läge R)
+98	.
+99	Startad: {tag}
+100	Det gick inte att öppna: {e}
+101	Version {tag}
+102	Ta bort version {tag} från disken?\n\n{path}
+103	Version {tag} borttagen.
+104	Borttagning
+105	Portabilizer-version
+106	Alla filer
+107	Versionsnamn
+108	Vad ska versionen heta (till exempel v7.3)?
+109	Version {name} tillagd från {p}.
+110	Lägg till version
+111	Launcher-inställningar
+112	Lägg till egen version...
+113	Ta bort vald version
+114	Skapa en genväg till launchern på skrivbordet
+115	Skapa en genväg till vald version på skrivbordet
+116	Öppna versionsmappen
+117	Genväg
+118	Genvägen skapas för den byggda Portabilizer Launcher.exe (build_launcher.bat). Den behövs inte när du kör från källkod.
+119	Genväg skapad: {p}
+120	Genväg skapad:\n{p}
+121	Genvägen skapades inte: {e}
+122	Det gick inte att skapa genvägen: {e}
+123	Skapa en genväg till Portabilizer Launcher på skrivbordet?
+124	Version {tag} är installerad.\n\nSkapa en genväg till den här Portabilizer-versionen på skrivbordet?
+125	Versionsgenväg: {p}
+126	Installation pågår
+127	Avbryta installationen och avsluta?
+128	B
+129	kB
+130	MB
+131	GB
+132	osäker sökväg i arkivet: {name}
+133	den här releasen saknar programfil (en zip med Portabilizer.exe eller själva exe-filen behövs)
+134	Filen {name} innehåller inget program, kontrollerar releasens övriga filer...
+135	releasen {tag} saknar ett byggt program ({exe}): bara filer utan det är bifogade. Releasens författare behöver bifoga den färdiga {exe} eller en zip med den.
+136	Hämtar {name} ({size})...
+137	kontrollsumman stämde inte: filen är skadad eller utbytt. Installationen avbröts.
+138	Kontrollsumman stämmer.
+139	Obs: releasen saknar kontrollsumma, integriteten har inte verifierats.
+140	det här är ingen exe-fil
+141	det finns ingen {exe} i arkivet
+142	Installerad: {p}
+143	filen hittades inte
+144	versionen «{name}» finns redan
+145	det finns ingen {exe} i arkivet. Det ser ut som att källkod har bifogats i stället för det byggda programmet: bygg det med build.bat
+146	en .zip eller .exe behövs
+147	bara mappar i versionsmappen kan tas bort
+148	genvägar på skrivbordet stöds bara i Windows
+149	det gick inte att skapa genvägen
