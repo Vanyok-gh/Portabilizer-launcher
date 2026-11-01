@@ -17,6 +17,8 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
+from pz_i18n import tr
+
 OWNER, REPO = "Vanyok-gh", "Portabilizer-launcher"          # репозиторий самого лаунчера
 # откуда брать версии Portabilizer: пока тот же репозиторий; когда появится отдельный
 # (например Vanyok-gh/Portabilizer), достаточно поменять эту строку или параметр versions_repo в настройках
@@ -40,9 +42,9 @@ def fmt_size(n) -> str:
     n = float(n or 0)
     for unit in ("Б", "КБ", "МБ", "ГБ"):
         if n < 1024 or unit == "ГБ":
-            return f"{n:.0f} {unit}" if unit == "Б" else f"{n:.1f} {unit}"
+            return f"{n:.0f} {tr(unit)}" if unit == "Б" else f"{n:.1f} {tr(unit)}"
         n /= 1024
-    return f"{n:.1f} ГБ"
+    return f"{n:.1f} {tr('ГБ')}"
 
 
 # ------------------------------------------------------------------ версии и релизы
@@ -318,7 +320,7 @@ def safe_extract(zip_path, dest: Path):
         for info in z.infolist():
             target = (dest / info.filename).resolve()
             if dest != target and dest not in target.parents:
-                raise ValueError(f"небезопасный путь в архиве: {info.filename}")
+                raise ValueError(tr("небезопасный путь в архиве: {name}", name=info.filename))
         z.extractall(dest)
 
 
@@ -344,7 +346,7 @@ def install_release(rel: Release, versions_dir: Path, progress=None, cancel=None
     Если в первом файле релиза нет программы (например, приложены исходники), пробует остальные."""
     log = log or (lambda m: None)
     if not rel.available:
-        raise ValueError("у этого релиза нет файла с программой (нужен zip с Portabilizer.exe или сам exe)")
+        raise ValueError(tr("у этого релиза нет файла с программой (нужен zip с Portabilizer.exe или сам exe)"))
     cands = [rel] + [dataclasses.replace(rel, asset_name=a["name"], asset_url=a["url"],
                                           asset_size=a["size"], sha256=a["sha256"], sha_url=a["sha_url"],
                                           alts=[]) for a in rel.alts if a.get("url")]
@@ -354,10 +356,10 @@ def install_release(rel: Release, versions_dir: Path, progress=None, cancel=None
             return _install_asset(c, versions_dir, progress, cancel, log, opener)
         except NoExeInAsset as e:
             last = e
-            log(f"В файле {c.asset_name} нет программы, смотрю другие файлы релиза...")
-    raise ValueError(f"в релизе {rel.tag} нет собранной программы ({EXE_NAME}): "
-                     f"приложены только файлы без неё. Автору релиза нужно приложить "
-                     f"готовый {EXE_NAME} или zip с ним.") from last
+            log(tr("В файле {name} нет программы, смотрю другие файлы релиза...", name=c.asset_name))
+    raise ValueError(tr("в релизе {tag} нет собранной программы ({exe}): приложены только файлы без неё. "
+                        "Автору релиза нужно приложить готовый {exe} или zip с ним.",
+                        tag=rel.tag, exe=EXE_NAME)) from last
 
 
 class NoExeInAsset(ValueError):
@@ -371,32 +373,31 @@ def _install_asset(rel: Release, versions_dir: Path, progress, cancel, log, open
     work = Path(tempfile.mkdtemp(prefix="_install_", dir=versions_dir))
     try:
         zpath = work / rel.asset_name
-        log(f"Скачиваю {rel.asset_name} ({fmt_size(rel.asset_size)})...")
+        log(tr("Скачиваю {name} ({size})...", name=rel.asset_name, size=fmt_size(rel.asset_size)))
         got = download(rel.asset_url, zpath, progress, cancel, opener=opener)
         want = _expected_sha(rel, opener)
         if want and got.lower() != want.lower():
-            raise ValueError("контрольная сумма не совпала: файл повреждён или подменён. "
-                             "Установка отменена.")
-        log("Контрольная сумма совпала." if want else
-            "Внимание: у релиза нет контрольной суммы, целостность не проверена.")
+            raise ValueError(tr("контрольная сумма не совпала: файл повреждён или подменён. Установка отменена."))
+        log(tr("Контрольная сумма совпала.") if want else
+            tr("Внимание: у релиза нет контрольной суммы, целостность не проверена."))
         stage = work / "unpacked"
         stage.mkdir()
         if zpath.name.lower().endswith(".exe"):          # приложен сам exe
             with open(zpath, "rb") as f:
                 if f.read(2) != b"MZ":
-                    raise NoExeInAsset("это не exe-файл")
+                    raise NoExeInAsset(tr("это не exe-файл"))
             shutil.move(str(zpath), str(stage / EXE_NAME))
         else:
             safe_extract(zpath, stage)
             if not find_exe(stage):
-                raise NoExeInAsset(f"в архиве нет {EXE_NAME}")
+                raise NoExeInAsset(tr("в архиве нет {exe}", exe=EXE_NAME))
         if final.exists():
             shutil.rmtree(final)
         shutil.move(str(stage), str(final))
         (final / ".installed.json").write_text(json.dumps(
             {"tag": rel.tag, "sha256": got, "installed": time.strftime("%Y-%m-%dT%H:%M:%S"),
              "channel": rel.channel}, ensure_ascii=False), encoding="utf-8")
-        log(f"Установлено: {final}")
+        log(tr("Установлено: {p}", p=final))
         return final
     finally:
         shutil.rmtree(work, ignore_errors=True)
@@ -406,24 +407,24 @@ def import_local(path, versions_dir: Path, name: str = "") -> Path:
     """Добавляет свою версию из zip или exe (например, старую v7.3). Папка = name или имя файла."""
     p = Path(path)
     if not p.is_file():
-        raise ValueError("файл не найден")
+        raise ValueError(tr("файл не найден"))
     versions_dir = Path(versions_dir)
     versions_dir.mkdir(parents=True, exist_ok=True)
     name = re.sub(r'[\\/:*?"<>|]+', "_", (name or p.stem).strip()) or "custom"
     final = versions_dir / name
     if final.exists():
-        raise ValueError(f"версия «{name}» уже есть")
+        raise ValueError(tr("версия «{name}» уже есть", name=name))
     final.mkdir()
     try:
         if p.suffix.lower() == ".zip":
             safe_extract(p, final)
             if not find_exe(final):
-                raise ValueError(f"в архиве нет {EXE_NAME}. Похоже, к релизу приложены исходники, "
-                                 f"а не собранная программа: соберите её через build.bat")
+                raise ValueError(tr("в архиве нет {exe}. Похоже, к релизу приложены исходники, а не собранная "
+                                    "программа: соберите её через build.bat", exe=EXE_NAME))
         elif p.suffix.lower() == ".exe":
             shutil.copy2(p, final / EXE_NAME)
         else:
-            raise ValueError("нужен .zip или .exe")
+            raise ValueError(tr("нужен .zip или .exe"))
     except Exception:
         shutil.rmtree(final, ignore_errors=True)
         raise
@@ -434,7 +435,7 @@ def remove_version(folder: Path, versions_dir: Path):
     """Удаляет папку версии, только если она лежит внутри versions_dir."""
     folder, root = Path(folder).resolve(), Path(versions_dir).resolve()
     if root not in folder.parents:
-        raise ValueError("удалять можно только папки внутри папки версий")
+        raise ValueError(tr("удалять можно только папки внутри папки версий"))
     shutil.rmtree(folder)
 
 
@@ -471,10 +472,23 @@ def shortcut_ps(target, name, args="", workdir="", icon="") -> str:
             + "$s.Save();Write-Output $p")
 
 
+def version_shortcut_name(tag: str, radical: bool = False) -> str:
+    """Имя ярлыка установленной версии: «Portabilizer v9.0» (для режима R - с пометкой R)."""
+    return f"Portabilizer {tag}" + (" R" if radical else "")
+
+
+def create_version_shortcut(exe, tag: str, radical: bool = False) -> str:
+    """Ярлык на рабочем столе, который запускает именно эту версию (режим R - ключ --r).
+    Значок берётся из самого exe, рабочая папка - папка версии, как при запуске из лаунчера."""
+    exe = Path(exe)
+    return create_desktop_shortcut(exe, version_shortcut_name(tag, radical), "--r" if radical else "",
+                                   exe.parent, exe)
+
+
 def create_desktop_shortcut(target, name="Portabilizer Launcher", args="", workdir=None, icon=None) -> str:
     """Создаёт ярлык на рабочем столе (только Windows). Возвращает путь к ярлыку."""
     if os.name != "nt":
-        raise OSError("ярлыки на рабочем столе поддерживаются только в Windows")
+        raise OSError(tr("ярлыки на рабочем столе поддерживаются только в Windows"))
     target = Path(target)
     ps = shortcut_ps(target, name, args, workdir or target.parent, icon or "")
     r = subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", ps],
@@ -482,5 +496,5 @@ def create_desktop_shortcut(target, name="Portabilizer Launcher", args="", workd
                        creationflags=0x08000000)
     out = (r.stdout or "").strip().splitlines()
     if r.returncode != 0 or not out:
-        raise OSError((r.stderr or r.stdout or "не удалось создать ярлык").strip()[:300])
+        raise OSError((r.stderr or r.stdout or tr("не удалось создать ярлык")).strip()[:300])
     return out[-1]
