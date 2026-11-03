@@ -17,7 +17,7 @@ import pz_icons
 import pz_theme as T
 from pz_i18n import LANGS, detect_lang, get_lang, lang_name, set_lang, tr
 
-VERSION = "0.5"
+VERSION = "0.6"
 REPO_URL = f"https://github.com/{C.OWNER}/{C.REPO}"
 DEFAULTS = {"show_beta": True, "close_after_launch": False, "mode": "normal", "last_tag": "",
             "versions_dir": "", "versions_repo": "", "offer_version_shortcut": True}
