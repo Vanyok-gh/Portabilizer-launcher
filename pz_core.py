@@ -177,6 +177,21 @@ def fetch_changelog(owner, repo, timeout=15, opener=None) -> str:
         return ""
 
 
+NEWS_URL = "https://raw.githubusercontent.com/Vanyok-gh/Portabilizer-launcher/main/news/{code}.md"
+
+
+def fetch_news(code, timeout=6, opener=None) -> dict:
+    """Перевод «Что нового» на язык code: {'9.1': 'текст', ...}. Нет файла или связи -> пустой словарь."""
+    if not re.fullmatch(r"[a-z]{2,3}", str(code or "")):
+        return {}
+    try:
+        req = urllib.request.Request(NEWS_URL.format(code=code), headers={"User-Agent": USER_AGENT})
+        with (opener or urllib.request.urlopen)(req, timeout=timeout) as r:
+            return parse_changelog(r.read().decode("utf-8"))
+    except Exception:                                       # noqa: BLE001
+        return {}
+
+
 def versions_api_url(settings=None) -> str:
     """Адрес API релизов с версиями Portabilizer: из настройки versions_repo ('владелец/репозиторий')."""
     spec = str((settings or {}).get("versions_repo") or "").strip().strip("/")

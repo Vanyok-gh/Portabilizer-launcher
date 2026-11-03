@@ -42,6 +42,8 @@ class Model:
         self.api_url, self.opener = api_url, opener
         self.cache = cache if cache is not None else C.app_dir() / "releases_cache.json"
         self.releases = []
+        self.news = {}                      # код языка -> {'9.1': перевод «Что нового»}
+        self.news_opener = None             # для тестов: подмена urlopen при чтении переводов
         self.launcher_new = None            # новая версия самого лаунчера (dict) или None
         self.installed = {}
         self.online = False
@@ -69,6 +71,9 @@ class Model:
                 except (IndexError, ValueError):
                     pass                                   # нестандартный адрес (тесты): описание не подставляем
             self.status = tr("Версий в GitHub: {n}.", n=len(self.releases))
+            self.news = {k: v for k, v in self.news.items() if v}      # пустые (не нашлись) пробуем снова
+            for code in {get_lang(), "en"} - {"ru"}:
+                self.news_for(code)                          # перевод описаний подгружаем заранее, не в окне
         except C.OfflineCache as e:
             self.releases, self.online = e.releases, False
             self.status = tr("Нет связи с GitHub: показан последний сохранённый список.")
@@ -182,6 +187,23 @@ class Model:
                     pass
         return total
 
+    def news_for(self, code) -> dict:
+        """Переводы описаний на язык code (скачиваются один раз; нет связи или файла -> пусто)."""
+        if code not in self.news:
+            self.news[code] = C.fetch_news(code, opener=self.news_opener)
+        return self.news[code]
+
+    def notes_for(self, r) -> str:
+        """Описание версии на языке интерфейса: свой язык, затем английский, иначе русский текст релиза."""
+        lang = get_lang()
+        if lang != "ru":
+            ver = ".".join(map(str, C.parse_version(r.tag)))
+            for code in (lang, "en"):
+                body = self.news_for(code).get(ver)
+                if body:
+                    return f"Portabilizer {r.tag}\n\n{body}"
+        return r.notes or ""
+
     def info(self, tag) -> str:
         r = self.get(tag)
         if r is None:
@@ -198,7 +220,7 @@ class Model:
                             size=C.fmt_size(self.disk_size(tag))))
         elif r.local:
             lines.append(tr("Есть только на диске (не из GitHub)."))
-        lines += ["", tr("Что нового:"), (r.notes or tr("Описание не указано.")).strip()]
+        lines += ["", tr("Что нового:"), (self.notes_for(r) or tr("Описание не указано.")).strip()]
         return "\n".join(lines)
 
 
@@ -661,7 +683,7 @@ def gui(_hook=None):
         if startup and settings.get("notified_tag") != r.tag:
             settings["notified_tag"] = r.tag
             save()
-            first = (r.notes or "").strip().splitlines()[:6]
+            first = (model.notes_for(r) or "").strip().splitlines()[:6]
             if messagebox.askyesno(tr("Новая версия Portabilizer"),
                                    tr("Вышла новая версия: {tag}.\n\n{notes}\n\nУстановить сейчас?",
                                       tag=r.tag, notes="\n".join(first)), parent=root):
