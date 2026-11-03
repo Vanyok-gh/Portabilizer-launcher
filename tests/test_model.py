@@ -84,6 +84,27 @@ _sl("en"); mm2.refresh(); check("дубль подсказки убран" in mm
 _sl("ru")
 check(C2.fetch_news("../x", opener=_op) == {} and C2.fetch_news("en", opener=_op).get("8.7"), "fetch_news: имя языка проверяется, разбор разделов")
 print("перевод описаний:", "ок")
+# --- машинный перевод как запасной вариант
+import json as _j
+def _mt_op(req, timeout=0):
+    q = __import__("urllib.parse", fromlist=["x"]).parse_qs(req.data.decode())["q"][0]
+    return _R(_j.dumps([[["[de] " + q, q]]]).encode())
+tx = C2.machine_translate("Portabilizer v9.1\n\n- Файл portabilizer.log пишется по-русски, DirectX и 7-Zip", "de", opener=_mt_op)
+check(tx.count("\n") == 2 and tx.splitlines()[2].startswith("- [de] ") and "portabilizer.log" in tx
+      and "DirectX" in tx and "7-Zip" in tx and "{0}" not in tx, "машинный перевод: метки возвращены, пункты целы")
+check(C2.machine_translate("текст", "de", opener=lambda *a, **k: (_ for _ in ()).throw(OSError("x"))) == "", "сбой сети -> пусто")
+check(C2.machine_translate("текст", "ru", opener=_mt_op) == "" and C2.machine_translate("текст", "../", opener=_mt_op) == "", "ru и неверный код")
+lost = lambda req, timeout=0: _R(_j.dumps([[["потеряна метка", "x"]]]).encode())
+check(C2.machine_translate("Файл portabilizer.log", "de", opener=lost) == "", "потерянная метка -> пусто")
+m3 = L.Model({"versions_dir": str(tmp / "v4")}, api_url=URL, cache=tmp / "c4.json"); m3.news_opener = lambda *a, **k: (_ for _ in ()).throw(OSError("нет"))
+m3.mt_opener = _mt_op; _sl("de"); m3.refresh()
+check(m3.info("v8.7").count("[de] дубль подсказки убран") == 1, "нет файла news -> машинный перевод описания")
+m4 = L.Model({"versions_dir": str(tmp / "v4")}, api_url=URL, cache=tmp / "c4.json"); m4.news_opener = m3.news_opener; m4.mt_opener = lambda *a, **k: (_ for _ in ()).throw(OSError("нет сети")); m4.refresh()
+check("[de] дубль" in m4.info("v8.7"), "кэш машинного перевода читается с диска без сети")
+m3.news_opener = _op; m3.news.clear(); _sl("en")
+check("duplicate hint removed" in m3.info("v8.7"), "готовый файл news/ главнее машинного")
+_sl("ru")
+
 srv.shutdown()
 m2 = L.Model(st, api_url=URL, cache=tmp / "c.json"); check("сохранённый список" in m2.refresh() and not m2.online and len(m2.releases) == 3, "оффлайн: кэш")
 m3 = L.Model(st, api_url=URL, cache=tmp / "none.json"); check("Не удалось" in m3.refresh() and {"v7.3", "v5"} <= {r["tag"] for r in m3.rows()}, "оффлайн без кэша: показаны установленные")

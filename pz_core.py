@@ -192,6 +192,51 @@ def fetch_news(code, timeout=6, opener=None) -> dict:
         return {}
 
 
+# --- запасной машинный перевод описания (если нет готового файла в news/).
+# Неофициальная бесплатная точка Google Translate без ключа: может перестать работать - тогда остаётся английский/русский.
+MT_URL = "https://translate.googleapis.com/translate_a/single"
+MT_CODES = {"zh": "zh-CN", "he": "iw"}                      # коды, которые у Google отличаются от наших
+_PROTECT = re.compile(r"\([^)]{80,}\)|[\w./-]+\.(?:log|dll|exe|bat|ps1|zip)\b|d3dx[\w…]*|XAudio|XACT|xinput|UAC"
+                      r"|DirectX|7-Zip|Visual C\+\+|OpenAL|GitHub|Portabilizer|Launcher|Windows")
+
+
+def machine_translate(text, code, timeout=8, opener=None) -> str:
+    """Переводит русский текст описания на язык code построчно. Имена файлов, DirectX, список языков и т.п.
+    прячутся за метками {n}; если метка потерялась или пришла ошибка - возвращается '' (покажется другой вариант)."""
+    import urllib.parse
+    if not re.fullmatch(r"[a-z]{2,3}", str(code or "")) or code == "ru":
+        return ""
+    out = []
+    try:
+        for line in str(text or "").splitlines():
+            if not line.strip():
+                out.append("")
+                continue
+            keep = []
+
+            def hide(m):
+                keep.append(m.group(0))
+                return "{%d}" % (len(keep) - 1)
+            bullet = "- " if line.startswith("- ") else ""
+            body = _PROTECT.sub(hide, line[len(bullet):])
+            data = urllib.parse.urlencode({"client": "gtx", "sl": "ru", "tl": MT_CODES.get(code, code),
+                                           "dt": "t", "q": body}).encode()
+            req = urllib.request.Request(MT_URL, data=data, headers={"User-Agent": USER_AGENT})
+            with (opener or urllib.request.urlopen)(req, timeout=timeout) as r:
+                parts = json.loads(r.read().decode("utf-8"))[0]
+            res = "".join(p[0] for p in parts if p and p[0])
+            if not res.strip() or any("{%d}" % i not in res for i in range(len(keep))):
+                return ""
+            out.append(bullet + re.sub(r"\{(\d+)\}", lambda m: keep[int(m.group(1))], res))
+    except Exception:                                       # noqa: BLE001
+        return ""
+    return "\n".join(out)
+
+
+def mt_key(lang, tag, notes) -> str:
+    return f"{lang}|{tag}|{hashlib.sha1(str(notes).encode('utf-8')).hexdigest()[:8]}"
+
+
 def versions_api_url(settings=None) -> str:
     """Адрес API релизов с версиями Portabilizer: из настройки versions_repo ('владелец/репозиторий')."""
     spec = str((settings or {}).get("versions_repo") or "").strip().strip("/")
