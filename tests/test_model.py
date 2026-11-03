@@ -60,6 +60,30 @@ if os.name != "nt":
 try: m.launch("v9", False); check(False, "запуск не установленной")
 except FileNotFoundError: check(True, "не установленную не запустить")
 m.remove("v8.7"); check("v8.7" not in m.installed and m.action("v8.7")[0] == "install", "удаление")
+# --- перевод «Что нового» по языку интерфейса
+import pz_core as C2
+from pz_i18n import set_lang as _sl
+_EN = "# x\n\n## v8.7\n\n- duplicate hint removed\n"
+class _R:
+    def __init__(s, b): s.b = b
+    def read(s): return s.b
+    def __enter__(s): return s
+    def __exit__(s, *a): return False
+def _op(req, timeout=0):
+    u = req.full_url
+    if u.endswith("/en.md"): return _R(_EN.encode())
+    raise OSError("нет файла")
+mm = L.Model({"versions_dir": str(tmp / "v2")}, api_url=URL, cache=tmp / "c2.json"); mm.news_opener = _op
+_sl("en"); mm.refresh(); r87 = mm.get("v8.7")
+check("duplicate hint removed" in mm.info("v8.7") and "дубль" not in mm.info("v8.7"), "английское описание при языке en")
+_sl("de"); check("duplicate hint removed" in mm.info("v8.7"), "для языка без перевода берётся английский")
+check(mm.notes_for(mm.get("v8.8-beta")) == "", "нет перевода и пустое описание -> пусто")
+_sl("ru"); check("дубль подсказки убран" in mm.info("v8.7"), "русский язык: текст релиза")
+mm2 = L.Model({"versions_dir": str(tmp / "v3")}, api_url=URL, cache=tmp / "c3.json"); mm2.news_opener = lambda *a, **k: (_ for _ in ()).throw(OSError("offline"))
+_sl("en"); mm2.refresh(); check("дубль подсказки убран" in mm2.info("v8.7"), "нет связи с переводами -> русский текст")
+_sl("ru")
+check(C2.fetch_news("../x", opener=_op) == {} and C2.fetch_news("en", opener=_op).get("8.7"), "fetch_news: имя языка проверяется, разбор разделов")
+print("перевод описаний:", "ок")
 srv.shutdown()
 m2 = L.Model(st, api_url=URL, cache=tmp / "c.json"); check("сохранённый список" in m2.refresh() and not m2.online and len(m2.releases) == 3, "оффлайн: кэш")
 m3 = L.Model(st, api_url=URL, cache=tmp / "none.json"); check("Не удалось" in m3.refresh() and {"v7.3", "v5"} <= {r["tag"] for r in m3.rows()}, "оффлайн без кэша: показаны установленные")
