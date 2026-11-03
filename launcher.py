@@ -17,7 +17,7 @@ import pz_icons
 import pz_theme as T
 from pz_i18n import LANGS, detect_lang, get_lang, lang_name, set_lang, tr
 
-VERSION = "0.5"
+VERSION = "0.6"
 REPO_URL = f"https://github.com/{C.OWNER}/{C.REPO}"
 DEFAULTS = {"show_beta": True, "close_after_launch": False, "mode": "normal", "last_tag": "",
             "versions_dir": "", "versions_repo": "", "offer_version_shortcut": True}
@@ -44,6 +44,12 @@ class Model:
         self.releases = []
         self.news = {}                      # код языка -> {'9.1': перевод «Что нового»}
         self.news_opener = None             # для тестов: подмена urlopen при чтении переводов
+        self.mt_opener = None               # для тестов: подмена urlopen у машинного перевода
+        self.mt_path = Path(self.cache).with_name("news_mt_cache.json")
+        try:
+            self.mt = json.loads(self.mt_path.read_text("utf-8"))   # ключ язык|тег|хеш -> готовый перевод
+        except (OSError, ValueError):
+            self.mt = {}
         self.launcher_new = None            # новая версия самого лаунчера (dict) или None
         self.installed = {}
         self.online = False
@@ -74,6 +80,7 @@ class Model:
             self.news = {k: v for k, v in self.news.items() if v}      # пустые (не нашлись) пробуем снова
             for code in {get_lang(), "en"} - {"ru"}:
                 self.news_for(code)                          # перевод описаний подгружаем заранее, не в окне
+            self.mt_prefetch()
         except C.OfflineCache as e:
             self.releases, self.online = e.releases, False
             self.status = tr("Нет связи с GitHub: показан последний сохранённый список.")
@@ -193,15 +200,42 @@ class Model:
             self.news[code] = C.fetch_news(code, opener=self.news_opener)
         return self.news[code]
 
+    def mt_prefetch(self, limit=3):
+        """Машинный перевод описаний новых версий, для которых нет готового файла в news/ (не больше limit,
+        останавливается на первой неудаче). Результат хранится на диске и берётся без сети."""
+        lang = get_lang()
+        if lang == "ru":
+            return
+        own, changed = self.news_for(lang), False
+        todo = [r for r in self.releases if not C.notes_empty(r.notes)
+                and ".".join(map(str, C.parse_version(r.tag))) not in own
+                and C.mt_key(lang, r.tag, r.notes) not in self.mt][:limit]
+        for r in todo:
+            text = C.machine_translate(r.notes, lang, opener=self.mt_opener)
+            if not text:
+                break
+            self.mt[C.mt_key(lang, r.tag, r.notes)] = text
+            changed = True
+        if changed:
+            try:
+                self.mt_path.write_text(json.dumps(self.mt, ensure_ascii=False), "utf-8")
+            except OSError:
+                pass
+
     def notes_for(self, r) -> str:
-        """Описание версии на языке интерфейса: свой язык, затем английский, иначе русский текст релиза."""
+        """Описание версии на языке интерфейса: готовый перевод из news/, затем машинный (из кэша), затем
+        английский из news/, иначе русский текст релиза."""
         lang = get_lang()
         if lang != "ru":
             ver = ".".join(map(str, C.parse_version(r.tag)))
-            for code in (lang, "en"):
-                body = self.news_for(code).get(ver)
-                if body:
-                    return f"Portabilizer {r.tag}\n\n{body}"
+            body = self.news_for(lang).get(ver)
+            if body:
+                return f"Portabilizer {r.tag}\n\n{body}"
+            if self.mt.get(C.mt_key(lang, r.tag, r.notes)):
+                return self.mt[C.mt_key(lang, r.tag, r.notes)]
+            body = self.news_for("en").get(ver)
+            if body:
+                return f"Portabilizer {r.tag}\n\n{body}"
         return r.notes or ""
 
     def info(self, tag) -> str:
