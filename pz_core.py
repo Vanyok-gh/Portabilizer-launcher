@@ -25,6 +25,33 @@ OWNER, REPO = "Vanyok-gh", "Portabilizer-launcher"          # репозитор
 VERSIONS_OWNER, VERSIONS_REPO = "Vanyok-gh", "Portabilizer"
 API_URL = "https://api.github.com/repos/{owner}/{repo}/releases"
 EXE_NAME = "Portabilizer.exe"
+# исходники версии (для запуска через Python на компьютерах, где exe блокируется политикой)
+SOURCE_URL_FMT = "https://github.com/{owner}/{repo}/archive/refs/tags/{tag}.zip"
+SOURCE_DIR = "source"
+PY_BAT_NAME = "Portabilizer-py.bat"
+SOURCE_SKIP = {".git", ".github", "tests", "docs", "design", "tools", "python_installer", "__pycache__"}
+# тот же файл, что Portabilizer-py.bat в репозитории Portabilizer
+PY_BAT = """@echo off
+chcp 65001 >nul
+rem Запуск Portabilizer из исходников, без Portabilizer.exe (для компьютеров, где exe блокируется).
+rem Нужен установленный Python с Tkinter. Параметры передаются дальше, например: Portabilizer-py.bat --r
+rem Исходники ищутся рядом с этим файлом или в подпапке source.
+set "PZ_DIR=%~dp0"
+if not exist "%PZ_DIR%portabilizer_v8.py" set "PZ_DIR=%~dp0source\\"
+if not exist "%PZ_DIR%portabilizer_v8.py" (
+  echo Не найден portabilizer_v8.py: положите этот файл рядом с исходниками или в папку с подпапкой source.
+  pause
+  exit /b 1
+)
+cd /d "%PZ_DIR%"
+rem Сначала без консольного окна (pythonw), затем через py-лаунчер, затем обычный python.
+where pythonw >nul 2>&1 && ( start "" pythonw "%PZ_DIR%portabilizer_v8.py" %* & exit /b 0 )
+where pyw >nul 2>&1 && ( start "" pyw "%PZ_DIR%portabilizer_v8.py" %* & exit /b 0 )
+where python >nul 2>&1 && ( python "%PZ_DIR%portabilizer_v8.py" %* & goto end )
+echo Python не найден в PATH.
+:end
+if errorlevel 1 pause
+"""
 USER_AGENT = "Portabilizer-Launcher"
 
 
@@ -400,6 +427,43 @@ def _expected_sha(rel: Release, opener=None) -> str:
     return ""
 
 
+def add_py_launcher(final: Path, tag: str, progress=None, cancel=None, log=None, opener=None) -> bool:
+    """Кладёт в папку установленной версии исходники (final/source) и Portabilizer-py.bat: запасной запуск
+    через Python, когда политика компьютера блокирует Portabilizer.exe. Не критично: при любой ошибке
+    установка версии остаётся рабочей, возвращается False (отмена пользователем пробрасывается)."""
+    log = log or (lambda m: None)
+    final = Path(final)
+    src = final / SOURCE_DIR
+    work = Path(tempfile.mkdtemp(prefix="_src_", dir=final.parent))
+    try:
+        if not (src / "portabilizer_v8.py").is_file():
+            url = SOURCE_URL_FMT.format(owner=VERSIONS_OWNER, repo=VERSIONS_REPO, tag=tag)
+            log("Python: " + url)
+            zpath = work / "src.zip"
+            download(url, zpath, progress, cancel, opener=opener)
+            stage = work / "unpacked"
+            stage.mkdir()
+            safe_extract(zpath, stage)
+            roots = [stage] + [d for d in stage.iterdir() if d.is_dir()]
+            root = next((d for d in roots if (d / "portabilizer_v8.py").is_file()), None)
+            if root is None:
+                raise ValueError("в исходниках нет portabilizer_v8.py")
+            shutil.copytree(root, work / "final_src",
+                            ignore=lambda d, names: [n for n in names if n in SOURCE_SKIP or n.endswith(".pyc")])
+            if src.exists():
+                shutil.rmtree(src)
+            shutil.move(str(work / "final_src"), str(src))
+        (final / PY_BAT_NAME).write_text(PY_BAT, encoding="utf-8", newline="\r\n")
+        return True
+    except Cancelled:
+        raise
+    except Exception as e:                             # noqa: BLE001
+        log(f"Python: {e}")
+        return False
+    finally:
+        shutil.rmtree(work, ignore_errors=True)
+
+
 def install_release(rel: Release, versions_dir: Path, progress=None, cancel=None, log=None,
                     opener=None) -> Path:
     """Скачивает, проверяет сумму и ставит версию в versions_dir/<тег>. Возвращает папку.
@@ -454,6 +518,7 @@ def _install_asset(rel: Release, versions_dir: Path, progress, cancel, log, open
         if final.exists():
             shutil.rmtree(final)
         shutil.move(str(stage), str(final))
+        add_py_launcher(final, rel.tag, progress, cancel, log, opener)
         (final / ".installed.json").write_text(json.dumps(
             {"tag": rel.tag, "sha256": got, "installed": time.strftime("%Y-%m-%dT%H:%M:%S"),
              "channel": rel.channel}, ensure_ascii=False), encoding="utf-8")

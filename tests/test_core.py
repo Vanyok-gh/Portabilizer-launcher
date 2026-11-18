@@ -3,6 +3,7 @@ import hashlib, http.server, io, json, os, shutil, stat, sys, tempfile, threadin
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import pz_core as C
+C.SOURCE_URL_FMT = "http://127.0.0.1:9/{tag}.zip"   # исходники в этих проверках не нужны (порт закрыт)
 
 def mkzip(files: dict) -> bytes:
     b = io.BytesIO()
