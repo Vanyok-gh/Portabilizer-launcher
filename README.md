@@ -29,7 +29,7 @@
 
 1. Откройте страницу релизов лаунчера: **[github.com/Vanyok-gh/Portabilizer-launcher/releases](https://github.com/Vanyok-gh/Portabilizer-launcher/releases)**.
 2. В самом верхнем релизе (помечен зелёным **Latest**) найдите раздел **Assets** и скачайте файл
-   **`Portabilizer.Launcher.exe`**. (Файл `Portabilizer-Launcher-vX.Y.zip` содержит тот же exe в архиве.)
+   **`Portabilizer.Launcher.exe`**. (Файл `Portabilizer-Launcher-vX.Y.zip` содержит тот же exe, bat для запуска через Python и папку source.)
 3. Создайте для лаунчера отдельную постоянную папку, например `D:\Portabilizer` или `C:\Tools\Portabilizer`.
    Не запускайте его прямо из «Загрузок» и не из архива: рядом с exe лаунчер хранит свои настройки и скачанные версии
    (папка `versions`).
@@ -78,9 +78,18 @@ Portabilizer напрямую, без лаунчера (в режиме R с к�
 | О программе | Версия лаунчера и ссылка на репозиторий |
 | Язык | Выбор языка интерфейса |
 
+## Если exe заблокирован (учебные и рабочие компьютеры)
+
+Рядом с `Portabilizer Launcher.exe` в архиве лежат `Portabilizer Launcher.bat` и папка `source` с исходниками лаунчера.
+Если компьютер не даёт запустить неподписанный exe (`Access is denied`), запускайте bat: он сообщит об этом и откроет
+лаунчер через установленный Python (нужен Tkinter). Версии Portabilizer при установке получают рядом `Portabilizer-py.bat`
+и папку `source`; если exe версии заблокирован, кнопка запуска сама открывает Portabilizer через этот bat.
+
 ## Что где лежит
 
-Всё хранится рядом с `Portabilizer.Launcher.exe`:
+Всё хранится рядом с `Portabilizer.Launcher.exe`. Исключение: если exe запущен из временной папки (например, двойным
+кликом прямо из архива в Проводнике), данные хранятся в папке `Portabilizers` в вашем профиле (`C:\Users\<имя>\Portabilizers`),
+чтобы не пропадать вместе с временными файлами. Лучше распаковать лаунчер в постоянную папку.
 
 | Что | Где |
 |---|---|
