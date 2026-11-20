@@ -3,6 +3,7 @@ import json
 import os
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -10,6 +11,34 @@ def app_dir() -> Path:
     if getattr(sys, "frozen", False):
         return Path(sys.executable).parent
     return Path(__file__).resolve().parent
+
+
+HOME_ENV = "PORTABILIZER_LAUNCHER_HOME"      # явно задать папку данных (так делает Portabilizer Launcher.bat)
+FALLBACK_NAME = "Portabilizers"              # папка данных в профиле, когда exe запущен из временной папки
+
+
+def is_temp_location(p) -> bool:
+    """Папка временная: exe запущен прямо из архива (Проводник распаковывает его в %TEMP%\\Temp1_...zip) или из %TEMP%."""
+    s = str(p).replace("/", "\\").lower().rstrip("\\") + "\\"
+    tmp = tempfile.gettempdir().replace("/", "\\").lower().rstrip("\\") + "\\"
+    return s.startswith(tmp) or "\\temp1_" in s or ".zip\\" in s
+
+
+def data_dir() -> Path:
+    """Где лежат версии, настройки, кэш и темы: рядом с exe. Но если exe во временной папке (запуск из архива),
+    всё, что там создано, потерялось бы и пряталось бы глубоко в AppData: тогда папка Portabilizers в профиле."""
+    env = os.environ.get(HOME_ENV)
+    if env:
+        return Path(env)
+    base = app_dir()
+    if not is_temp_location(base):
+        return base
+    d = Path.home() / FALLBACK_NAME
+    try:
+        d.mkdir(parents=True, exist_ok=True)
+    except OSError:
+        pass
+    return d
 
 
 # ------------------------------------------------------------------ темы оформления
@@ -154,14 +183,14 @@ def _is_hex(v) -> bool:
 
 def load_settings(path=None) -> dict:
     try:
-        d = json.loads(Path(path or (app_dir() / SETTINGS_FILE)).read_text(encoding="utf-8"))
+        d = json.loads(Path(path or (data_dir() / SETTINGS_FILE)).read_text(encoding="utf-8"))
         return d if isinstance(d, dict) else {}
     except (OSError, ValueError):
         return {}
 
 
 def save_settings(d: dict, path=None):
-    pth = Path(path or (app_dir() / SETTINGS_FILE))
+    pth = Path(path or (data_dir() / SETTINGS_FILE))
     try:
         tmp = pth.with_name(pth.name + ".tmp")
         tmp.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -173,7 +202,7 @@ def save_settings(d: dict, path=None):
 def load_themes(folder=None) -> dict:
     """Встроенные темы + пользовательские из папки themes. Битые файлы пропускаем."""
     themes = {k: dict(v, id=k) for k, v in THEMES_BUILTIN.items()}
-    d = Path(folder) if folder else app_dir() / "themes"
+    d = Path(folder) if folder else data_dir() / "themes"
     try:
         files = sorted(d.glob("*.json")) if d.is_dir() else []
     except OSError:

@@ -17,7 +17,9 @@ echo [2/2] Собираю exe...
 python -m PyInstaller --noconfirm --clean --onefile --windowed --name "Portabilizer Launcher" --icon launcher.ico launcher.py
 if errorlevel 1 goto fail
 echo.
+copy /Y "Portabilizer Launcher.bat" "dist\Portabilizer Launcher.bat" >nul
 echo Готово: dist\Portabilizer Launcher.exe
+echo Рядом лежит Portabilizer Launcher.bat: он откроет лаунчер через Python, если exe заблокирован (нужна папка source с .py файлами).
 pause
 exit /b 0
 :fail

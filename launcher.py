@@ -17,7 +17,7 @@ import pz_icons
 import pz_theme as T
 from pz_i18n import LANGS, detect_lang, get_lang, lang_name, set_lang, tr
 
-VERSION = "0.6"
+VERSION = "0.8"
 REPO_URL = f"https://github.com/{C.OWNER}/{C.REPO}"
 DEFAULTS = {"show_beta": True, "close_after_launch": False, "mode": "normal", "last_tag": "",
             "versions_dir": "", "versions_repo": "", "offer_version_shortcut": True}
@@ -40,7 +40,7 @@ class Model:
         for k, v in DEFAULTS.items():
             self.settings.setdefault(k, v)
         self.api_url, self.opener = api_url, opener
-        self.cache = cache if cache is not None else C.app_dir() / "releases_cache.json"
+        self.cache = cache if cache is not None else C.data_dir() / "releases_cache.json"
         self.releases = []
         self.news = {}                      # код языка -> {'9.1': перевод «Что нового»}
         self.news_opener = None             # для тестов: подмена urlopen при чтении переводов
@@ -57,7 +57,7 @@ class Model:
 
     @property
     def versions_dir(self) -> Path:
-        return Path(self.settings.get("versions_dir") or (C.app_dir() / "versions"))
+        return Path(self.settings.get("versions_dir") or (C.data_dir() / "versions"))
 
     # --- обновление списка
     def scan_installed(self):
@@ -287,6 +287,10 @@ def gui(_hook=None):
     def log(msg):
         stamp = time.strftime("%H:%M:%S")
         q.put(("log", f"[{stamp}] {msg}\n"))
+
+    if not os.environ.get(T.HOME_ENV) and T.is_temp_location(T.app_dir()):
+        log(f"Лаунчер запущен из временной папки (например, прямо из архива). "
+            f"Версии и настройки хранятся в {T.data_dir()}")
 
     def bg(fn, done):
         """Выполняет fn в потоке, результат (или ошибку) отдаёт done в главном потоке."""
@@ -560,7 +564,7 @@ def gui(_hook=None):
             parent=root) else "#808080"
         try:
             t = T.make_theme_from_color(res[1], base["kind"], bg_tint=tint, name="Мой цвет")
-            d = C.app_dir() / "themes"
+            d = C.data_dir() / "themes"
             d.mkdir(exist_ok=True)
             (d / "my_color.json").write_text(json.dumps(t, ensure_ascii=False, indent=2),
                                              encoding="utf-8")
@@ -918,7 +922,7 @@ def gui(_hook=None):
         settings["close_after_launch"] = bool(close_var.get())
         settings["offer_version_shortcut"] = bool(offer_var.get())
         d = dir_var.get().strip()
-        settings["versions_dir"] = "" if d == str(C.app_dir() / "versions") else d
+        settings["versions_dir"] = "" if d == str(C.data_dir() / "versions") else d
         save()
         model.scan_installed()
         fill_list()

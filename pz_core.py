@@ -17,6 +17,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
+from pz_theme import data_dir, is_temp_location  # noqa: F401  (папка данных лаунчера)
 from pz_i18n import tr
 
 OWNER, REPO = "Vanyok-gh", "Portabilizer-launcher"          # репозиторий самого лаунчера
@@ -578,7 +579,28 @@ def launch(exe: Path, radical: bool = False):
     kw = {}
     if os.name == "nt":
         kw["creationflags"] = 0x00000008 | 0x00000200   # DETACHED_PROCESS | NEW_PROCESS_GROUP
-    return subprocess.Popen(build_command(exe, radical), cwd=str(exe.parent), close_fds=True, **kw)
+    try:
+        return subprocess.Popen(build_command(exe, radical), cwd=str(exe.parent), close_fds=True, **kw)
+    except OSError as e:
+        # компьютер не даёт запустить неподписанный exe (отказано в доступе / заблокировано политикой):
+        # пробуем bat, который открывает Portabilizer через Python
+        if isinstance(e, PermissionError) or getattr(e, "winerror", None) in (5, 1260):
+            p = launch_via_bat(exe, radical)
+            if p is not None:
+                return p
+        raise
+
+
+def launch_via_bat(exe: Path, radical: bool = False):
+    """Запасной запуск версии через bat (запуск из исходников через Python). None, если подходящего bat нет."""
+    exe = Path(exe)
+    for bat in (exe.parent / PY_BAT_NAME, exe.parent.parent / PY_BAT_NAME,
+                exe.parent / ("Portabilizer (R).bat" if radical else "Portabilizer.bat")):
+        if bat.is_file():
+            args = [str(bat)] + (["--r"] if radical and bat.name == PY_BAT_NAME else [])
+            kw = {"creationflags": 0x00000010} if os.name == "nt" else {}      # CREATE_NEW_CONSOLE: видны сообщения bat
+            return subprocess.Popen(args, cwd=str(bat.parent), close_fds=True, **kw)
+    return None
 
 
 # ------------------------------------------------------------------ ярлык на рабочем столе

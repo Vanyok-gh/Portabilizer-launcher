@@ -28,7 +28,11 @@ jobs:
         shell: pwsh
         run: |
           $v = "${{ env.TAG }}" -replace '^(launcher-)?[vV]',''
-          Compress-Archive -Path "dist\Portabilizer Launcher.exe" -DestinationPath "Portabilizer-Launcher-v$v.zip"
+          # рядом с exe: bat, который при блокировке exe открывает лаунчер через Python, и исходники в source
+          New-Item -ItemType Directory source | Out-Null
+          Copy-Item launcher.py,pz_core.py,pz_i18n.py,pz_icons.py,pz_lang_data.py,pz_theme.py source\
+          Copy-Item "Portabilizer Launcher.bat" dist\
+          Compress-Archive -Path "dist\Portabilizer Launcher.exe","dist\Portabilizer Launcher.bat","source" -DestinationPath "Portabilizer-Launcher-v$v.zip"
       - name: Publish
         shell: pwsh
         env:
